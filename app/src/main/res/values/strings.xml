@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">antenna</string>
+    <string name="todo">TODO</string>
+    <string name="antenna">Antenna</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
