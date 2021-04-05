@@ -5,19 +5,17 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.example.antenna.Fragment.*
 
-@Suppress("DEPRECATION")
-class MainFragmentStatePagerAdapter(fm : FragmentManager, val fragmentCount :
-Int) : FragmentStatePagerAdapter(fm)
-{
+class MainFragmentStatePagerAdapter(fm : FragmentManager, val fragmentCount : Int) : FragmentStatePagerAdapter(fm) {
     override fun getItem(position: Int): Fragment {
         when(position){
             0 -> return ClickFragment()
-            1 -> return NewsFragment()
-            2 -> return InfoFragment()
-            3 -> return MyFragment()
-            else -> return MpageFragment()
+            1 -> return InfoFragment()
+            2 -> return AssetFragment()
+            3 -> return NewsFragment()
+            else -> return MypageFragment()
         }
     }
 
-    override fun getCount(): Int =fragmentCount
+    override fun getCount(): Int = fragmentCount // 자바에서는 { return fragmentCount }
+
 }

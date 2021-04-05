@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="56dp"
@@ -11,12 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textColor="@color/black"
-            android:text="원클릭주식"/>
+            android:src="@drawable/ic_baseline_trending_up_24" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -24,11 +22,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="뉴스"/>
+            android:src="@drawable/ic_baseline_comment_24" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -36,11 +34,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="투자 정보"/>
+            android:src="@drawable/ic_baseline_info_24" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -48,11 +46,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="MY 자산"/>
+            android:src="@drawable/ic_baseline_attach_money_24" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -60,11 +58,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="마이페이지"/>
+            android:src="@drawable/ic_baseline_home_24" />
     </RelativeLayout>
 
 </LinearLayout>

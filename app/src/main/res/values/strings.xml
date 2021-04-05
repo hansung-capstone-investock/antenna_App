@@ -1,7 +1,13 @@
 <resources>
     <string name="app_name">antenna</string>
-    <string name="todo">TODO</string>
     <string name="antenna">Antenna</string>
+
+    <string name="one_click">원클릭주식</string>
+    <string name="news">뉴스</string>
+    <string name="info">투자정보</string>
+    <string name="my_money">MY 자산</string>
+    <string name="my_page">마이페이지</string>
+    <string name="todo">TODO</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
