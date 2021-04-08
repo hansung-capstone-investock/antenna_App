@@ -1,9 +1,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="56dp"
-    android:background="#ffffff"
+    android:background="#000000"
     android:elevation="5dp"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:baselineAligned="false">
 
     <RelativeLayout
         android:id="@+id/btn_bottom_navi_home_tab"
@@ -11,23 +12,27 @@
         android:layout_height="match_parent"
         android:layout_weight="1">
         <ImageView
+            android:id="@+id/home_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@drawable/ic_baseline_trending_up_24" />
-    </RelativeLayout>
+            android:src="@drawable/ic_baseline_home_24"
+            android:contentDescription="@string/todo" />
+</RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/btn_bottom_navi_search_tab"
+<RelativeLayout
+android:id="@+id/btn_bottom_navi_search_tab"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@drawable/ic_baseline_comment_24" />
-    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/click_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_baseline_trending_up_24" />
+</RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/btn_bottom_navi_add_tab"
@@ -38,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@drawable/ic_baseline_info_24" />
+            android:src="@drawable/ic_baseline_comment_24" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -62,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@drawable/ic_baseline_home_24" />
+            android:src="@drawable/ic_baseline_info_24" />
     </RelativeLayout>
 
 </LinearLayout>

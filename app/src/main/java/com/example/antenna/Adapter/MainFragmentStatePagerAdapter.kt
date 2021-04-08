@@ -5,14 +5,14 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.example.antenna.Fragment.*
 
-class MainFragmentStatePagerAdapter(fm : FragmentManager, val fragmentCount : Int) : FragmentStatePagerAdapter(fm) {
+class MainFragmentStatePagerAdapter(fm : FragmentManager, private val fragmentCount : Int) : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     override fun getItem(position: Int): Fragment {
-        when(position){
-            0 -> return ClickFragment()
-            1 -> return InfoFragment()
-            2 -> return AssetFragment()
-            3 -> return NewsFragment()
-            else -> return MypageFragment()
+        return when(position){
+            0 -> MainFragment()
+            1 -> ClickFragment()
+            2 -> NewsFragment()
+            3 -> AssetFragment()
+            else -> InfoFragment()
         }
     }
 
