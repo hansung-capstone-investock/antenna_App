@@ -1,48 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/toolbar"
+    <FrameLayout
+        android:id="@+id/content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFC4C4">
-
-        <TextView
-            android:id="@+id/toolbar_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="20sp"
-            android:text="HOME">
-
-        </TextView>
-
-    </androidx.appcompat.widget.Toolbar>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/vp_ac_main_frag_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/tl_ac_main_bottom_menu"
-        android:layout_marginBottom="-1dp">
-
-    </androidx.viewpager.widget.ViewPager>
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tl_ac_main_bottom_menu"
-        android:background="#000000"
-        android:elevation="5dp"
-        app:tabIndicatorColor="#40D39F"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_alignParentBottom="true">
-    </com.google.android.material.tabs.TabLayout>
+        android:background="?android:attr/windowBackground"
+        app:menu="@menu/bottom_nav" />
+    <!-- app:itemIconTint="@color/selector_bottom_nav_color"
+     app:itemTextColor="@color/selector_bottom_nav_color"-->
 
 
-</RelativeLayout>
+
+
+</LinearLayout>

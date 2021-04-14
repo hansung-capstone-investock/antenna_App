@@ -2,5 +2,7 @@
 <resources>
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorControlNormal">#FFFFFF</item> <!--홈/뒤로가기 버튼의 색상-->
+
+        <item name="colorPrimary">#000000</item>
     </style>
 </resources>
