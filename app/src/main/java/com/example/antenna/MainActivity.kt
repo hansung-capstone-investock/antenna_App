@@ -2,12 +2,13 @@ package com.example.antenna
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.example.antenna.Fragment.*
+import com.example.antenna.fragment.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,7 +23,14 @@ class MainActivity : AppCompatActivity() {
             BottomNavigate(menuItem.itemId)
             true
         })
+
+        // 초기 화면 설정
         mBottomNV!!.selectedItemId = R.id.navigation_1
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
     }
 
     @SuppressLint("SetTextI18n")

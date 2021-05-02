@@ -38,6 +38,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    // 꺽은선 그래프 그리기 라이브러리 적용
+    repositories{
+        maven { url "https://jitpack.io" }
+    }
 }
 
 dependencies {
@@ -62,9 +67,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    implementation "org.jetbrains.anko:anko:$anko_version"
-
-
+    // 꺽은선 라이브러리
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.2'
+    
 }
 android{
     useLibrary 'org.apache.http.legacy'
