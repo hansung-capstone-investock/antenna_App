@@ -69,6 +69,9 @@ dependencies {
 
     // 꺽은선 라이브러리
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.2'
+
+    // Recyclerview
+    implementation 'androidx.recyclerview:recyclerview:1.2.0'
     
 }
 android{
