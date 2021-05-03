@@ -5,5 +5,11 @@
 - 21.04.14 로그인 액티비티 생성 및 연결(~ing)
 - 20.05.02 장고 서버를 통한 로그인 시도(~ing)
  임의의 그래프 생성 완료 -> 코스피 지수 구현(예정)
-![0502](https://user-images.githubusercontent.com/70618223/116806512-74d50c80-ab68-11eb-912c-858f8cf79167.PNG)
+ - 20.05.03 로그인 시도 완료, ViewPager를 통한 그래프 구현
+ (KOSPI, KOSDAQ, KOSPI200 페이지 넘어가게끔 완성 
+ -> <U>데이터 값을 받아서 그래프 그리기(예정)</U>
+ 
+ 
+ ![0503](https://user-images.githubusercontent.com/70618223/116849829-694a1a00-ac2a-11eb-80df-b2a99f8cd964.PNG)
+
 
