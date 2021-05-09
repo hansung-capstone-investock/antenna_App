@@ -3,9 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:layout_marginStart="5dp"
-    android:layout_marginTop="5dp">
+    android:layout_height="50dp">
 
 
     <ImageView
@@ -31,6 +29,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="Name"
+            android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.105"
@@ -45,6 +44,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="Percent"
+            android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.812"

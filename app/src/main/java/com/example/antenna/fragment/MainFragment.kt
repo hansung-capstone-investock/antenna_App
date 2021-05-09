@@ -1,5 +1,6 @@
 package com.example.antenna.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.annotation.Nullable
 import androidx.core.content.res.ResourcesCompat
 import androidx.viewpager.widget.ViewPager
+import com.example.antenna.MainActivity
 import com.example.antenna.R
 import com.example.antenna.adpater.DataList
 import com.example.antenna.adpater.RecyclerAdapter
@@ -28,11 +30,12 @@ class MainFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val list = ArrayList<DataList>()
-        list.add(DataList(null, "삼성전자", "-2.0%"))
+        list.add(DataList((activity as MainActivity).getDrawable(R.mipmap.samsung), "삼성전자", "-2.0%"))
         list.add(DataList(null, "삼성생명", "2.0%"))
         list.add(DataList(null, "삼성전자우", "-0.2%"))
         list.add(DataList(null, "삼성SDI", "0.0%"))
@@ -42,7 +45,7 @@ class MainFragment : Fragment() {
         val adapter1 = RecyclerAdapter(list)
         rv_data.adapter = adapter1
 
-        viewPager_main.adapter = MainFragment@adapter
+        viewPager_main.adapter = adapter
 
         viewPager_main.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
             override fun onPageScrolled(p0 : Int, p1 : Float, p2 : Int) {}

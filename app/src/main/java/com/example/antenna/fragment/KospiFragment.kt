@@ -7,13 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.antenna.R
-import com.example.antenna.adpater.DataList
-import com.example.antenna.adpater.RecyclerAdapter
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import kotlinx.android.synthetic.main.fragment_kosdaq.*
-import kotlinx.android.synthetic.main.fragment_main.*
 
 class KospiFragment : Fragment(){
 
@@ -33,7 +30,6 @@ class KospiFragment : Fragment(){
 
     override fun onResume() {
         super.onResume()
-
     }
 
     inner class ThreadClass : Thread(){
@@ -62,8 +58,6 @@ class KospiFragment : Fragment(){
                 lineChart.notifyDataSetChanged()
                 lineChart.invalidate()
             }
-//            start_button.text = "난수 생성 시작"
-            // start_button.isClickable = true
             isrunning = false
             super.run()
         }

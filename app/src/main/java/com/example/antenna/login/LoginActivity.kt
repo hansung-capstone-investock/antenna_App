@@ -19,7 +19,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_page)
 
-        var retrofit = Retrofit.Builder()
+        val retrofit = Retrofit.Builder()
                 .baseUrl("http://926fe53947d9.ngrok.io/") // 장고 서버 주소 입력
                 .addConverterFactory(GsonConverterFactory.create()) // Retrofit 객체 생성
                 .build()

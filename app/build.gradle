@@ -39,6 +39,10 @@ android {
         jvmTarget = '1.8'
     }
 
+    buildFeatures {
+        viewBinding true
+    }
+
     // 꺽은선 그래프 그리기 라이브러리 적용
     repositories{
         maven { url "https://jitpack.io" }
