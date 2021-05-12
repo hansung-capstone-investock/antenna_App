@@ -31,13 +31,10 @@ class RecyclerAdapter(private val items: ArrayList<DataList>):
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
-
-
         when (holder){
             is FooterViewHolder -> {
                 holder.itemView.setOnClickListener {
-                    val intent = Intent(holder.itemView?.context, InterestActivity::class.java)
+                    val intent = Intent(holder.itemView.context, InterestActivity::class.java)
                     startActivity(holder.itemView.context, intent, null)
                 }
             }

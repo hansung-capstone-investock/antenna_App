@@ -1,6 +1,7 @@
 package com.example.antenna.fragment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -33,20 +34,27 @@ class MainFragment : Fragment() {
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val list = ArrayList<DataList>()
-        list.add(DataList((activity as MainActivity).getDrawable(R.mipmap.samsung), "삼성전자", "-2.0%"))
-        list.add(DataList(null, "삼성생명", "2.0%"))
-        list.add(DataList(null, "삼성전자우", "-0.2%"))
-        list.add(DataList(null, "삼성SDI", "0.0%"))
-        list.add(DataList(null, "삼성SDS", "-2.0%"))
-        list.add(DataList(null, "현대", "-1.0%"))
-
+        val intent = Intent(activity, MainFragment::class.java)
         val adapter1 = RecyclerAdapter(list)
-        rv_data.adapter = adapter1
+
+        if(intent.hasExtra("code")){
+
+            list.add(DataList((activity as MainActivity).getDrawable(R.mipmap.samsung), "삼성전자", "-2.0%"))
+            list.add(DataList(null, "삼성생명", "2.0%"))
+            list.add(DataList(null, "삼성전자우", "-0.2%"))
+            list.add(DataList(null, "삼성SDI", "0.0%"))
+            list.add(DataList(null, "삼성SDS", "-2.0%"))
+            list.add(DataList(null, "현대", "-1.0%"))
+
+            rv_data.adapter = adapter1
+        }
+        else{
+            rv_data.adapter = adapter1
+        }
+
 
         viewPager_main.adapter = adapter
-
         viewPager_main.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
             override fun onPageScrolled(p0 : Int, p1 : Float, p2 : Int) {}
 

@@ -1,10 +1,12 @@
 package com.example.antenna.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.antenna.R
+import com.example.antenna.fragment.MainFragment
 import kotlinx.android.synthetic.main.login_page.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,8 +21,11 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_page)
 
+        val nextIntent  = Intent(this, MainFragment::class.java)
+
+
         val retrofit = Retrofit.Builder()
-                .baseUrl("http://926fe53947d9.ngrok.io/") // 장고 서버 주소 입력
+                .baseUrl("http://bf31a3db4375.ngrok.io") // 장고 서버 주소 입력
                 .addConverterFactory(GsonConverterFactory.create()) // Retrofit 객체 생성
                 .build()
 
@@ -33,13 +38,15 @@ class LoginActivity : AppCompatActivity() {
             var id = userid.text.toString()
             var pw = userpw.text.toString()
 
+            var dialog = AlertDialog.Builder(this@LoginActivity)
+
             // 웹 통신를 할떄 별도의 다른 스레드에서 작업을 해야함(메인 액티비티 스레드가 아닌)
 
             loginService.requestLogin(id, pw).enqueue(object : Callback<Login>{
 
                 // 웹 통신 실패했을 떄 실행
                 override fun onFailure(call: Call<Login>, t: Throwable) {
-                    var dialog = AlertDialog.Builder(this@LoginActivity)
+
                     t.message?.let { it1 -> Log.e("LOGIN", it1) }
                     Log.d(loginService.toString(), "FA!!!!!!!!!!!!!!!!!")
                     dialog.setTitle("실패!")
@@ -54,12 +61,26 @@ class LoginActivity : AppCompatActivity() {
                     Log.d(response.toString(), "..ERROR")
                     Log.e("RES", response.message())
 
-                    var dialog = AlertDialog.Builder(this@LoginActivity)
-                    dialog.setTitle("성공")
+                    if(login?.code.toString() == "0000"){
 
-                    dialog.setMessage("code = " + login?.code + "msg = " + login?.msg )
-                    dialog.show()
-                    
+                        dialog.setTitle("성공")
+                        dialog.setMessage("code = " + login?.code + "msg = " + login?.msg )
+                        dialog.show()
+
+                        nextIntent.putExtra("code", login?.code)
+                        nextIntent.putExtra("pw", pw)
+
+                        startActivity(nextIntent)
+                    }
+                    else{ // login.code == 1001
+                        dialog.setTitle("실패")
+                        dialog.setMessage("입력된 정보가 일치하지 않습니다")
+                        dialog.show()
+                    }
+
+
+
+
                     // 로그인 성공했을 경우 원래 액티비티로 돌아가기
                     // finish()
                 }
