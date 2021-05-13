@@ -14,7 +14,7 @@ import com.example.antenna.login.LoginActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.list_item.view.*
 
-class RecyclerAdapter(private val items: ArrayList<DataList>):
+class RecyclerAdapter(private val items: MutableList<DataList>):
         RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val TYPE_ITEM : Int = 1
@@ -51,7 +51,7 @@ class RecyclerAdapter(private val items: ArrayList<DataList>):
     }
 
     // 내부 데이터 전체 값 갱신 함수
-    fun setTaskList(list : ArrayList<DataList>){
+    fun setTaskList(list : MutableList<DataList>){
         items.clear()
         items.addAll(list)
 

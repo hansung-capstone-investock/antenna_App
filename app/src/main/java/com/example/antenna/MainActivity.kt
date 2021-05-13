@@ -28,6 +28,12 @@ class MainActivity : AppCompatActivity() {
         mBottomNV!!.selectedItemId = R.id.navigation_1
     }
 
+    override fun onRestart() {
+        super.onRestart()
+        MainFragment().refreshAdapter()
+
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         return true
@@ -35,7 +41,6 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun BottomNavigate(id: Int) {  //BottomNavigation 페이지 변경
-
 
         val tag = id.toString()
         val fragmentManager: FragmentManager = supportFragmentManager
@@ -46,8 +51,10 @@ class MainActivity : AppCompatActivity() {
         }
         var fragment: Fragment? = fragmentManager.findFragmentByTag(tag)
         if (fragment == null) {
-            fragment = if (id == R.id.navigation_1)
+            fragment = if (id == R.id.navigation_1) {
+                onRestart()
                 MainFragment()
+            }
             else if (id == R.id.navigation_2)
                 ClickFragment()
             else if (id == R.id.navigation_3)

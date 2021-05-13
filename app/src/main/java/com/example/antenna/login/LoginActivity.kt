@@ -25,7 +25,7 @@ class LoginActivity : AppCompatActivity() {
 
 
         val retrofit = Retrofit.Builder()
-                .baseUrl("http://bf31a3db4375.ngrok.io") // 장고 서버 주소 입력
+                .baseUrl("http://b7b972d4fdd0.ngrok.io/") // 장고 서버 주소 입력
                 .addConverterFactory(GsonConverterFactory.create()) // Retrofit 객체 생성
                 .build()
 
@@ -67,7 +67,7 @@ class LoginActivity : AppCompatActivity() {
                         dialog.setMessage("code = " + login?.code + "msg = " + login?.msg )
                         dialog.show()
 
-                        nextIntent.putExtra("code", login?.code)
+                        nextIntent.putExtra("id", id)
                         nextIntent.putExtra("pw", pw)
 
                         startActivity(nextIntent)

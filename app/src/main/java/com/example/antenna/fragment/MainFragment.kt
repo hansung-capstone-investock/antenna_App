@@ -19,7 +19,11 @@ import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
 
+    // 뷰페이저
     private val adapter by lazy { activity?.let { ViewPagerAdapter(it.supportFragmentManager) } }
+
+    private val list = mutableListOf<DataList>()
+    private val adapter1 = RecyclerAdapter(list)
 
     @Nullable
     override fun onCreateView(
@@ -34,25 +38,26 @@ class MainFragment : Fragment() {
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val list = ArrayList<DataList>()
+
         val intent = Intent(activity, MainFragment::class.java)
-        val adapter1 = RecyclerAdapter(list)
 
-        if(intent.hasExtra("code")){
 
+        if(intent.hasExtra("id")){ // intent id 값이 있으면...
             list.add(DataList((activity as MainActivity).getDrawable(R.mipmap.samsung), "삼성전자", "-2.0%"))
-            list.add(DataList(null, "삼성생명", "2.0%"))
+            /*list.add(DataList(null, "삼성생명", "2.0%"))
             list.add(DataList(null, "삼성전자우", "-0.2%"))
             list.add(DataList(null, "삼성SDI", "0.0%"))
             list.add(DataList(null, "삼성SDS", "-2.0%"))
-            list.add(DataList(null, "현대", "-1.0%"))
+            list.add(DataList(null, "현대", "-1.0%"))*/
 
             rv_data.adapter = adapter1
         }
         else{
+            list.add(DataList(null, " ", " "))
+            list.add(DataList(null, " ", " "))
+
             rv_data.adapter = adapter1
         }
-
 
         viewPager_main.adapter = adapter
         viewPager_main.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
@@ -72,5 +77,10 @@ class MainFragment : Fragment() {
 
             override fun onPageScrollStateChanged(p0: Int) {}
         })
+    }
+
+    fun refreshAdapter() {
+        adapter1.setTaskList(list)
+        adapter1.notifyDataSetChanged()
     }
 }
