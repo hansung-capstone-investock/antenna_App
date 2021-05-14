@@ -22,10 +22,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.login_page)
 
         val nextIntent  = Intent(this, MainFragment::class.java)
-
-
         val retrofit = Retrofit.Builder()
-                .baseUrl("http://b7b972d4fdd0.ngrok.io/") // 장고 서버 주소 입력
+                .baseUrl("http://ec2-13-125-236-101.ap-northeast-2.compute.amazonaws.com:8000/") // 장고 서버 주소 입력
                 .addConverterFactory(GsonConverterFactory.create()) // Retrofit 객체 생성
                 .build()
 

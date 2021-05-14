@@ -26,7 +26,11 @@ class InfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*val inflater = LayoutInflater.from(context)
-        inflater.inflate(R.layout.login_item, conta)*/
+        button4.setOnClickListener {
+            activity?.let {
+                val intent = Intent(context, LoginActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
 }
