@@ -51,34 +51,15 @@ class NewsFragment : Fragment() {
 
                for(i in 0 until response.body()?.count()?.toInt()!!){
 
-                  // main_list.add("", "","","")
+                   val title : String? = response.body()?.elementAt(i)?.title
+                   val summary : String? = response.body()?.elementAt(i)?.summary
+                   val publishDay : String? = response.body()?.elementAt(i)?.publishDay
+                   // var link : String? = response.body()?.elementAt(i)?.link
 
-                   var title : String? = response.body()?.elementAt(i)?.title
-                   var summary : String? = response.body()?.elementAt(i)?.summary
-                   var publishDay : String? = response.body()?.elementAt(i)?.publishDay
-                   var link : String? = response.body()?.elementAt(i)?.link
+                   main_list.add(MainNewsList(title.toString(), summary.toString(), publishDay.toString()))
 
-                   // Log.d("GET TITLE", title?.elementAt(i).toString())
-                   /*Log.d("GET SUMMARY", summary.toString())
-                   Log.d("GET PUBLISHDAY", publishDay.toString())
-                   Log.d("GET LINK", link.toString())*/
                }
-
                rv_main_data.adapter = main_adapter
-
-
-               var title = response.body()?.elementAt(1)?.title
-               var summary = response.body()?.elementAt(1)?.summary
-               var publishDay = response.body()?.elementAt(1)?.publishDay
-               var link = response.body()?.elementAt(1)?.link
-
-               Log.d("GET TITLE", title.toString())
-               Log.d("GET SUMMARY", summary.toString())
-               Log.d("GET PUBLISHDAY", publishDay.toString())
-               Log.d("GET LINK", link.toString())
-
-               Log.d("GET BODY COUNT", response.body()?.count().toString())
-
            }
            override fun onFailure(call: Call<List<NewsData>>, t: Throwable) {
                Log.d("GET NEWS Fail", t.toString())

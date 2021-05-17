@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.antenna.R
+import kotlinx.android.synthetic.main.list_main.view.*
 
 class MainNewsAdapter(private val items : MutableList<MainNewsList>)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
@@ -21,7 +22,9 @@ class MainNewsAdapter(private val items : MutableList<MainNewsList>)
         val item = items[position]
 
         holder.itemView.apply {
-
+            main_title.text = item.main_title
+            main_summary.text = item.main_summary
+            main_publishDay.text = item.main_publishDay
         }
     }
 
