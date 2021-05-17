@@ -8,7 +8,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface MainNews {
-
+    // API로 부터 메인 뉴스 정보 가져오기
     @GET("/views/api/news")
     fun getNews(
             @Query("title") title: String? = null,

@@ -9,7 +9,10 @@ import android.view.ViewGroup
 import androidx.annotation.Nullable
 import com.example.antenna.R
 import com.example.antenna.`interface`.MainNews
+import com.example.antenna.adpater.MainNewsAdapter
+import com.example.antenna.adpater.MainNewsList
 import com.example.antenna.dataclass.NewsData
+import kotlinx.android.synthetic.main.fragment_news.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,6 +20,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class NewsFragment : Fragment() {
+
+    private val main_list = mutableListOf<MainNewsList>()
+    private val main_adapter = MainNewsAdapter(main_list)
+
     @Nullable
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -39,22 +46,26 @@ class NewsFragment : Fragment() {
         Log.d("GET REQUEST SUCCESS", firstRetrofit.toString())
 
        regionServer?.getNews()?.enqueue(object : Callback<List<NewsData>> {
-           /*override fun onResponse(call: Call<NewsData>, response: Response<NewsData>) {
-
-               Log.d("GET NEWS SUCCESS", response.toString())
-
-               var title = response.body()?.title
-               var summary = response.body()?.summary
-               var publishDay = response.body()?.publishDay
-               var link = response.body()?.link
-           }
-
-           override fun onFailure(call: Call<NewsData>, t: Throwable) {
-               Log.d("GET NEWS Fail", t.toString())
-               t.printStackTrace()
-           }*/
            override fun onResponse(call: Call<List<NewsData>>, response: Response<List<NewsData>>) {
-               Log.d("GET NEWS SUCCESS", response.toString())
+               Log.d("GET NEWS SUCCESS", response.toString()) // 통신 성공 여부 확인 메세지
+
+               for(i in 0 until response.body()?.count()?.toInt()!!){
+
+                  // main_list.add("", "","","")
+
+                   var title : String? = response.body()?.elementAt(i)?.title
+                   var summary : String? = response.body()?.elementAt(i)?.summary
+                   var publishDay : String? = response.body()?.elementAt(i)?.publishDay
+                   var link : String? = response.body()?.elementAt(i)?.link
+
+                   // Log.d("GET TITLE", title?.elementAt(i).toString())
+                   /*Log.d("GET SUMMARY", summary.toString())
+                   Log.d("GET PUBLISHDAY", publishDay.toString())
+                   Log.d("GET LINK", link.toString())*/
+               }
+
+               rv_main_data.adapter = main_adapter
+
 
                var title = response.body()?.elementAt(1)?.title
                var summary = response.body()?.elementAt(1)?.summary

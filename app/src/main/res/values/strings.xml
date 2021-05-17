@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">INVESTOCK</string>
     <string name="INVESTOCK">Investock</string>
-
     <string name="one_click">Antenna</string>
     <string name="news">뉴스</string>
     <string name="info">마이페이지</string>
