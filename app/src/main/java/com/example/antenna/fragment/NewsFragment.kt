@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.Nullable
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.antenna.R
 import com.example.antenna.`interface`.MainNews
 import com.example.antenna.adpater.MainNewsAdapter
@@ -54,11 +56,11 @@ class NewsFragment : Fragment() {
                    val title : String? = response.body()?.elementAt(i)?.title
                    val summary : String? = response.body()?.elementAt(i)?.summary
                    val publishDay : String? = response.body()?.elementAt(i)?.publishDay
-                   // var link : String? = response.body()?.elementAt(i)?.link
+                   var link : String? = response.body()?.elementAt(i)?.link // .. 클릭을 하면 URL 로 이동하게끔 구성하기
 
-                   main_list.add(MainNewsList(title.toString(), summary.toString(), publishDay.toString()))
-
+                   main_list.add(MainNewsList(title.toString(), summary.toString(), publishDay.toString(), link.toString()))
                }
+               rv_main_data.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
                rv_main_data.adapter = main_adapter
            }
            override fun onFailure(call: Call<List<NewsData>>, t: Throwable) {

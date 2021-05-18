@@ -1,9 +1,13 @@
 package com.example.antenna.adpater
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.antenna.MainActivity
 import com.example.antenna.R
 import kotlinx.android.synthetic.main.list_main.view.*
 
@@ -20,6 +24,12 @@ class MainNewsAdapter(private val items : MutableList<MainNewsList>)
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = items[position]
+
+        holder.itemView.setOnClickListener {
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse(item.main_link)
+            ContextCompat.startActivity(holder.itemView.context, i, null)
+        }
 
         holder.itemView.apply {
             main_title.text = item.main_title
