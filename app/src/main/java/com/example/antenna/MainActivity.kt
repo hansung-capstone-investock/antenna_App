@@ -59,8 +59,6 @@ class MainActivity : AppCompatActivity() {
                 ClickFragment()
             else if (id == R.id.navigation_3)
                 NewsFragment()
-            else if (id == R.id.navigation_4)
-                AssetFragment()
             else
                 InfoFragment()
 

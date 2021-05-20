@@ -15,10 +15,6 @@
         android:icon="@drawable/ic_baseline_comment_24"
         android:title="@string/news" />
     <item
-        android:id="@+id/navigation_4"
-        android:icon="@drawable/ic_baseline_attach_money_24"
-        android:title="@string/my_money" />
-    <item
         android:id="@+id/navigation_5"
         android:icon="@drawable/ic_baseline_info_24"
         android:title="@string/info" />

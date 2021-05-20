@@ -47,27 +47,36 @@ class NewsFragment : Fragment() {
 
         Log.d("GET REQUEST SUCCESS", firstRetrofit.toString())
 
-       regionServer?.getNews()?.enqueue(object : Callback<List<NewsData>> {
-           override fun onResponse(call: Call<List<NewsData>>, response: Response<List<NewsData>>) {
-               Log.d("GET NEWS SUCCESS", response.toString()) // 통신 성공 여부 확인 메세지
+        main_button.setOnClickListener {
+            regionServer?.getNews()?.enqueue(object : Callback<List<NewsData>> {
+                override fun onResponse(call: Call<List<NewsData>>, response: Response<List<NewsData>>) {
+                    Log.d("GET NEWS SUCCESS", response.toString()) // 통신 성공 여부 확인 메세지
 
-               for(i in 0 until response.body()?.count()?.toInt()!!){
+                    for(i in 0 until response.body()?.count()?.toInt()!!){
 
-                   val title : String? = response.body()?.elementAt(i)?.title
-                   val summary : String? = response.body()?.elementAt(i)?.summary
-                   val publishDay : String? = response.body()?.elementAt(i)?.publishDay
-                   var link : String? = response.body()?.elementAt(i)?.link // .. 클릭을 하면 URL 로 이동하게끔 구성하기
+                        val title : String? = response.body()?.elementAt(i)?.title
+                        val summary : String? = response.body()?.elementAt(i)?.summary
+                        val publishDay : String? = response.body()?.elementAt(i)?.publishDay
+                        var link : String? = response.body()?.elementAt(i)?.link // .. 클릭을 하면 URL 로 이동하게끔 구성하기
 
-                   main_list.add(MainNewsList(title.toString(), summary.toString(), publishDay.toString(), link.toString()))
-               }
-               rv_main_data.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
-               rv_main_data.adapter = main_adapter
-           }
-           override fun onFailure(call: Call<List<NewsData>>, t: Throwable) {
-               Log.d("GET NEWS Fail", t.toString())
-               t.printStackTrace()
-           }
+                        main_list.add(MainNewsList(title.toString(), summary.toString(), publishDay.toString(), link.toString()))
+                    }
+                    rv_main_data.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+                    rv_main_data.adapter = main_adapter
+                }
+                override fun onFailure(call: Call<List<NewsData>>, t: Throwable) {
+                    Log.d("GET NEWS Fail", t.toString())
+                    t.printStackTrace()
+                }
 
-       })
+            })
+        }
+
+        live_button.setOnClickListener {
+            rv_main_data.adapter = null
+        }
+
+//        main_button.isEnabled = true
     }
+
 }
