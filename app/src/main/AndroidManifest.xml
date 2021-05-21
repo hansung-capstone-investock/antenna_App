@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".login.LoginActivity"/>
+        <activity android:name=".sign.LoginActivity"/>
+        <activity android:name=".sign.SignActivity"/>
         <activity android:name=".interest.InterestActivity"/>
         <activity
             android:name=".MainActivity">

@@ -4,14 +4,10 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.antenna.R
 import com.example.antenna.interest.InterestActivity
-import com.example.antenna.login.LoginActivity
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.list_item.view.*
 
 class RecyclerAdapter(private val items: MutableList<DataList>):

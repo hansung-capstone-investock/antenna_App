@@ -7,8 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.Nullable
-import com.example.antenna.login.LoginActivity
+import com.example.antenna.sign.LoginActivity
 import com.example.antenna.R
+import com.example.antenna.sign.SignActivity
 import kotlinx.android.synthetic.main.fragment_info.*
 
 class InfoFragment : Fragment() {
@@ -26,9 +27,16 @@ class InfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        button4.setOnClickListener {
+        Login_button.setOnClickListener {
             activity?.let {
                 val intent = Intent(context, LoginActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
+        Sign_button.setOnClickListener {
+            activity?.let{
+                val intent = Intent(context, SignActivity::class.java)
                 startActivity(intent)
             }
         }

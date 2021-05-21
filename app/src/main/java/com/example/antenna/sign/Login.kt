@@ -1,4 +1,4 @@
-package com.example.antenna.login
+package com.example.antenna.sign
 
 // Output data 생성 (응답값)
 // 서버에서 가져올 값 추가 하기
