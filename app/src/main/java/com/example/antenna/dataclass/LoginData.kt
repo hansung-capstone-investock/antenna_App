@@ -1,8 +1,8 @@
-package com.example.antenna.sign
+package com.example.antenna.dataclass
 
 // Output data 생성 (응답값)
 // 서버에서 가져올 값 추가 하기
-data class Login(
+data class LoginData(
         var code : String,
         var msg : String
 )

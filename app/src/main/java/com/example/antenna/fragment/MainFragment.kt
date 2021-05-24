@@ -3,12 +3,15 @@ package com.example.antenna.fragment
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.service.quicksettings.Tile
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.Nullable
 import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.setFragmentResultListener
 import androidx.viewpager.widget.ViewPager
 import com.example.antenna.MainActivity
 import com.example.antenna.R
@@ -25,6 +28,7 @@ class MainFragment : Fragment() {
     private val list = mutableListOf<DataList>()
     private val adapter1 = RecyclerAdapter(list)
 
+    private var r_name : String = ""
     @Nullable
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -35,29 +39,21 @@ class MainFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
+    @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val intent = Intent(activity, MainFragment::class.java)
 
+            setFragmentResultListener("requestKey") { requestKey, bundle ->
+                val k_name = bundle.getString("id")
 
-        if(intent.hasExtra("id")){ // intent id 값이 있으면...
-            list.add(DataList((activity as MainActivity).getDrawable(R.mipmap.samsung), "삼성전자", "-2.0%"))
-            /*list.add(DataList(null, "삼성생명", "2.0%"))
-            list.add(DataList(null, "삼성전자우", "-0.2%"))
-            list.add(DataList(null, "삼성SDI", "0.0%"))
-            list.add(DataList(null, "삼성SDS", "-2.0%"))
-            list.add(DataList(null, "현대", "-1.0%"))*/
+                if (k_name != null) {
+                    r_name = k_name
+                }
+            }
 
-            rv_data.adapter = adapter1
-        }
-        else{
-            list.add(DataList(null, " ", " "))
-            list.add(DataList(null, " ", " "))
-
-            rv_data.adapter = adapter1
-        }
+        list.add(DataList((activity as MainActivity).getDrawable(R.mipmap.samsung), "삼성전자", "-2.0%"))
+        rv_data.adapter = adapter1
 
         viewPager_main.adapter = adapter
         viewPager_main.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{

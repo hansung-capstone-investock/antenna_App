@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.antenna">
 
     <application
@@ -9,11 +10,12 @@
         android:label= ""
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:name="com.example.antenna.notused.MyApplication">
 
-        <activity android:name=".sign.LoginActivity"/>
         <activity android:name=".sign.SignActivity"/>
         <activity android:name=".interest.InterestActivity"/>
+
         <activity
             android:name=".MainActivity">
             <intent-filter>
