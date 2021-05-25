@@ -9,7 +9,7 @@ import retrofit2.http.POST
 interface SignUpService {
     @FormUrlEncoded
     @POST("/account/api/signup/")
-    fun requestsignup(
+    fun requestSignUp(
         // Input Data 정의
         @Field("id") id: String,
         @Field("password") password: String
