@@ -33,6 +33,14 @@ class NewsFragment : Fragment() {
     private val live_list = mutableListOf<LiveNewsList>()
     private val live_adapter = LiveNewsAdapter(live_list)
 
+    private val firstRetrofit: Retrofit = Retrofit.Builder()
+            .baseUrl("http://ec2-13-125-236-101.ap-northeast-2.compute.amazonaws.com:8000/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+    private val regionServer : MainNews? = firstRetrofit.create(MainNews::class.java)
+    private val liveServer : LiveNews? = firstRetrofit.create(LiveNews::class.java)
+
     @Nullable
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -45,20 +53,20 @@ class NewsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val firstRetrofit: Retrofit = Retrofit.Builder()
-               .baseUrl("http://ec2-13-125-236-101.ap-northeast-2.compute.amazonaws.com:8000/")
-               .addConverterFactory(GsonConverterFactory.create())
-               .build()
-
-        val regionServer : MainNews? = firstRetrofit.create(MainNews::class.java)
-        val liveServer : LiveNews? = firstRetrofit.create(LiveNews::class.java)
-
         rv_main_data.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
 
         Log.d("GET REQUEST SUCCESS", firstRetrofit.toString())
 
         main_button.setOnClickListener {
+            main_news()
+        }
+
+        live_button.setOnClickListener {
+            live_news()
+        }
+    }
+
+    private fun main_news(){
             main_name.text = "메인 뉴스"
             regionServer?.getNews()?.enqueue(object : Callback<List<NewsData>> {
                 override fun onResponse(call: Call<List<NewsData>>, response: Response<List<NewsData>>) {
@@ -82,36 +90,37 @@ class NewsFragment : Fragment() {
                 }
 
             })
-        }
-
-        live_button.setOnClickListener {
-            main_name.text = "라이브 뉴스"
-            liveServer?.getLiveNews()?.enqueue(object : Callback<List<LiveData>>{
-                override fun onResponse(
-                    call: Call<List<LiveData>>,
-                    response: Response<List<LiveData>>
-                ) {
-                    for(i in 0 until response.body()?.count()?.toInt()!!){
-
-                        val title : String? = response.body()?.elementAt(i)?.title
-                        val summary : String? = response.body()?.elementAt(i)?.summary
-                        val publishDate : String? = response.body()?.elementAt(i)?.publishDate
-                        val link : String? = response.body()?.elementAt(i)?.link // .. 클릭을 하면 URL 로 이동하게끔 구성하기
-
-                        live_list.add(LiveNewsList(title.toString(), summary.toString(), publishDate.toString(), link.toString()))
-                     }
-                    rv_main_data.adapter = live_adapter
-                }
-
-                override fun onFailure(call: Call<List<LiveData>>, t: Throwable) {
-                    Log.d("GET NEWS Fail", t.toString())
-                    t.printStackTrace()
-                }
-
-            })
-        }
-
-        main_button.isClickable = true
     }
 
+    private fun live_news(){
+        main_name.text = "라이브 뉴스"
+        liveServer?.getLiveNews()?.enqueue(object : Callback<List<LiveData>>{
+            override fun onResponse(
+                    call: Call<List<LiveData>>,
+                    response: Response<List<LiveData>>
+            ) {
+                for(i in 0 until response.body()?.count()?.toInt()!!){
+
+                    val title : String? = response.body()?.elementAt(i)?.title
+                    val summary : String? = response.body()?.elementAt(i)?.summary
+                    val publishDate : String? = response.body()?.elementAt(i)?.publishDate
+                    val link : String? = response.body()?.elementAt(i)?.link // .. 클릭을 하면 URL 로 이동하게끔 구성하기
+
+                    live_list.add(LiveNewsList(title.toString(), summary.toString(), publishDate.toString(), link.toString()))
+                }
+                rv_main_data.adapter = live_adapter
+            }
+
+            override fun onFailure(call: Call<List<LiveData>>, t: Throwable) {
+                Log.d("GET NEWS Fail", t.toString())
+                t.printStackTrace()
+            }
+
+        })
+    }
+
+    override fun onStart() {
+        main_news()
+        super.onStart()
+    }
 }

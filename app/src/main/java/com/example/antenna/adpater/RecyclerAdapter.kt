@@ -1,12 +1,14 @@
 package com.example.antenna.adpater
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.antenna.R
+import com.example.antenna.fragment.MainFragment
 import com.example.antenna.interest.InterestActivity
 import kotlinx.android.synthetic.main.list_item.view.*
 
@@ -30,7 +32,16 @@ class RecyclerAdapter(private val items: MutableList<DataList>):
         when (holder){
             is FooterViewHolder -> {
                 holder.itemView.setOnClickListener {
+
+
                     val intent = Intent(holder.itemView.context, InterestActivity::class.java)
+
+//                    val intent1 = Intent(holder.itemView.context, MainFragment::class.java)
+//                    val name = intent1.getStringExtra("name")
+//                    Log.d("USER RECY NAME", name.toString())
+//                    intent.putExtra("name", name)
+
+
                     startActivity(holder.itemView.context, intent, null)
                 }
             }

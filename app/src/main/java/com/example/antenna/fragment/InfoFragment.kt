@@ -16,6 +16,7 @@ import com.example.antenna.R
 import com.example.antenna.dataclass.LoginData
 import com.example.antenna.sign.LoginService
 import com.example.antenna.sign.SignActivity
+import com.example.antenna.userdata.User_Info
 import kotlinx.android.synthetic.main.fragment_info.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -81,6 +82,8 @@ class InfoFragment : Fragment() {
                             dialog?.show()
 
                             Log.d("INFO ID", id)
+
+                            val info = User_Info(id)
 
                             setFragmentResult("requestKey", bundleOf("id" to id))
                             parentFragmentManager.beginTransaction()

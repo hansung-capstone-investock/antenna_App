@@ -7,6 +7,14 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/username_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:gravity="right"
+        android:textColor="#000000" />
+
     <FrameLayout
         android:id="@+id/content_layout"
         android:layout_width="match_parent"

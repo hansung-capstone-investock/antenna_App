@@ -44,6 +44,8 @@ class SignActivity : AppCompatActivity() {
 
                     dialog.setTitle("회원가입 성공")
                     dialog.show()
+
+                    // startActivity(intent)
                 }
 
                 override fun onFailure(call: Call<SignData>, t: Throwable) {
