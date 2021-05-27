@@ -20,6 +20,7 @@ import com.example.antenna.adpater.DataList
 import com.example.antenna.adpater.RecyclerAdapter
 import com.example.antenna.adpater.ViewPagerAdapter
 import com.example.antenna.interest.InterestActivity
+import com.example.antenna.sharedPreference.App
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
@@ -29,10 +30,6 @@ class MainFragment : Fragment() {
 
     private val list = mutableListOf<DataList>()
     private val adapter1 = RecyclerAdapter(list)
-
-    private lateinit var username : String
-
-
 
     @Nullable
     override fun onCreateView(
@@ -44,23 +41,26 @@ class MainFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         activity?.let {
-            val intent = Intent(context, InterestActivity::class.java)
             super.onViewCreated(view, savedInstanceState)
-            setFragmentResultListener("requestKey") { requestKey, bundle ->
-                val name = bundle.getString("id")
-                name?.toString()?.let { Log.d("RETURN NAME", it) }
-//                bundle.getString("id")?.let {
-//                    username.text = it
-//                }
-                intent.putExtra("name", name)
-            }
 
-            // list.add(DataList((activity as MainActivity).getDrawable(R.mipmap.samsung), "삼성전자", "-2.0%"))
+            val id = App.prefs.id
+            Log.d("SHARED NAME", id.toString())
+
+//            if(App.prefs.id == null){
+//                Username.text = "로그인을 해주세요"
+//            } else{
+//                Username.text = id.toString()+"님 안녕하세요"
+//            }
+
+            Username.text = id.toString()+"님 안녕하세요"
+
+            list.add(DataList((activity as MainActivity).getDrawable(R.mipmap.samsung), "삼성전자", "-2.0%"))
+
             rv_data.adapter = adapter1
-
         }
 
         viewPager_main.adapter = adapter

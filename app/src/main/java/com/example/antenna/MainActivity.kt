@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.example.antenna.fragment.*
 import com.example.antenna.interest.InterestActivity
+import com.example.antenna.sharedPreference.App
 
 
 class MainActivity : AppCompatActivity() {
@@ -62,8 +63,14 @@ class MainActivity : AppCompatActivity() {
                 ClickFragment()
             else if (id == R.id.navigation_3)
                 NewsFragment()
-            else
+            else {
                 InfoFragment()
+                /*if(App.prefs.id == null){
+                    InfoFragment()
+                } else{
+                    MyFragment()
+                }*/
+            }
 
             fragmentTransaction.add(R.id.content_layout, fragment, tag)
         } else {

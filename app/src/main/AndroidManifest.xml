@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name="com.example.antenna.notused.MyApplication">
+        android:name="com.example.antenna.sharedPreference.App">
 
         <activity android:name=".sign.SignActivity"/>
         <activity android:name=".interest.InterestActivity"/>
