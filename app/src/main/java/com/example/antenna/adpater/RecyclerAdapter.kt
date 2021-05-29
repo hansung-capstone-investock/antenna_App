@@ -40,7 +40,7 @@ class RecyclerAdapter(private val items: MutableList<DataList>):
                 holder.itemView.apply {
                     xml_image.setImageDrawable(item.imgProfile)
                     inter_name.text = item.strName
-                    inter_percent.text = item.strNumber
+                    inter_code.text = item.strNumber
                 }
             }
         }

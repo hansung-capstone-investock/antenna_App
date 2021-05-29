@@ -64,12 +64,11 @@ class MainActivity : AppCompatActivity() {
             else if (id == R.id.navigation_3)
                 NewsFragment()
             else {
-                InfoFragment()
-                /*if(App.prefs.id == null){
+                if(App.prefs.id.isNullOrBlank()){
                     InfoFragment()
                 } else{
                     MyFragment()
-                }*/
+                }
             }
 
             fragmentTransaction.add(R.id.content_layout, fragment, tag)

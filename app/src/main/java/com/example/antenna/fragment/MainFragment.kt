@@ -41,7 +41,7 @@ class MainFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "UseCompatLoadingForDrawables")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         activity?.let {
@@ -50,11 +50,11 @@ class MainFragment : Fragment() {
             val id = App.prefs.id
             Log.d("SHARED NAME", id.toString())
 
-//            if(App.prefs.id == null){
-//                Username.text = "로그인을 해주세요"
-//            } else{
-//                Username.text = id.toString()+"님 안녕하세요"
-//            }
+            if(App.prefs.id.isNullOrBlank()){
+                Username.text = "로그인을 해주세요"
+            } else{
+                Username.text = id.toString()+"님 안녕하세요"
+            }
 
             Username.text = id.toString()+"님 안녕하세요"
 

@@ -5,10 +5,8 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import com.example.antenna.R
-import com.example.antenna.adpater.DataList
 import com.example.antenna.adpater.InterAdapter
 import com.example.antenna.adpater.InterList
-import com.example.antenna.adpater.RecyclerAdapter
 import kotlinx.android.synthetic.main.add_company.*
 
 class InterestActivity : AppCompatActivity(){
@@ -22,7 +20,7 @@ class InterestActivity : AppCompatActivity(){
 
         // searchView 검색 및 변경 처리
         // search_searchView.isSubmitButtonEnabled = true
-        search_searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        search_searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 // 검색 버튼을 누르면 호출 되는 함수
 
@@ -36,7 +34,7 @@ class InterestActivity : AppCompatActivity(){
                 Log.d("onQueryTextChange : ", newText.toString())
 
                 // 검색창에서 글자가 변경이 일어날 떄마다 호출되는 함수
-                
+
                 return true
             }
         })
@@ -49,6 +47,7 @@ class InterestActivity : AppCompatActivity(){
         list.add(InterList("KG동부제철", "016380"))
         list.add(InterList("KG케미칼", "001390"))
         list.add(InterList("KTis", "058860"))
+        list.add(InterList("LG이노텍", "011070"))
 
         rv_data.adapter = adapter1
 

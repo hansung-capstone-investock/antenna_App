@@ -1,5 +1,6 @@
 package com.example.antenna.sign
 
+import android.app.PendingIntent.getActivity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -45,7 +46,8 @@ class SignActivity : AppCompatActivity() {
                     dialog.setTitle("회원가입 성공")
                     dialog.show()
 
-                    // startActivity(intent)
+                    startActivity(intent)
+                    finish()
                 }
 
                 override fun onFailure(call: Call<SignData>, t: Throwable) {
