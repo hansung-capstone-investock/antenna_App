@@ -1,6 +1,5 @@
 package com.example.antenna.sign
 
-import android.app.PendingIntent.getActivity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -31,7 +30,8 @@ class SignActivity : AppCompatActivity() {
                 .baseUrl("http://ec2-13-125-236-101.ap-northeast-2.compute.amazonaws.com:8000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-
+        
+        // 회원가입 객체 생성
         val signServer: SignUpService? = signRetrofit.create(SignUpService::class.java)
 
         signup_button.setOnClickListener {

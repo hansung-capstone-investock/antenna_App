@@ -8,9 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.Nullable
 import androidx.appcompat.app.AlertDialog
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResult
 import com.example.antenna.MainActivity
 import com.example.antenna.R
 import com.example.antenna.sharedPreference.App
@@ -48,7 +46,7 @@ class InfoFragment : Fragment() {
 
         Login_button.setOnClickListener {
             activity?.let{
-                val intent  = Intent(context, MainActivity::class.java)
+                val intent_login  = Intent(context, MainActivity::class.java)
                 Log.d(loginService.toString(), "loginService button!!!!!!!!!!!!!!!!!")
 
                 val id = userid.text.toString()
@@ -77,17 +75,14 @@ class InfoFragment : Fragment() {
                         Log.d("RESPONSE MEG", loginData?.code.toString())
 
                         if (loginData?.code.toString() == "0000") {
-                            dialog?.setTitle("로그인 성공")
-                            dialog?.setMessage("code = " + loginData?.code + " msg = " + loginData?.msg)
-                            dialog?.show()
-
                             Log.d("INFO ID", id)
 
                             App.prefs.id = id
 
-                            Log.d("LGO NAME INFO", App.prefs.id.toBoolean().toString())
+                            userid.text.clear()
+                            userpw.text.clear()
 
-                            startActivity(intent)
+                            startActivity(intent_login)
 
                         } else { // login.code == 1001
                             dialog?.setTitle("실패")

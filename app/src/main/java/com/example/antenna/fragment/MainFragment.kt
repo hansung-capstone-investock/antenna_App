@@ -58,7 +58,7 @@ class MainFragment : Fragment() {
 
             Username.text = id.toString()+"님 안녕하세요"
 
-            list.add(DataList((activity as MainActivity).getDrawable(R.mipmap.samsung), "삼성전자", "-2.0%"))
+//            list.add(DataList((activity as MainActivity).getDrawable(R.mipmap.samsung), "삼성전자", "-2.0%"))
 
             rv_data.adapter = adapter1
         }

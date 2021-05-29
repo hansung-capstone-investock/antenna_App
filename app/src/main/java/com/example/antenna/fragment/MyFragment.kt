@@ -1,5 +1,6 @@
 package com.example.antenna.fragment
 
+import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -24,20 +25,23 @@ class MyFragment : Fragment(){
 
         // 회원정보 삭제
         Logout.setOnClickListener {
-            App.prefs.id = null
             App.prefs.editor.clear()
             App.prefs.editor.commit()
 
             Log.d("LOG NAME", App.prefs.id.toString())
 
+            (context as Activity).finish()
+
             // 다시하기
-            activity.let{
-                val intent = Intent(it, InfoFragment()::class.java)
-                it?.startActivity(intent)
-                //activity?.finish()
-            }
+//            activity.let{
+//                val intent = Intent(it, InfoFragment()::class.java)
+//                it?.startActivity(intent)
+//                //activity?.finish()
+//            }
         }
     }
+
+
 
     override fun onResume() {
         super.onResume()
