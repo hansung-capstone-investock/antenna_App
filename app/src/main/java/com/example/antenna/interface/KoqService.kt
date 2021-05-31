@@ -1,15 +1,14 @@
 package com.example.antenna.`interface`
 
-import com.example.antenna.dataclass.KosData
-import com.example.antenna.dataclass.LiveData
+import com.example.antenna.dataclass.KoqData
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface KosService {
-    @GET("/stock/kospiyear/")
-    fun getKospi(
+interface KoqService {
+    @GET("/stock/kosdaqyear/")
+    fun getKosdaq(
             @Query("date") date: String? = null,
             @Query("close") close: String? = null,
-    ) : Call<List<KosData>>
+    ) : Call<List<KoqData>>
 }

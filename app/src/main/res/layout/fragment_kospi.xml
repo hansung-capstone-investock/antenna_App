@@ -14,7 +14,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/KOSDAQ_TEXT"
+            android:id="@+id/Kospi_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="KOSPI"
@@ -32,7 +32,7 @@
             android:text="3,121.95"
             android:textColor="#000000"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/KOSDAQ_TEXT"
+            app:layout_constraintStart_toEndOf="@+id/Kospi_text"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.538" />
 
@@ -64,7 +64,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/lineChart"
+        android:id="@+id/lineChart1"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginStart="16dp"

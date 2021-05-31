@@ -1,6 +1,6 @@
 package com.example.antenna.dataclass
 
-data class KosData(
+data class KoqData (
         var date : String,
         var close : Double,
 )
