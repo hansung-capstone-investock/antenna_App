@@ -10,15 +10,19 @@ import android.view.ViewGroup
 import com.example.antenna.R
 import com.example.antenna.`interface`.KosService
 import com.example.antenna.dataclass.KosData
+import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import kotlinx.android.synthetic.main.fragment_kosdaq.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.concurrent.thread
 
 class KospiFragment : Fragment(){
 
@@ -31,7 +35,7 @@ class KospiFragment : Fragment(){
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-    val kosServer : KosService? = kosRetrofit.create(KosService::class.java)
+    private val kosServer : KosService? = kosRetrofit.create(KosService::class.java)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_kospi, container, false)
@@ -67,8 +71,77 @@ class KospiFragment : Fragment(){
         thread.start()
     }
 
-    override fun onResume() {
-        super.onResume()
+    private fun setChart(){
+        val xAxis = lineChart.xAxis
+
+        xAxis.apply {
+            position =  XAxis.XAxisPosition.BOTTOM
+            textSize = 10f
+            setDrawGridLines(false)
+            granularity = 1f
+            axisMinimum = 2f
+            isGranularityEnabled = true
+        }
+
+        lineChart.apply {
+            axisRight.isEnabled = false
+            axisLeft.axisMaximum = 50f
+            legend.apply {
+                textSize = 15f
+                verticalAlignment = Legend.LegendVerticalAlignment.TOP
+                horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
+                orientation = Legend.LegendOrientation.HORIZONTAL
+                setDrawInside(false)
+            }
+        }
+        val lineData = LineData()
+        lineChart.data = lineData
+//        feedMultiple()
+    }
+    
+    // 차트에 쓰일 데이터 목록 가져오기
+    private fun feedMultiple() {
+        if (thread != null){
+            thread!!.interrupt()
+        }
+
+        val runnable = Runnable {
+            addEntry()
+        }
+
+        thread = Thread(Runnable {
+            while (true){
+                runOnUiThread(runnable)
+                try {
+                    Thread.sleep(1000)
+                } catch (e: InterruptedException){
+                    e.printStackTrace()
+                }
+            }
+        })
+        thread!!.start()
+    }
+
+    private fun addEntry() {
+        val data = lineChart.data
+
+        data?.let {
+            var set: ILineDataSet? = data.getDataSetByIndex(0)
+
+            if(set == null){
+                set = createSet()
+                data.addDataSet(set)
+            }
+            data.addEntry(Entry(set.entryCount.toFloat(), floatTemp), 0)
+
+            data.notifyDataChanged()
+            lineChart.apply {
+                notifyDataSetChanged()
+                moveViewToX(data.entryCount.toFloat())
+                setVisibleXRangeMaximum(4f)
+
+            }
+        }
     }
 
     inner class ThreadClass : Thread(){

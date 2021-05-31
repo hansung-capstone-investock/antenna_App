@@ -4,15 +4,22 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import com.example.antenna.BuildConfig
 import com.example.antenna.R
 import com.example.antenna.adpater.InterAdapter
 import com.example.antenna.adpater.InterList
+import com.opencsv.CSVReader
 import kotlinx.android.synthetic.main.add_company.*
+import java.io.FileReader
+import java.io.IOException
+import java.util.*
 
 class InterestActivity : AppCompatActivity(){
 
     private val list = mutableListOf<InterList>()
     private val adapter1 = InterAdapter(list)
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,15 +46,16 @@ class InterestActivity : AppCompatActivity(){
             }
         })
 
-        list.add(InterList("DRB동일", "004840"))
-        list.add(InterList("DSR", "155660"))
-        list.add(InterList("GS글로벌", "001250"))
-        list.add(InterList("HDC현대산업개발", "294870"))
-        list.add(InterList("KEC", "092220"))
-        list.add(InterList("KG동부제철", "016380"))
-        list.add(InterList("KG케미칼", "001390"))
-        list.add(InterList("KTis", "058860"))
-        list.add(InterList("LG이노텍", "011070"))
+        // CSV READER
+        val filePath = filesDir.toString()
+        val csvHelper = CsvHelper(filePath)
+
+        val stockList = "stockList.csv"
+        val dataList = csvHelper.readAllCsvData(stockList)
+
+        for(data in dataList){
+            list.add(InterList(data.contentToString(), " "))
+        }
 
         rv_data.adapter = adapter1
 
@@ -73,11 +81,21 @@ class InterestActivity : AppCompatActivity(){
         })*/
     }
 
-    /*override fun onBackPressed() {
-        if (!search_searchView.isIconified) {
-            search_searchView.isIconified = true
-        } else {
-            super.onBackPressed()
+    class CsvHelper(private val filePath: String){
+        fun readAllCsvData(fileName: String) : List<Array<String>>{
+            return try {
+                FileReader("$filePath/$fileName").use { fr ->
+                    CSVReader(fr).use {
+                        it.readAll()
+                    }
+                }
+            } catch (e : IOException){
+                if (BuildConfig.DEBUG){
+                    e.printStackTrace()
+                }
+                listOf()
+            }
         }
-    }*/
+    }
+
 }
