@@ -1,6 +1,7 @@
 package com.example.antenna.fragment
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import androidx.core.content.ContextCompat
 import com.example.antenna.R
 import com.example.antenna.`interface`.KosService
 import com.example.antenna.dataclass.KosData
+import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -96,12 +98,20 @@ class KospiFragment : Fragment(){
             // Entry 배열 초기값 입력
             entries.add(Entry(0F, 1900F))
             // 그래프 구현을 위한 LineDataSet 생성
-            var dataset : LineDataSet = LineDataSet(entries, "")
+            val dataSet : LineDataSet = LineDataSet(entries, "").apply {
+                setDrawCircles(false)
+                color = Color.RED
+                highLightColor = Color.TRANSPARENT
+                circleRadius = 0f
+                valueTextSize = 0F
+                lineWidth = 1.5F
+            }
             // 그래프 data 생성 -> 최종입력 데이터
-            var data : LineData = LineData(dataset)
+            var data : LineData = LineData(dataSet)
             // activity_main에 배치된 lineChart에 데이터 연결 하기
             lineChart1.data = data
 
+            setChart()
             activity?.runOnUiThread {
                 lineChart1.animateXY(1, 1)
             }
@@ -117,6 +127,33 @@ class KospiFragment : Fragment(){
             
             isrunning = false
             super.run()
+        }
+    }
+
+    private fun setChart(){
+
+        // X축
+        val xAxis = lineChart1.xAxis.apply {
+            position = XAxis.XAxisPosition.BOTTOM
+            textSize = 10f
+            setDrawGridLines(false)
+            setDrawAxisLine(false)
+            isGranularityEnabled = true
+            textColor = Color.TRANSPARENT
+        }
+
+        lineChart1.apply {
+            // Y축
+            axisRight.isEnabled = false
+            axisLeft.axisMaximum = 3500f
+            axisLeft.axisMinimum = 1800f
+            setPinchZoom(false)
+            description.isEnabled = false
+
+            legend.apply {
+                setDrawInside(false)
+                isEnabled = false
+            }
         }
     }
 

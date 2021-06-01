@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.example.antenna.fragment.KosdaqFragment
+import com.example.antenna.fragment.Kospi200Fragment
 import com.example.antenna.fragment.KospiFragment
 
 @SuppressLint("WrongConstant")
@@ -18,7 +19,7 @@ class ViewPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, Frag
         return when(position){
             0 -> KospiFragment()
             1 -> KosdaqFragment()
-            else -> KosdaqFragment()
+            else -> Kospi200Fragment()
         }
     }
 
