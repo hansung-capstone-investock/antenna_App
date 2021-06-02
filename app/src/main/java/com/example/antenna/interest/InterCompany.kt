@@ -1,11 +1,9 @@
 package com.example.antenna.interest
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.antenna.R
-import com.example.antenna.adpater.InterAdapter
 import kotlinx.android.synthetic.main.company_main.*
 
 class InterCompany : AppCompatActivity() {

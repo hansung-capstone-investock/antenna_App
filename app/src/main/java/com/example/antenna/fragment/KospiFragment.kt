@@ -25,10 +25,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class KospiFragment : Fragment(){
 
-    var isrunning = false
+    private var isrunning = false
 
     // KOSPI 정보 데이터 넣기
-    val data_list = mutableListOf<Double>()
+    private val data_list = mutableListOf<Double>()
 
     private val kosRetrofit: Retrofit = Retrofit.Builder()
             .baseUrl("http://ec2-13-125-236-101.ap-northeast-2.compute.amazonaws.com:8000/")
@@ -50,15 +50,15 @@ class KospiFragment : Fragment(){
             override fun onResponse(call: Call<List<KosData>>, response: Response<List<KosData>>) {
 
                 val count = response.body()?.count()
-                val today = response.body()?.elementAt(244)?.close
-                val yesterday = response.body()?.elementAt(243)?.close
+                val today = count?.minus(1)?.let { response.body()?.elementAt(it)?.close }
+                val yesterday = count?.minus(1)?.let { response.body()?.elementAt(it)?.close }
 
                 Log.d("count : ", count.toString())
                 Log.d("today : ", today.toString())
                 Log.d("yesterday : ", yesterday.toString())
 
-                val rateChange = yesterday?.let { today?.minus(it) }?.toFloat()
-
+                val rateChange = today?.toDouble()?.minus(yesterday?.toDouble()!!)
+                Log.d("rateChange : ", rateChange.toString())
                 Kospi_value.text = today.toString()
 
                 if (rateChange != null) {
@@ -96,7 +96,7 @@ class KospiFragment : Fragment(){
             // Entry 배열
             val entries : ArrayList<Entry> = ArrayList()
             // Entry 배열 초기값 입력
-            entries.add(Entry(0F, 1900F))
+            entries.add(Entry(0F, 2147F))
             // 그래프 구현을 위한 LineDataSet 생성
             val dataSet : LineDataSet = LineDataSet(entries, "").apply {
                 setDrawCircles(false)

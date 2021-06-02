@@ -11,6 +11,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.antenna.MainActivity
 import com.example.antenna.R
+import com.example.antenna.`interface`.AddService
+import com.example.antenna.dataclass.InterAddData
 import com.example.antenna.sharedPreference.App
 import com.example.antenna.dataclass.LoginData
 import com.example.antenna.sign.LoginService
@@ -24,6 +26,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class InfoFragment : Fragment() {
     var loginData: LoginData? = null
+
+    val retrofit: Retrofit = Retrofit.Builder()
+            .baseUrl("http://ec2-13-125-236-101.ap-northeast-2.compute.amazonaws.com:8000/") // 장고 서버 주소 입력
+            .addConverterFactory(GsonConverterFactory.create()) // Retrofit 객체 생성
+            .build()
     @Nullable
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -37,16 +44,11 @@ class InfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val retrofit = Retrofit.Builder()
-                .baseUrl("http://ec2-13-125-236-101.ap-northeast-2.compute.amazonaws.com:8000/") // 장고 서버 주소 입력
-                .addConverterFactory(GsonConverterFactory.create()) // Retrofit 객체 생성
-                .build()
-
         val loginService : LoginService = retrofit.create(LoginService::class.java)
 
         Login_button.setOnClickListener {
             activity?.let{
-                val intent_login  = Intent(context, MainActivity::class.java)
+                val intentLogin  = Intent(context, MainActivity::class.java)
                 Log.d(loginService.toString(), "loginService button!!!!!!!!!!!!!!!!!")
 
                 val id = userid.text.toString()
@@ -76,13 +78,13 @@ class InfoFragment : Fragment() {
 
                         if (loginData?.code.toString() == "0000") {
                             Log.d("INFO ID", id)
-
+                            returnCompany(id)
                             App.prefs.id = id
 
                             userid.text.clear()
                             userpw.text.clear()
 
-                            startActivity(intent_login)
+                            startActivity(intentLogin)
 
                         } else { // login.code == 1001
                             dialog?.setTitle("실패")
@@ -101,5 +103,19 @@ class InfoFragment : Fragment() {
                 startActivity(intent)
             }
         }
+    }
+
+    private fun returnCompany(name : String) {
+        val company : AddService = retrofit.create(AddService::class.java)
+        company.requestCompany(name).enqueue(object : Callback<InterAddData>{
+            override fun onResponse(call: Call<InterAddData>, response: Response<InterAddData>) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onFailure(call: Call<InterAddData>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 }

@@ -12,7 +12,7 @@ import com.example.antenna.interest.InterCompany
 import kotlinx.android.synthetic.main.list_item.view.*
 
 
-class InterAdapter(private val items: MutableList<InterList>):
+class CompanyAdapter(private val items: MutableList<CompanyList>):
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private fun ViewGroup.inflate(layoutRes : Int) : View = LayoutInflater.from(context).inflate(layoutRes, this, false)

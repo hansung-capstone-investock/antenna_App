@@ -6,20 +6,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import com.example.antenna.BuildConfig
 import com.example.antenna.R
-import com.example.antenna.adpater.InterAdapter
-import com.example.antenna.adpater.InterList
+import com.example.antenna.adpater.CompanyAdapter
+import com.example.antenna.adpater.CompanyList
 import com.opencsv.CSVReader
 import kotlinx.android.synthetic.main.add_company.*
 import java.io.FileReader
 import java.io.IOException
-import java.util.*
 
 class InterestActivity : AppCompatActivity(){
 
-    private val list = mutableListOf<InterList>()
-    private val adapter1 = InterAdapter(list)
-
-
+    private val list = mutableListOf<CompanyList>()
+    private val adapter1 = CompanyAdapter(list)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +51,7 @@ class InterestActivity : AppCompatActivity(){
         val dataList = csvHelper.readAllCsvData(stockList)
 
         for(data in dataList){
-            list.add(InterList(data.contentToString(), " "))
+            list.add(CompanyList(data.contentToString(), " "))
         }
 
         rv_data.adapter = adapter1
