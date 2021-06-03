@@ -22,6 +22,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.math.round
+import kotlin.math.roundToInt
 
 class KospiFragment : Fragment(){
 
@@ -50,27 +52,43 @@ class KospiFragment : Fragment(){
             override fun onResponse(call: Call<List<KosData>>, response: Response<List<KosData>>) {
 
                 val count = response.body()?.count()
+                // 자료형은 Double
                 val today = count?.minus(1)?.let { response.body()?.elementAt(it)?.close }
-                val yesterday = count?.minus(1)?.let { response.body()?.elementAt(it)?.close }
+                val yesterday = count?.minus(2)?.let { response.body()?.elementAt(it)?.close }
 
-                Log.d("count : ", count.toString())
-                Log.d("today : ", today.toString())
-                Log.d("yesterday : ", yesterday.toString())
+                val rateChange = today?.toFloat()?.let { yesterday?.toFloat()?.minus(it) }?.toDouble()
+                // 소수점 아래 3번째에서 반올림
+                val rateChange1 = rateChange?.times(100)?.let { round(it) }?.div(100)
 
-                val rateChange = today?.toDouble()?.minus(yesterday?.toDouble()!!)
-                Log.d("rateChange : ", rateChange.toString())
+                val ratePercent = rateChange1?.div(yesterday!!)?.times(100)
+                // 소수점 아래 3번째에서 반올림
+                val ratePercent1 = ratePercent?.times(100)?.let { round(it) }?.div(100)
+
                 Kospi_value.text = today.toString()
 
-                if (rateChange != null) {
-                    if(rateChange > 0){
-                        Kospi_Fluctuation.text = "▲$rateChange"
+                if (rateChange1 != null) {
+                    if(rateChange1 > 0){
+                        Kospi_Fluctuation.text = "▲$rateChange1"
+                        Kospi_value.setTextColor(ContextCompat.getColor(context!!, R.color.red))
                         Kospi_Fluctuation.setTextColor(ContextCompat.getColor(context!!, R.color.red))
                     }
                     else{
-                        Kospi_Fluctuation.text = "▼$rateChange"
+                        Kospi_Fluctuation.text = "▼$rateChange1"
+                        Kospi_value.setTextColor(ContextCompat.getColor(context!!, R.color.blue))
                         Kospi_Fluctuation.setTextColor(ContextCompat.getColor(context!!, R.color.blue))
                     }
                 }
+
+                if (ratePercent1 != null) {
+                    if(ratePercent1 > 0){
+                        Kospi_percent.text = "+$ratePercent1%"
+                        Kospi_percent.setTextColor(ContextCompat.getColor(context!!, R.color.red))
+                    } else{
+                        Kospi_percent.text = "$ratePercent1%"
+                        Kospi_percent.setTextColor(ContextCompat.getColor(context!!, R.color.blue))
+                    }
+                }
+
 
                 for(i in 0 until response.body()?.count()?.toInt()!!){
                     val graphData : Double? = response.body()?.elementAt(i)?.close
@@ -133,7 +151,7 @@ class KospiFragment : Fragment(){
     private fun setChart(){
 
         // X축
-        val xAxis = lineChart1.xAxis.apply {
+        lineChart1.xAxis.apply {
             position = XAxis.XAxisPosition.BOTTOM
             textSize = 10f
             setDrawGridLines(false)

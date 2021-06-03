@@ -24,6 +24,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.math.round
 
 class KosdaqFragment : Fragment(){
 
@@ -51,24 +52,38 @@ class KosdaqFragment : Fragment(){
             override fun onResponse(call: Call<List<KoqData>>, response: Response<List<KoqData>>) {
                 val count = response.body()?.count()
                 val today = count?.minus(1)?.let { response.body()?.elementAt(it)?.close }
-                val yesterday = count?.minus(1)?.let { response.body()?.elementAt(it)?.close }
+                val yesterday = count?.minus(2)?.let { response.body()?.elementAt(it)?.close }
 
-                Log.d("count : ", count.toString())
-                Log.d("today : ", today.toString())
-                Log.d("yesterday : ", yesterday.toString())
+                val rateChange = today?.toFloat()?.let { yesterday?.toFloat()?.minus(it) }?.toDouble()
+                // 소수점 아래 3번째에서 반올림
+                val rateChange1 = rateChange?.times(100)?.let { round(it) }?.div(100)
 
-                val rateChange = today?.toDouble()?.minus(yesterday?.toDouble()!!)
-                Log.d("rateChange : ", rateChange.toString())
+                val ratePercent = rateChange1?.div(yesterday!!)?.times(100)
+                // 소수점 아래 3번째에서 반올림
+                val ratePercent1 = ratePercent?.times(100)?.let { round(it) }?.div(100)
+
                 KosDaq_value.text = today.toString()
 
                 if (rateChange != null) {
                     if(rateChange > 0){
-                        KosDaq_Fluctuation.text = "▲$rateChange"
+                        KosDaq_Fluctuation.text = "▲$rateChange1"
+                        KosDaq_value.setTextColor(ContextCompat.getColor(context!!, R.color.red))
                         KosDaq_Fluctuation.setTextColor(ContextCompat.getColor(context!!, R.color.red))
                     }
                     else{
-                        KosDaq_Fluctuation.text = "▼$rateChange"
+                        KosDaq_Fluctuation.text = "▼$rateChange1"
+                        KosDaq_value.setTextColor(ContextCompat.getColor(context!!, R.color.blue))
                         KosDaq_Fluctuation.setTextColor(ContextCompat.getColor(context!!, R.color.blue))
+                    }
+                }
+
+                if (ratePercent1 != null) {
+                    if(ratePercent1 > 0){
+                        KosDqa_percent.text = "+$ratePercent1%"
+                        KosDqa_percent.setTextColor(ContextCompat.getColor(context!!, R.color.red))
+                    } else{
+                        KosDqa_percent.text = "$ratePercent1%"
+                        KosDqa_percent.setTextColor(ContextCompat.getColor(context!!, R.color.blue))
                     }
                 }
 

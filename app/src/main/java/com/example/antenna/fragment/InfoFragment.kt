@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import com.example.antenna.MainActivity
 import com.example.antenna.R
 import com.example.antenna.`interface`.AddService
-import com.example.antenna.dataclass.InterAddData
+import com.example.antenna.dataclass.LoadData
 import com.example.antenna.sharedPreference.App
 import com.example.antenna.dataclass.LoginData
 import com.example.antenna.sign.LoginService
@@ -26,6 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class InfoFragment : Fragment() {
     var loginData: LoginData? = null
+    var companyData : LoadData? = null
 
     val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("http://ec2-13-125-236-101.ap-northeast-2.compute.amazonaws.com:8000/") // 장고 서버 주소 입력
@@ -107,12 +108,14 @@ class InfoFragment : Fragment() {
 
     private fun returnCompany(name : String) {
         val company : AddService = retrofit.create(AddService::class.java)
-        company.requestCompany(name).enqueue(object : Callback<InterAddData>{
-            override fun onResponse(call: Call<InterAddData>, response: Response<InterAddData>) {
-                TODO("Not yet implemented")
+        company.requestCompany(name).enqueue(object : Callback<LoadData>{
+            override fun onResponse(call: Call<LoadData>, response: Response<LoadData>) {
+                companyData = response.body()
+
+                Log.d("companyData", companyData.toString())
             }
 
-            override fun onFailure(call: Call<InterAddData>, t: Throwable) {
+            override fun onFailure(call: Call<LoadData>, t: Throwable) {
                 TODO("Not yet implemented")
             }
 

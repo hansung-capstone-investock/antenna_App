@@ -199,13 +199,13 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/textletter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:fontFamily="sans-serif-black"
-                    android:text="만약 3달 전에 알았더라면"
+                    android:text="커뮤니티 HOT"
                     android:textColor="@color/black" />
             </LinearLayout>
 

@@ -29,19 +29,17 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_weight="0.5"
-            android:text="3,121.95"
             android:textColor="#000000"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/Kospi_text"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.538" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/Kospi_Fluctuation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="▼25.30"
             android:textColor="#000000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/Kospi_percent"
@@ -55,7 +53,6 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="80dp"
             android:layout_weight="1"
-            android:text="-0.75%"
             android:textColor="#000000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
