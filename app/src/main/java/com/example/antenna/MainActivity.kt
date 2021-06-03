@@ -63,6 +63,8 @@ class MainActivity : AppCompatActivity() {
                 ClickFragment()
             else if (id == R.id.navigation_3)
                 NewsFragment()
+            else if (id == R.id.navigation_4)
+                BackFragment()
             else {
                 if(App.prefs.id.isNullOrBlank()){
                     InfoFragment()

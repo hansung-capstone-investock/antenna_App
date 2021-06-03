@@ -6,7 +6,7 @@ import retrofit2.http.*
 
 interface AddService {
     @FormUrlEncoded
-    @POST("/account/api/interestUpdate/")
+    @POST("/account/api/intereststock/")
     fun requestCompany(
             // 사용자에게 관심기업 추가하는~~~
             @Field("name") name: String

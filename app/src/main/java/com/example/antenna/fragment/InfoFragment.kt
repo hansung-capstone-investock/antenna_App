@@ -18,6 +18,8 @@ import com.example.antenna.dataclass.LoginData
 import com.example.antenna.sign.LoginService
 import com.example.antenna.sign.SignActivity
 import kotlinx.android.synthetic.main.fragment_info.*
+import kotlinx.coroutines.flow.callbackFlow
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,6 +29,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 class InfoFragment : Fragment() {
     var loginData: LoginData? = null
     var companyData : LoadData? = null
+
+    val list : List<String>? = null
 
     val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("http://ec2-13-125-236-101.ap-northeast-2.compute.amazonaws.com:8000/") // 장고 서버 주소 입력
@@ -110,13 +114,27 @@ class InfoFragment : Fragment() {
         val company : AddService = retrofit.create(AddService::class.java)
         company.requestCompany(name).enqueue(object : Callback<LoadData>{
             override fun onResponse(call: Call<LoadData>, response: Response<LoadData>) {
+
                 companyData = response.body()
+                Log.d("companyData count", companyData?.count().toString())
 
-                Log.d("companyData", companyData.toString())
+                if(companyData != null && response.isSuccessful){
+
+                    for(i in 0 until companyData?.count()!!){
+                        Log.d("RETURN I", i.toString())
+                        Log.d("companyData", companyData!![i].toString())
+
+                        App.prefs.loadData[i] = companyData!![i]
+
+                        Log.d("App companyData",  App.prefs.loadData[i].toString())
+                    }
+
+                } else{
+                    Log.e("ERROR MESSAGE", response.errorBody().toString())
+                }
             }
-
             override fun onFailure(call: Call<LoadData>, t: Throwable) {
-                TODO("Not yet implemented")
+                t.printStackTrace()
             }
 
         })

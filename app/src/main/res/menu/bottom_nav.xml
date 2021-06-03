@@ -15,6 +15,10 @@
         android:icon="@drawable/ic_baseline_comment_24"
         android:title="@string/news" />
     <item
+        android:id="@+id/navigation_4"
+        android:icon="@drawable/ic_baseline_trending_up_24"
+        android:title="@string/BackTest" />
+    <item
         android:id="@+id/navigation_5"
         android:icon="@drawable/ic_baseline_info_24"
         android:title="@string/info" />
