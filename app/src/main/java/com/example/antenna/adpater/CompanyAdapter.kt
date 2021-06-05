@@ -28,6 +28,7 @@ class CompanyAdapter(private val items: MutableList<CompanyList>):
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, InterCompany::class.java)
             intent.putExtra("name", item.str_company)
+            intent.putExtra("code", item.str_tst)
             Log.d("company : ", item.str_company)
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }

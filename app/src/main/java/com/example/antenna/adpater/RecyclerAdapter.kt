@@ -38,9 +38,12 @@ class RecyclerAdapter(private val items: MutableList<DataList>):
                 val item = items[position]
 
                 holder.itemView.apply {
-                    xml_image.setImageDrawable(item.imgProfile)
-                    inter_name.text = item.strName
-                    inter_code.text = item.strNumber
+                    if(item.strName == "null"){
+                        inter_code.text = item.strNumber
+                    } else{
+                        inter_name.text = item.strName
+                        inter_code.text = item.strNumber
+                    }
                 }
             }
         }

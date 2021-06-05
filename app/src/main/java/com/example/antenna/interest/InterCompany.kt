@@ -14,6 +14,7 @@ class InterCompany : AppCompatActivity() {
         if(intent.hasExtra("name")){
             Log.d("HAVE NAME : ", intent.getStringExtra("name").toString())
             company_name.text = intent.getStringExtra("name")
+            company_code.text = intent.getStringExtra("code").toString()
         } else{
             Log.d("HAVEN NAME : ", intent.getStringExtra("name").toString())
         }

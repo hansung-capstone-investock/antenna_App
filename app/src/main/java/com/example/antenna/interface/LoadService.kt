@@ -4,7 +4,7 @@ import com.example.antenna.dataclass.LoadData
 import retrofit2.Call
 import retrofit2.http.*
 
-interface AddService {
+interface LoadService {
     @FormUrlEncoded
     @POST("/account/api/intereststock/")
     fun requestCompany(

@@ -1,25 +1,25 @@
 package com.example.antenna.fragment
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.Nullable
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.antenna.MainActivity
 import com.example.antenna.R
-import com.example.antenna.`interface`.AddService
+import com.example.antenna.`interface`.LoadService
 import com.example.antenna.dataclass.LoadData
 import com.example.antenna.sharedPreference.App
 import com.example.antenna.dataclass.LoginData
 import com.example.antenna.sign.LoginService
 import com.example.antenna.sign.SignActivity
 import kotlinx.android.synthetic.main.fragment_info.*
-import kotlinx.coroutines.flow.callbackFlow
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -111,24 +111,21 @@ class InfoFragment : Fragment() {
     }
 
     private fun returnCompany(name : String) {
-        val company : AddService = retrofit.create(AddService::class.java)
+        val company : LoadService = retrofit.create(LoadService::class.java)
         company.requestCompany(name).enqueue(object : Callback<LoadData>{
+            @RequiresApi(Build.VERSION_CODES.P)
             override fun onResponse(call: Call<LoadData>, response: Response<LoadData>) {
 
                 companyData = response.body()
                 Log.d("companyData count", companyData?.count().toString())
 
                 if(companyData != null && response.isSuccessful){
-
-                    for(i in 0 until companyData?.count()!!){
-                        Log.d("RETURN I", i.toString())
-                        Log.d("companyData", companyData!![i].toString())
-
-                        App.prefs.loadData[i] = companyData!![i]
-
-                        Log.d("App companyData",  App.prefs.loadData[i].toString())
-                    }
-
+                    App.prefs.saveArrayList1(companyData!![0])
+                    App.prefs.saveArrayList2(companyData!![1])
+                    App.prefs.saveArrayList3(companyData!![2])
+                    Log.d("saveArrayList1", App.prefs.getArrayList1().toString())
+                    Log.d("saveArrayList2", App.prefs.getArrayList2().toString())
+                    Log.d("saveArrayList3", App.prefs.getArrayList3().toString())
                 } else{
                     Log.e("ERROR MESSAGE", response.errorBody().toString())
                 }

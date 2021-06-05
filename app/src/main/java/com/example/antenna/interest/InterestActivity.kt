@@ -27,9 +27,7 @@ class InterestActivity : AppCompatActivity(){
         search_searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 // 검색 버튼을 누르면 호출 되는 함수
-
                 Log.d("Change SEARCH TEXT : ", query.toString())
-
                 return true
             }
 
@@ -51,31 +49,10 @@ class InterestActivity : AppCompatActivity(){
         val dataList = csvHelper.readAllCsvData(stockList)
 
         for(data in dataList){
-            list.add(CompanyList(data.contentToString(), " "))
+            list.add(CompanyList(data[0], data[1]))
         }
 
         rv_data.adapter = adapter1
-
-        // Retrofit 연결을 통해 초기값 가져오기
-        /*val firstRetrofit: Retrofit = Retrofit.Builder()
-                .baseUrl("")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                var regionServer : FirstService? = firstRetrofit.create(FirstService::class.java)
-
-        regionServer?.getInfo("json", "")?.enqueue(object : Callback<FirstData>{
-            override fun onResponse(call: Call<FirstData>, response: Response<FirstData>) {
-                var name = response.body()?.body?.name
-                var address = response.body()?.body?.address
-                var phoneNum = response.body()?.body?.phone_number
-
-            }
-
-            override fun onFailure(call: Call<FirstData>, t: Throwable) {
-                t.printStackTrace()
-            }
-
-        })*/
     }
 
     class CsvHelper(private val filePath: String){

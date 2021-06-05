@@ -29,6 +29,7 @@ class MyFragment : Fragment(){
             App.prefs.editor.commit()
 
             Log.d("LOG NAME", App.prefs.id.toString())
+            Log.d("getArrayList1 DELETE", App.prefs.getArrayList1().toString())
 
             (context as Activity).finish()
 

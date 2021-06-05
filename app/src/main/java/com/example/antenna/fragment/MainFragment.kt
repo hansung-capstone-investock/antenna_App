@@ -1,25 +1,19 @@
 package com.example.antenna.fragment
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
-import android.service.quicksettings.Tile
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.annotation.Nullable
 import androidx.core.content.res.ResourcesCompat
-import androidx.fragment.app.setFragmentResultListener
 import androidx.viewpager.widget.ViewPager
-import com.example.antenna.MainActivity
 import com.example.antenna.R
 import com.example.antenna.adpater.DataList
 import com.example.antenna.adpater.RecyclerAdapter
 import com.example.antenna.adpater.ViewPagerAdapter
-import com.example.antenna.interest.InterestActivity
 import com.example.antenna.sharedPreference.App
 import kotlinx.android.synthetic.main.fragment_main.*
 
@@ -56,9 +50,20 @@ class MainFragment : Fragment() {
                 Username.text = id.toString()+"님 안녕하세요"
             }
 
-            Username.text = id.toString()+"님 안녕하세요"
-
-//            list.add(DataList((activity as MainActivity).getDrawable(R.mipmap.samsung), "삼성전자", "-2.0%"))
+//            if(App.prefs.getArrayList1()?.companies.toString().isNotBlank()) {
+//                if (App.prefs.getArrayList1()?.companies?.company2.toString() == "null") {
+//                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company1.toString(), ""))
+//                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company2.toString(), ""))
+//                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company3.toString(), ""))
+//                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company4.toString(), ""))
+//                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company5.toString(), ""))
+//                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company6.toString(), ""))
+//                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company7.toString(), ""))
+//                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company8.toString(), ""))
+//                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company9.toString(), ""))
+//                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company10.toString(), ""))
+//                }
+//            }
 
             rv_data.adapter = adapter1
         }
