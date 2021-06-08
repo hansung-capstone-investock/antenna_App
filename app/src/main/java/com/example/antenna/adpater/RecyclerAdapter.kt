@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.antenna.R
+import com.example.antenna.interest.InterCompany
 import com.example.antenna.interest.InterestActivity
 import kotlinx.android.synthetic.main.list_item.view.*
 
@@ -36,10 +37,17 @@ class RecyclerAdapter(private val items: MutableList<DataList>):
             }
             else -> {
                 val item = items[position]
+                /*holder.itemView.setOnClickListener {
+                    val intentInfo = Intent(holder.itemView.context, InterCompany::class.java)
+                    intentInfo.putExtra("name", item.strName)
+                    // 코드
+                    startActivity(holder.itemView.context, intentInfo, null)
+                }*/
 
                 holder.itemView.apply {
                     if(item.strName == "null"){
-                        inter_code.text = item.strNumber
+                        inter_name.text.isEmpty()
+                        inter_code.text.isEmpty()
                     } else{
                         inter_name.text = item.strName
                         inter_code.text = item.strNumber

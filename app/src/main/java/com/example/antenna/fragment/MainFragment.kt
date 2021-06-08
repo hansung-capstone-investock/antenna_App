@@ -48,24 +48,112 @@ class MainFragment : Fragment() {
                 Username.text = "로그인을 해주세요"
             } else{
                 Username.text = id.toString()+"님 안녕하세요"
+//                list.add(DataList(App.prefs.getArrayList1().companies.company1.toString(), ""))
+
+                /*if(App.prefs.getArrayList1().companies.company2.toString() != "null") {
+                    list.add(DataList(App.prefs.getArrayList1().companies.company2.toString(), ""))
+                }*/
+                /*if(App.prefs.getArrayList1().companies.company3.toString() != "null"){
+                    list.add(DataList(App.prefs.getArrayList1().companies.company3.toString(), ""))
+                }*/
             }
 
-//            if(App.prefs.getArrayList1()?.companies.toString().isNotBlank()) {
-//                if (App.prefs.getArrayList1()?.companies?.company2.toString() == "null") {
-//                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company1.toString(), ""))
-//                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company2.toString(), ""))
-//                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company3.toString(), ""))
-//                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company4.toString(), ""))
-//                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company5.toString(), ""))
-//                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company6.toString(), ""))
-//                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company7.toString(), ""))
-//                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company8.toString(), ""))
-//                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company9.toString(), ""))
-//                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company10.toString(), ""))
-//                }
-//            }
+            /*if(App.prefs.getArrayList1().companies.toString() != "null") {
+                if(App.prefs.getArrayList1().companies.company10.toString() == "null") {
+                    list.add(DataList(App.prefs.getArrayList1().companies.company1.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1().companies.company2.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1().companies.company3.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1().companies.company4.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1().companies.company5.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1().companies.company6.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1().companies.company7.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1().companies.company8.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1().companies.company9.toString(), ""))
+                    rv_data.adapter = adapter1
+                }
+                else if(App.prefs.getArrayList1().companies.company9.toString() == "null" && App.prefs.getArrayList1()?.companies?.company10.toString() == "null") {
+                    list.add(DataList(App.prefs.getArrayList1().companies.company1.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1().companies.company2.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1().companies.company3.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1().companies.company4.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1().companies.company5.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1().companies.company6.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1().companies.company7.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1().companies.company8.toString(), ""))
+                    rv_data.adapter = adapter1
+                }
+                else if(App.prefs.getArrayList1().companies.company8.toString() == "null" &&
+                        App.prefs.getArrayList1().companies.company9.toString() == "null" && App.prefs.getArrayList1()?.companies?.company10.toString() == "null") {
+                    list.add(DataList(App.prefs.getArrayList1().companies.company1.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1().companies.company2.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1().companies.company3.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1().companies.company4.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1().companies.company5.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1().companies.company6.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1().companies.company7.toString(), ""))
+                    rv_data.adapter = adapter1
+                }
+                else if(App.prefs.getArrayList1().companies.company7.toString() == "null" && App.prefs.getArrayList1()?.companies?.company8.toString() == "null" &&
+                        App.prefs.getArrayList1().companies.company9.toString() == "null" && App.prefs.getArrayList1()?.companies?.company10.toString() == "null") {
+                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company1.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company2.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company3.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company4.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company5.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company6.toString(), ""))
+                    rv_data.adapter = adapter1
+                }
+                else if(App.prefs.getArrayList1()?.companies?.company6.toString() == "null" &&
+                        App.prefs.getArrayList1()?.companies?.company7.toString() == "null" && App.prefs.getArrayList1()?.companies?.company8.toString() == "null" &&
+                        App.prefs.getArrayList1()?.companies?.company9.toString() == "null" && App.prefs.getArrayList1()?.companies?.company10.toString() == "null") {
+                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company1.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company2.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company3.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company4.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company5.toString(), ""))
+                    rv_data.adapter = adapter1
+                }
+                else if(App.prefs.getArrayList1()?.companies?.company5.toString() == "null" && App.prefs.getArrayList1()?.companies?.company6.toString() == "null" &&
+                        App.prefs.getArrayList1()?.companies?.company7.toString() == "null" && App.prefs.getArrayList1()?.companies?.company8.toString() == "null" &&
+                        App.prefs.getArrayList1()?.companies?.company9.toString() == "null" && App.prefs.getArrayList1()?.companies?.company10.toString() == "null") {
+                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company1.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company2.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company3.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company4.toString(), ""))
+                    rv_data.adapter = adapter1
+                }
+                else if(App.prefs.getArrayList1()?.companies?.company4.toString() == "null" &&
+                        App.prefs.getArrayList1()?.companies?.company5.toString() == "null" && App.prefs.getArrayList1()?.companies?.company6.toString() == "null" &&
+                        App.prefs.getArrayList1()?.companies?.company7.toString() == "null" && App.prefs.getArrayList1()?.companies?.company8.toString() == "null" &&
+                        App.prefs.getArrayList1()?.companies?.company9.toString() == "null" && App.prefs.getArrayList1()?.companies?.company10.toString() == "null") {
+                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company1.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company2.toString(), ""))
+                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company3.toString(), ""))
+                    rv_data.adapter = adapter1
+                }
+                else if(App.prefs.getArrayList1()?.companies?.company3.toString() == "null" && App.prefs.getArrayList1()?.companies?.company4.toString() == "null" &&
+                        App.prefs.getArrayList1()?.companies?.company5.toString() == "null" && App.prefs.getArrayList1()?.companies?.company6.toString() == "null" &&
+                        App.prefs.getArrayList1()?.companies?.company7.toString() == "null" && App.prefs.getArrayList1()?.companies?.company8.toString() == "null" &&
+                        App.prefs.getArrayList1()?.companies?.company9.toString() == "null" && App.prefs.getArrayList1()?.companies?.company10.toString() == "null") {
+                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company2.toString(), ""))
+                    rv_data.adapter = adapter1
+                }
+                else{
+                    list.add(DataList(App.prefs.getArrayList1()?.companies?.company1.toString(), ""))
+                    rv_data.adapter = adapter1
+                }
+            }
+            else {
+                rv_data.adapter = adapter1
+            }*/
+
 
             rv_data.adapter = adapter1
+
+            refreshButton.setOnClickListener{
+                println("refrsh button click")
+                App.prefs.getArrayList1()
+            }
         }
 
         viewPager_main.adapter = adapter
@@ -89,6 +177,7 @@ class MainFragment : Fragment() {
     }
 
     fun refreshAdapter() {
+        // 아예 초기화
         adapter1.setTaskList(list)
         adapter1.notifyDataSetChanged()
     }

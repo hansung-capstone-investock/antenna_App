@@ -15,7 +15,7 @@ import java.io.IOException
 
 class InterestActivity : AppCompatActivity(){
 
-    private val list = mutableListOf<CompanyList>()
+    private val list = ArrayList<CompanyList>()
     private val adapter1 = CompanyAdapter(list)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,11 +24,13 @@ class InterestActivity : AppCompatActivity(){
 
         // searchView 검색 및 변경 처리
         // search_searchView.isSubmitButtonEnabled = true
+
         search_searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 // 검색 버튼을 누르면 호출 되는 함수
                 Log.d("Change SEARCH TEXT : ", query.toString())
-                return true
+
+                return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
@@ -36,6 +38,8 @@ class InterestActivity : AppCompatActivity(){
                 Log.d("onQueryTextChange : ", newText.toString())
 
                 // 검색창에서 글자가 변경이 일어날 떄마다 호출되는 함수
+                adapter1.filter.filter(newText)
+                adapter1.notifyDataSetChanged()
 
                 return true
             }

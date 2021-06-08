@@ -123,9 +123,8 @@ class InfoFragment : Fragment() {
                     App.prefs.saveArrayList1(companyData!![0])
                     App.prefs.saveArrayList2(companyData!![1])
                     App.prefs.saveArrayList3(companyData!![2])
+
                     Log.d("saveArrayList1", App.prefs.getArrayList1().toString())
-                    Log.d("saveArrayList2", App.prefs.getArrayList2().toString())
-                    Log.d("saveArrayList3", App.prefs.getArrayList3().toString())
                 } else{
                     Log.e("ERROR MESSAGE", response.errorBody().toString())
                 }

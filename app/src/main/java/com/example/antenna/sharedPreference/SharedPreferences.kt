@@ -26,7 +26,7 @@ class SharedPreferences(context: Context) {
         editor.apply() // This line is IMPORTANT !!!
     }
 
-    fun getArrayList1(): LoadDataItem? {
+    fun getArrayList1(): LoadDataItem {
         val json: String? = prefs.getString("save1", null)
         val type = object : TypeToken<LoadDataItem>() {}.type
         return gson.fromJson(json, type)
