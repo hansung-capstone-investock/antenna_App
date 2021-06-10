@@ -39,6 +39,7 @@ class InterCompany : AppCompatActivity() {
     var yesterday : Double? = null
     var today : Double? = null
     var percent : Double? = null
+    var volume : Double? = null
 
     private var dataList = mutableListOf<Double>()
     private var isrunning = false
@@ -48,6 +49,9 @@ class InterCompany : AppCompatActivity() {
     private var dataMin : String? = null
     // 데이터 시작 값
     private var dataFirst : String? = null
+
+    // 스피너 목록
+    // var dataArr
 
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,6 +65,7 @@ class InterCompany : AppCompatActivity() {
             company_code.text = code
 
             searchService.searchCompany(code).enqueue(object : Callback<CompanyData> {
+                @SuppressLint("SetTextI18n")
                 override fun onResponse(call: Call<CompanyData>, response: Response<CompanyData>) {
 
                     companyData = response.body()
@@ -72,6 +77,11 @@ class InterCompany : AppCompatActivity() {
                     if (count != null) {
                         today = companyData?.stockData?.get(count - 2)?.close
                         yesterday = companyData?.stockData?.get(count - 3)?.close
+                        volume = companyData?.stockData?.get(count - 2)?.volume
+
+                        Log.e("today : ", today.toString())
+                        Log.e("yesterday : ", yesterday.toString())
+                        Log.e("volume : ", volume.toString())
                     }
                     // 오늘 - 어제 / 어제 * 100 등락률
                     percent = yesterday?.let { it1 -> today?.minus(it1) }?.div(yesterday!!)?.times(100)?.toDouble()
@@ -88,68 +98,42 @@ class InterCompany : AppCompatActivity() {
                         }
                         dataMax = dataList.maxOrNull().toString()
                         dataMin = dataList.minOrNull().toString()
-                        Log.e("data max : ", dataMax.toString())
-                        Log.e("data min : ", dataMin.toString())
-
-                        Log.e("data last : ", dataList[count - 2].toString())
+//                        Log.e("data max : ", dataMax.toString())
+//                        Log.e("data min : ", dataMin.toString())
+//                        Log.e("data last : ", dataList[count - 2].toString())
 
                         dataFirst = dataList[0].toInt().toString()
                         Log.e("dataFirst : ", dataFirst.toString())
                     }
 
-                    // 오늘 최고가
-                    val todayMax = companyData?.stockData?.get(342)?.high?.toInt()
-                    // 오늘 최저가
-                    val todayMin = companyData?.stockData?.get(342)?.low?.toInt()
-                    // 오늘 거래량
-                    val volume = companyData?.stockData?.get(342)?.volume?.toInt()
-                    // 시작 값
-
-
-                    company_rate.text = dec.format(today)
-                    Fluctuation_rate.text = percent1.toString()
-                    one_max.text = dec.format(todayMax)
-                    one_min.text = dec.format(todayMin)
-                    trading_volume.text = dec.format(volume)
+                    company_rate.text = dec.format(today) + "원"
+                    Fluctuation_rate.text = percent1.toString() + "%"
+                    /*one_max.text = dec.format(dataMax)
+                    one_min.text = dec.format(dataMin)*/
+                    trading_volume.text = dec.format(volume) + "주"
 
                     isrunning = true
                     val thread = ThreadClass()
                     thread.start()
 
-                    /*if (percent1 != null) {
+                    if (percent1 != null) {
                         if(percent1 > 0.0){
-                            company_rate.setTextColor(Color.parseColor(R.color.red.toString()))
-                            Fluctuation_rate.setTextColor(Color.parseColor(R.color.red.toString()))
+                            company_rate.setTextColor(Color.RED)
+                            Fluctuation_rate.setTextColor(Color.RED)
                         } else if (percent1 == 0.0){
-                            company_rate.setTextColor(Color.parseColor(R.color.black.toString()))
-                            Fluctuation_rate.setTextColor(Color.parseColor(R.color.black.toString()))
+                            company_rate.setTextColor(Color.BLACK)
+                            Fluctuation_rate.setTextColor(Color.BLACK)
                         } else {
-                            company_rate.setTextColor(Color.parseColor(R.color.blue.toString()))
-                            Fluctuation_rate.setTextColor(Color.parseColor(R.color.blue.toString()))
+                            company_rate.setTextColor(Color.BLUE)
+                            Fluctuation_rate.setTextColor(Color.BLUE)
                         }
-                    }*/
+                    }
                 }
 
                 override fun onFailure(call: Call<CompanyData>, t: Throwable) {
                     t.printStackTrace()
                 }
             })
-
-            /*if(intent.getStringExtra("percent")?.toDouble()!! > 0.0){
-                Log.e("HAVE PERCENT HIGH : ", intent.getStringExtra("percent").toString())
-                company_rate.setTextColor(ContextCompat.getColor(this, R.color.red))
-                Fluctuation_rate.setTextColor(ContextCompat.getColor(this, R.color.red))
-            } else if(intent.getStringExtra("percent")?.toDouble()!! == 0.0){
-                Log.e("HAVE PERCENT HIGH : ", intent.getStringExtra("percent").toString())
-                company_rate.setTextColor(ContextCompat.getColor(this, R.color.black))
-                Fluctuation_rate.setTextColor(ContextCompat.getColor(this, R.color.black))
-            }
-            else{
-                Log.e("HAVE PERCENT LOW : ", intent.getStringExtra("percent").toString())
-                company_rate.setTextColor(ContextCompat.getColor(this, R.color.blue))
-                Fluctuation_rate.setTextColor(ContextCompat.getColor(this, R.color.blue))
-            }*/
-
         } else{
             Log.d("HAVEN NAME : ", intent.getStringExtra("name").toString())
         }

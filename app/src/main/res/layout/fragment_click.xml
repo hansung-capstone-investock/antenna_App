@@ -74,7 +74,27 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="커피 한잔으로 주식 시작하기 "
+                android:text="종목코드"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/textcoffee2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif-black"
+                android:text="예측날짜"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/textcoffee3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif-black"
+                android:text="보조지표"
                 android:textColor="@color/black" />
         </LinearLayout>
 

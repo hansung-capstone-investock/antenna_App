@@ -74,7 +74,7 @@ class CompanyAdapter(private var items: ArrayList<CompanyList>):
                 } else {
                     val resultList = ArrayList<CompanyList>()
                     for(row in items){
-                        if(row.str_company.toLowerCase(Locale.ROOT).contains(charSearch.toLowerCase(Locale.ROOT))) {
+                        if(row.str_tst.toLowerCase(Locale.ROOT).contains(charSearch.toLowerCase(Locale.ROOT))) {
                             resultList.add(row)
                         }
                     }
