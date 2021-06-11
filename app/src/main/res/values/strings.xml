@@ -11,4 +11,28 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="BackTest">백테스팅</string>
     <!-- TODO: Remove or change this placeholder text -->
+
+    <string-array name="spinner_code">
+        <item>1005":"음식료품</item>
+        <item>1006":"섬유의복</item>
+        <item>1007":"종이목재</item>
+        <item>1008":"화학</item>
+        <item>1009":"의약품</item>
+        <item>1010":"비금속광물</item>
+        <item>1011":"철강금속</item>
+        <item>1012":"기계</item>
+        <item>1013":"전기전자</item>
+        <item>1015":"운수장비</item>
+        <item>1016":"유통업</item>
+        <item>1017":"전기가스업</item>
+        <item>1018":"건설업</item>
+        <item>1019":"운수창고업</item>
+        <item>1020":"통신업</item>
+        <item>1021":"금융업</item>
+        <item>1022":"은행</item>
+        <item>1024":"증권</item>
+        <item>1025":"보</item>
+        <item>1026":"서비스업</item>
+        <item>1027":"제조업</item>
+    </string-array>
 </resources>

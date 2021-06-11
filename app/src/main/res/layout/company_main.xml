@@ -155,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="100sp"
                 android:gravity="left"
-                android:text="PER"
+                android:text="-"
                 android:textColor="#000000"
                 android:textStyle="bold" />
 
@@ -174,7 +174,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="120sp"
                 android:gravity="left"
-                android:text="PBR"
+                android:text="-"
                 android:textColor="#000000"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -203,9 +203,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|left"
-                android:layout_marginStart="70sp"
+                android:layout_marginStart="60dp"
                 android:gravity="start|left"
-                android:text="거래량"
+                android:text="-"
                 android:textColor="#000000"
                 android:textStyle="bold" />
 
@@ -219,12 +219,12 @@
                 android:textColor="#000000" />
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/capvalue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="66sp"
                 android:gravity="left"
-                android:text="시가총액"
+                android:text="-"
                 android:textColor="#000000"
                 android:textStyle="bold" />
 
@@ -254,7 +254,7 @@
                 android:id="@+id/one_max"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
+                android:layout_marginStart="40sp"
                 android:layout_marginTop="8dp"
                 android:gravity="left"
                 android:text="최고가"
@@ -278,7 +278,7 @@
                 android:layout_marginStart="60dp"
                 android:layout_marginTop="8dp"
                 android:gravity="left"
-                android:text="최저가"
+                android:text="-"
                 android:textColor="#000000"
                 android:textStyle="bold" />
 

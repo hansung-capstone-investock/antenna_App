@@ -151,7 +151,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="8dp"
                 android:orientation="vertical"
-                tools:ignore="MissingConstraints">
+                tools:ignore="MissingConstraints"
+                tools:visibility="invisible">
 
                 <TextView
                     android:id="@+id/title7"
@@ -759,60 +760,237 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/textView8"
+                    <CheckBox
+                        android:id="@+id/PERcheckBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
                         android:text="PER"
-                        android:textColor="#000000"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/textView9"
+                    <CheckBox
+                        android:id="@+id/PBRcheckBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="20dp"
                         android:text="PBR"
-                        android:textColor="#000000"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                        app:layout_constraintTop_toBottomOf="@+id/PERcheckBox" />
 
-                    <TextView
-                        android:id="@+id/textView14"
+                    <CheckBox
+                        android:id="@+id/PSRcheckBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
+                        android:layout_marginStart="8dp"
                         android:layout_marginTop="16dp"
                         android:text="PSR"
-                        android:textColor="#000000"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+                        app:layout_constraintTop_toBottomOf="@+id/PBRcheckBox" />
 
-                    <TextView
-                        android:id="@+id/textView13"
+                    <CheckBox
+                        android:id="@+id/ROEcheckBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="20dp"
                         android:text="ROE(단위:%)"
-                        android:textColor="#000000"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+                        app:layout_constraintTop_toBottomOf="@+id/PSRcheckBox" />
 
-                    <TextView
-                        android:id="@+id/textView15"
+                    <CheckBox
+                        android:id="@+id/ROAcheckBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
+                        android:layout_marginStart="8dp"
                         android:layout_marginTop="16dp"
                         android:text="ROA(단위:%)"
-                        android:textColor="#000000"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                        app:layout_constraintTop_toBottomOf="@id/ROEcheckBox" />
+
+                    <EditText
+                        android:id="@+id/PERedit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="56dp"
+                        android:layout_marginTop="16dp"
+                        android:hint="우선순위"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/PERcheckBox"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/PERMin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:hint="최소값 : -100"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@id/PERedit"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/PBRMin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="8dp"
+                        android:hint="최소값 : 0.1"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/PBRedit"
+                        app:layout_constraintTop_toBottomOf="@+id/PERMin" />
+
+                    <EditText
+                        android:id="@+id/PSRMin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:hint="최소값 : 0.1"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/PSRedit"
+                        app:layout_constraintTop_toBottomOf="@id/PBRMin" />
+
+                    <EditText
+                        android:id="@+id/ROEMin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:hint="최소값 : -200%"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/ROEedit"
+                        app:layout_constraintTop_toBottomOf="@id/PSRMin" />
+
+                    <EditText
+                        android:id="@+id/ROAMin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:hint="최소값 : -200%"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/ROAedit" />
+
+                    <EditText
+                        android:id="@+id/ROAMax"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:hint="최대값 : 200%"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/ROAMin" />
+
+                    <EditText
+                        android:id="@+id/ROEMax"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:hint="최대값 : 200%"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@id/ROEMin"
+                        app:layout_constraintTop_toBottomOf="@id/PSRMin" />
+
+                    <EditText
+                        android:id="@+id/PBRMax"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:hint="최대값 : 300"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@id/PBRMin"
+                        app:layout_constraintTop_toBottomOf="@id/PERMax" />
+
+                    <EditText
+                        android:id="@+id/PSRMax"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:hint="최대값 : 300"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/PSRMin"
+                        app:layout_constraintTop_toBottomOf="@id/PBRMax" />
+
+                    <EditText
+                        android:id="@+id/PERMax"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="16dp"
+                        android:hint="최대값 300"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@id/PERMin"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/PBRedit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="56dp"
+                        android:layout_marginTop="8dp"
+                        android:hint="우선순위"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/PSRedit"
+                        app:layout_constraintStart_toEndOf="@id/PBRcheckBox"
+                        app:layout_constraintTop_toBottomOf="@+id/PERedit"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <EditText
+                        android:id="@+id/PSRedit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="56dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="12dp"
+                        android:hint="우선순위"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/ROEedit"
+                        app:layout_constraintStart_toEndOf="@id/PSRcheckBox"
+                        app:layout_constraintTop_toBottomOf="@+id/PBRedit" />
+
+                    <EditText
+                        android:id="@+id/ROEedit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:hint="우선순위"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@+id/ROAedit"
+                        app:layout_constraintStart_toEndOf="@+id/ROEcheckBox"
+                        app:layout_constraintTop_toBottomOf="@+id/PSRedit" />
+
+                    <EditText
+                        android:id="@+id/ROAedit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:hint="우선순위"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/ROAcheckBox" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
@@ -840,14 +1018,38 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+                    <EditText
+                        android:id="@+id/MinValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:hint="숫자입력(단위 %)"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/minvalue"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/MaxValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:hint="숫자입력(단위 %)"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/maxvalue"
+                        app:layout_constraintTop_toBottomOf="@+id/MinValue" />
+
                     <TextView
                         android:id="@+id/minvalue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="16dp"
                         android:text="최소"
                         android:textColor="#000000"
+                        android:textSize="18sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -859,10 +1061,27 @@
                         android:layout_marginTop="16dp"
                         android:text="최대"
                         android:textColor="#000000"
+                        android:textSize="18sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/minvalue" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/backbutton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#C06868"
+                    android:fontFamily="sans-serif-black"
+                    android:text="백테스팅 시작"
+                    android:textColor="#FFFFFF" />
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

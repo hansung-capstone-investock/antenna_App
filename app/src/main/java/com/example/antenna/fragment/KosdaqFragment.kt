@@ -13,10 +13,12 @@ import com.example.antenna.R
 import com.example.antenna.`interface`.KoqService
 import com.example.antenna.`interface`.KosService
 import com.example.antenna.dataclass.KoqData
+import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.ValueFormatter
 import kotlinx.android.synthetic.main.fragment_kosdaq.*
 import kotlinx.android.synthetic.main.fragment_kospi.*
 import retrofit2.Call
@@ -32,6 +34,7 @@ class KosdaqFragment : Fragment(){
 
     // KOSPI 정보 데이터 넣기
     private val data_list = mutableListOf<Double>()
+    private val date_list = mutableListOf<String>()
 
     private val kosRetrofit: Retrofit = Retrofit.Builder()
             .baseUrl("http://ec2-13-125-236-101.ap-northeast-2.compute.amazonaws.com:8000/")
@@ -89,9 +92,13 @@ class KosdaqFragment : Fragment(){
 
                 for(i in 0 until response.body()?.count()?.toInt()!!){
                     val graphData : Double? = response.body()?.elementAt(i)?.close
-
+                    val graphDate : String? = response.body()?.elementAt(i)?.date
                     if (graphData != null) {
                         data_list.add(graphData)
+                    }
+                    if (graphDate != null){
+                        val graphSub : String = graphDate.substring(2,10)
+                        date_list.add(graphSub)
                     }
                 }
                 isrunning = true
@@ -148,13 +155,15 @@ class KosdaqFragment : Fragment(){
     private fun setChart(){
 
         // X축
-        val xAxis = lineChart2.xAxis.apply {
+        lineChart2.xAxis.apply {
             position = XAxis.XAxisPosition.BOTTOM
             textSize = 10f
             setDrawGridLines(false)
             setDrawAxisLine(false)
             isGranularityEnabled = true
-            textColor = Color.TRANSPARENT
+
+            valueFormatter = MyXAxisFormatter()
+            setLabelCount(4, true)
         }
 
         lineChart2.apply {
@@ -169,6 +178,12 @@ class KosdaqFragment : Fragment(){
                 setDrawInside(false)
                 isEnabled = false
             }
+        }
+    }
+
+    inner class MyXAxisFormatter : ValueFormatter(){
+        override fun getAxisLabel(value: Float, axis: AxisBase?): String {
+            return date_list.getOrNull(value.toInt()) ?: value.toString()
         }
     }
 

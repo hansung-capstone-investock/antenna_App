@@ -9,5 +9,11 @@ data class StockData(
     val high: Double,
     val low: Double,
     val open: Double,
-    val volume: Double
+    val volume: Double,
+    val cap : Double,
+    val per : Double,
+    val pbr : Double,
+    val psr : Double,
+    val roe : Double,
+    val roa : Double,
 )

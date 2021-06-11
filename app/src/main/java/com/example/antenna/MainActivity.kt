@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
+
         return true
     }
 
@@ -77,6 +78,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             fragmentTransaction.show(fragment)
         }
+
         fragmentTransaction.setPrimaryNavigationFragment(fragment)
         fragmentTransaction.setReorderingAllowed(true)
         fragmentTransaction.commitNow()

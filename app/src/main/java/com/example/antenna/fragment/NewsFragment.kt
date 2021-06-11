@@ -1,5 +1,6 @@
 package com.example.antenna.fragment
 
+import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import androidx.annotation.Nullable
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.antenna.R
 import com.example.antenna.`interface`.LiveNews
 import com.example.antenna.`interface`.MainNews
@@ -54,6 +56,8 @@ class NewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rv_main_data.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+        val spaceDecoration = VerticalSpaceItemDecoration(40)
+        rv_main_data.addItemDecoration(spaceDecoration)
 
         Log.d("GET REQUEST SUCCESS", firstRetrofit.toString())
 
@@ -63,6 +67,17 @@ class NewsFragment : Fragment() {
 
         live_button.setOnClickListener {
             live_news()
+        }
+    }
+
+    inner class VerticalSpaceItemDecoration(private val verticalSpaceHeight: Int) :
+            RecyclerView.ItemDecoration() {
+
+        override fun getItemOffsets(
+                outRect: Rect, view: View, parent: RecyclerView,
+                state: RecyclerView.State
+        ) {
+            outRect.bottom = verticalSpaceHeight
         }
     }
 
@@ -91,6 +106,8 @@ class NewsFragment : Fragment() {
 
             })
     }
+
+
 
     private fun live_news(){
         main_name.text = "라이브 뉴스"

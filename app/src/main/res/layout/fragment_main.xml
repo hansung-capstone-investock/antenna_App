@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f3f4f6"
+    android:background="#E2ECEB"
     android:gravity="right|top"
     android:orientation="vertical">
 
@@ -191,53 +190,63 @@
                 android:background="#ffffff"
                 android:orientation="vertical">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="30dp"
-                    android:layout_weight="1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
+                    android:orientation="horizontal">
 
-                    <Button
-                        android:id="@+id/button2"
+                    <TextView
+                        android:id="@+id/commuhot"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="64dp"
+                        android:layout_gravity="center|clip_vertical"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:text="커뮤니티 HOT"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/button3"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:fontFamily="sans-serif-black"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-                    <Button
-                        android:id="@+id/button"
+                    <TextView
+                        android:id="@+id/volumevalue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center|clip_vertical"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:text="거래량"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:fontFamily="sans-serif-black"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-                    <Button
-                        android:id="@+id/button3"
+                    <TextView
+                        android:id="@+id/interesthot"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center|clip_vertical"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:text="인기 종목"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:fontFamily="sans-serif-black"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/viewPager_list"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_data_community"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp">
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:overScrollMode="never"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/list_comm">
 
-                </androidx.viewpager.widget.ViewPager>
+                </androidx.recyclerview.widget.RecyclerView>
+
             </LinearLayout>
 
         </LinearLayout>

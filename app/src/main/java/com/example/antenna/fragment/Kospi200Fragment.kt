@@ -12,10 +12,12 @@ import androidx.core.content.ContextCompat
 import com.example.antenna.R
 import com.example.antenna.`interface`.Kos200Service
 import com.example.antenna.dataclass.Kos200Data
+import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.ValueFormatter
 import kotlinx.android.synthetic.main.fragment_kosdaq.*
 import kotlinx.android.synthetic.main.fragment_kospi.*
 import kotlinx.android.synthetic.main.fragment_kospi200.*
@@ -32,6 +34,7 @@ class Kospi200Fragment : Fragment(){
 
     // KOSPI 정보 데이터 넣기
     private val data_list = mutableListOf<Double>()
+    private val date_list = mutableListOf<String>()
 
     private val kos200Retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("http://ec2-13-125-236-101.ap-northeast-2.compute.amazonaws.com:8000/")
@@ -91,9 +94,13 @@ class Kospi200Fragment : Fragment(){
 
                 for(i in 0 until response.body()?.count()?.toInt()!!){
                     val graphData : Double? = response.body()?.elementAt(i)?.close
-
+                    val graphDate : String? = response.body()?.elementAt(i)?.date
                     if (graphData != null) {
                         data_list.add(graphData)
+                    }
+                    if (graphDate != null){
+                        val graphSub : String = graphDate.substring(2,10)
+                        date_list.add(graphSub)
                     }
                 }
                 isrunning3 = true
@@ -156,7 +163,9 @@ class Kospi200Fragment : Fragment(){
             setDrawGridLines(false)
             setDrawAxisLine(false)
             isGranularityEnabled = true
-            textColor = Color.TRANSPARENT
+
+            valueFormatter = MyXAxisFormatter()
+            setLabelCount(4, true)
         }
 
         lineChart3.apply {
@@ -171,6 +180,14 @@ class Kospi200Fragment : Fragment(){
                 setDrawInside(false)
                 isEnabled = false
             }
+        }
+    }
+
+    inner class MyXAxisFormatter : ValueFormatter(){
+
+        // private val days = arrayOf("1차","2차","3차","4차","5차","6차","7차")
+        override fun getAxisLabel(value: Float, axis: AxisBase?): String {
+            return date_list.getOrNull(value.toInt()) ?: value.toString()
         }
     }
 

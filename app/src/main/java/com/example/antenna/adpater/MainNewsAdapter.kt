@@ -25,6 +25,14 @@ class MainNewsAdapter(private val items : MutableList<MainNewsList>)
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = items[position]
 
+        // 아이템 간격 조절
+        /*val layoutParams = holder.itemView.layoutParams
+        layoutParams.height = 100
+        holder.itemView.requestLayout()*/
+
+
+
+
         holder.itemView.setOnClickListener {
             val i = Intent(Intent.ACTION_VIEW)
             i.data = Uri.parse(item.main_link)

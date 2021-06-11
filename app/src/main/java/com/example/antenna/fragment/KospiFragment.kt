@@ -12,10 +12,12 @@ import androidx.core.content.ContextCompat
 import com.example.antenna.R
 import com.example.antenna.`interface`.KosService
 import com.example.antenna.dataclass.KosData
+import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.ValueFormatter
 import kotlinx.android.synthetic.main.fragment_kospi.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -31,6 +33,7 @@ class KospiFragment : Fragment(){
 
     // KOSPI 정보 데이터 넣기
     private val data_list = mutableListOf<Double>()
+    private val date_list = mutableListOf<String>()
 
     private val kosRetrofit: Retrofit = Retrofit.Builder()
             .baseUrl("http://ec2-13-125-236-101.ap-northeast-2.compute.amazonaws.com:8000/")
@@ -92,9 +95,13 @@ class KospiFragment : Fragment(){
 
                 for(i in 0 until response.body()?.count()?.toInt()!!){
                     val graphData : Double? = response.body()?.elementAt(i)?.close
-
+                    val graphDate : String? = response.body()?.elementAt(i)?.date
                     if (graphData != null) {
                         data_list.add(graphData)
+                    }
+                    if (graphDate != null){
+                        val graphSub : String = graphDate.substring(2,10)
+                        date_list.add(graphSub)
                     }
                 }
                 isrunning = true
@@ -157,7 +164,9 @@ class KospiFragment : Fragment(){
             setDrawGridLines(false)
             setDrawAxisLine(false)
             isGranularityEnabled = true
-            textColor = Color.TRANSPARENT
+
+            valueFormatter = MyXAxisFormatter()
+            setLabelCount(4, true)
         }
 
         lineChart1.apply {
@@ -165,13 +174,20 @@ class KospiFragment : Fragment(){
             axisRight.isEnabled = false
             axisLeft.axisMaximum = 3500f
             axisLeft.axisMinimum = 1800f
-            setPinchZoom(false)
+            setPinchZoom(true)
             description.isEnabled = false
 
             legend.apply {
                 setDrawInside(false)
                 isEnabled = false
             }
+        }
+    }
+
+    inner class MyXAxisFormatter : ValueFormatter(){
+
+        override fun getAxisLabel(value: Float, axis: AxisBase?): String {
+            return date_list.getOrNull(value.toInt()) ?: value.toString()
         }
     }
 

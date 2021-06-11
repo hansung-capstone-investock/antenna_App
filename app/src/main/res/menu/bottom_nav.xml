@@ -8,11 +8,11 @@
         android:title="@string/home" />
     <item
         android:id="@+id/navigation_2"
-        android:icon="@drawable/ic_baseline_trending_up_24"
+        android:icon="@drawable/ant"
         android:title="@string/one_click" />
     <item
         android:id="@+id/navigation_3"
-        android:icon="@drawable/ic_baseline_comment_24"
+        android:icon="@drawable/news"
         android:title="@string/news" />
     <item
         android:id="@+id/navigation_4"

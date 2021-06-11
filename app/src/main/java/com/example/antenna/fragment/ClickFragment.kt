@@ -17,10 +17,26 @@ class ClickFragment : Fragment() {
             @Nullable savedInstanceState: Bundle?
     ): View {
         setHasOptionsMenu(true)
-        return inflater.inflate(R.layout.fragment_click, container, false)
+        return inflater.inflate(R.layout.fragment_antenna, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        /*val years = resources.getStringArray(R.array.spinner_code)
+        val months = DateFormatSymbols().months*/
+
         super.onViewCreated(view, savedInstanceState)
     }
+
+//    private fun setupSpinnerYear() {
+//        val years = resources.getStringArray(R.array.spinner_year)
+//        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, years)
+//        binding.spinnerYear.adapter = adapter
+//    }
+
+    /*private fun setupSpinnerMonth() {
+        val months = DateFormatSymbols().months
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, months)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerMonth.adapter = adapter
+    }*/
 }

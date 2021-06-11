@@ -5,18 +5,18 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.example.antenna.R
 import com.example.antenna.`interface`.SearchService
 import com.example.antenna.`interface`.UpdateService
 import com.example.antenna.dataclass.CompanyData
+import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.ValueFormatter
 import kotlinx.android.synthetic.main.company_main.*
 import kotlinx.android.synthetic.main.company_main.lineChart1
-import kotlinx.android.synthetic.main.fragment_kospi.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -41,15 +41,28 @@ class InterCompany : AppCompatActivity() {
     var percent : Double? = null
     var volume : Double? = null
 
-    private var dataList = mutableListOf<Double>()
-    private var isrunning = false
+    var cap : Double? = null
+    var per : Double? = null
+    var pbr : Double? = null
 
-    // 데이터의 최고 최저 값
-    private var dataMax : String? = null
-    private var dataMin : String? = null
+    // 1년치
+    private var dataList = mutableListOf<Double>()
+
+
+    // 3개월
+    private var dataListMonth = mutableListOf<Double>()
+
+    private var isrunningYear = false
+    private var isrunningMonth = false
+
+    // 데이터의 최고 최저 값0
+    private var dataMax : Double? = null
+    private var dataMin : Double? = null
     // 데이터 시작 값
     private var dataFirst : String? = null
 
+    private val date_list = mutableListOf<String>()
+    private val date_listMonth = mutableListOf<String>()
     // 스피너 목록
     // var dataArr
 
@@ -79,6 +92,10 @@ class InterCompany : AppCompatActivity() {
                         yesterday = companyData?.stockData?.get(count - 3)?.close
                         volume = companyData?.stockData?.get(count - 2)?.volume
 
+                        cap = companyData?.stockData?.get(count -2)?.cap
+                        per = companyData?.stockData?.get(count -2)?.per
+                        pbr = companyData?.stockData?.get(count -2)?.pbr
+
                         Log.e("today : ", today.toString())
                         Log.e("yesterday : ", yesterday.toString())
                         Log.e("volume : ", volume.toString())
@@ -90,17 +107,35 @@ class InterCompany : AppCompatActivity() {
                     // 1년치 종가 데이터 가져오기
                     if (count != null) {
                         for(i in 0 until count-1){
-                            val graphData : Double? = companyData?.stockData?.elementAt(i)?.close
-                            if (graphData != null) {
-                                dataList.add(graphData)
+                            val graphDataYear : Double? = companyData?.stockData?.elementAt(i)?.close
+                            val graphDateYear : String? = companyData?.stockData?.elementAt(i)?.date
+                            if (graphDataYear != null) {
+                                dataList.add(graphDataYear)
+                            }
+                            if (graphDateYear != null){
+                                val graphSub : String = graphDateYear.substring(2,10)
+                                date_list.add(graphSub)
                             }
 //                            Log.e("data list : ", dataList.toString())
                         }
-                        dataMax = dataList.maxOrNull().toString()
-                        dataMin = dataList.minOrNull().toString()
-//                        Log.e("data max : ", dataMax.toString())
-//                        Log.e("data min : ", dataMin.toString())
-//                        Log.e("data last : ", dataList[count - 2].toString())
+
+                        // 3개월 데이터 자르기
+                        for(i in count - 90 until count -1){
+                            val graphDataMonth : Double? = companyData?.stockData?.elementAt(i)?.close
+                            val graphDateMonth : String? = companyData?.stockData?.elementAt(i)?.date
+                            if (graphDataMonth != null) {
+                                dataListMonth.add(graphDataMonth)
+                            }
+                            if (graphDateMonth != null){
+                                val graphSub : String = graphDateMonth.substring(2,10)
+                                date_listMonth.add(graphSub)
+                            }
+                        }
+
+                        dataMax = dataList.maxOrNull()
+                        dataMin = dataList.minOrNull()
+                        Log.e("data max : ", dataMax.toString())
+                        Log.e("data min : ", dataMin.toString())
 
                         dataFirst = dataList[0].toInt().toString()
                         Log.e("dataFirst : ", dataFirst.toString())
@@ -108,13 +143,30 @@ class InterCompany : AppCompatActivity() {
 
                     company_rate.text = dec.format(today) + "원"
                     Fluctuation_rate.text = percent1.toString() + "%"
-                    /*one_max.text = dec.format(dataMax)
-                    one_min.text = dec.format(dataMin)*/
+
+                    one_max.text = dec.format(dataMax)
+                    one_min.text = dec.format(dataMin)
+
+                    capvalue.text = dec.format(cap)
+                    PER.text = dec.format(per)
+                    PBR.text = dec.format(pbr)
+
                     trading_volume.text = dec.format(volume) + "주"
 
-                    isrunning = true
-                    val thread = ThreadClass()
-                    thread.start()
+                    /*third_day.setOnClickListener {
+                        isrunningYear = false
+                        isrunningMonth = true
+                        val thread = ThreadClassThird()
+                        thread.start()
+                    }*/
+
+                   //  one_year.setOnClickListener {
+                        isrunningMonth = false
+                        isrunningYear = true
+                        val thread = ThreadClass()
+                        thread.start()
+                    //}
+
 
                     if (percent1 != null) {
                         if(percent1 > 0.0){
@@ -143,6 +195,7 @@ class InterCompany : AppCompatActivity() {
         }*/
     }
 
+    // 1년 그래프
     inner class ThreadClass : Thread(){
         override fun run() {
             // Entry 배열
@@ -177,7 +230,7 @@ class InterCompany : AppCompatActivity() {
                 lineChart1.invalidate()
             }
 
-            isrunning = false
+            isrunningYear = false
             super.run()
         }
     }
@@ -191,7 +244,9 @@ class InterCompany : AppCompatActivity() {
             setDrawGridLines(false)
             setDrawAxisLine(false)
             isGranularityEnabled = true
-            textColor = Color.TRANSPARENT
+
+            valueFormatter = MyXAxisFormatter()
+            setLabelCount(4, true)
         }
 
         lineChart1.apply {
@@ -207,5 +262,91 @@ class InterCompany : AppCompatActivity() {
                 isEnabled = false
             }
         }
+
     }
+
+    // 3개월 그래프
+    /*inner class ThreadClassThird : Thread(){
+        override fun run() {
+            // Entry 배열
+            val entries : ArrayList<Entry> = ArrayList()
+            // Entry 배열 초기값 입력
+            entries.add(Entry(0F, dataFirst?.toFloat()!!))
+            // 그래프 구현을 위한 LineDataSet 생성
+            val dataSet : LineDataSet = LineDataSet(entries, "").apply {
+                setDrawCircles(false)
+                color = Color.RED
+                highLightColor = Color.TRANSPARENT
+                circleRadius = 0f
+                valueTextSize = 0F
+                lineWidth = 1.5F
+            }
+            // 그래프 data 생성 -> 최종입력 데이터
+            var data : LineData = LineData(dataSet)
+            // activity_main에 배치된 lineChart에 데이터 연결 하기
+            lineChart1.data = data
+
+            setChartMonth()
+            runOnUiThread {
+                lineChart1.animateXY(1, 1)
+            }
+            // 그래프 초기화 설정
+
+            for(i in 0 until dataListMonth.size){
+                // SystemClock.sleep(0.5.toLong())
+                data.addEntry(Entry(i.toFloat(), dataListMonth[i].toFloat()), 0)
+                data.notifyDataChanged()
+                lineChart1.notifyDataSetChanged()
+                lineChart1.invalidate()
+            }
+
+            isrunningMonth = false
+            super.run()
+        }
+    }*/
+
+    /*private fun setChartMonth(){
+
+        // X축
+        lineChart1.xAxis.apply {
+            position = XAxis.XAxisPosition.BOTTOM
+            textSize = 10f
+            setDrawGridLines(false)
+            setDrawAxisLine(false)
+            isGranularityEnabled = true
+
+            valueFormatter = MyXAxisFormatterMonth()
+            setLabelCount(4, true)
+        }
+
+        lineChart1.apply {
+            // Y축
+            axisRight.isEnabled = false
+            axisLeft.axisMaximum = dataMax?.toFloat()!! + 1500F
+            axisLeft.axisMinimum = dataMin?.toFloat()!! - 1500F
+            setPinchZoom(false)
+            description.isEnabled = false
+
+            legend.apply {
+                setDrawInside(false)
+                isEnabled = false
+            }
+        }
+    }*/
+
+    // dataListMonth
+    inner class MyXAxisFormatter : ValueFormatter(){
+
+        // private val days = arrayOf("1차","2차","3차","4차","5차","6차","7차")
+        override fun getAxisLabel(value: Float, axis: AxisBase?): String {
+            return date_list.getOrNull(value.toInt()) ?: value.toString()
+        }
+    }
+
+    /*inner class MyXAxisFormatterMonth : ValueFormatter(){
+
+        override fun getAxisLabel(value: Float, axis: AxisBase?): String {
+            return date_listMonth.getOrNull(value.toInt()) ?: value.toString()
+        }
+    }*/
 }
