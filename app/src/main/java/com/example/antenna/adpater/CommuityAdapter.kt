@@ -21,8 +21,9 @@ class CommuityAdapter(private val items : MutableList<CommunityList>):
         val item = items[position]
 
         holder.itemView.apply {
+            listnum.text = item.num.toString()
             listname.text = item.strName
-            listpercent.text = item.strPercent
+            listcount.text = item.strCount.toString()
         }
     }
 

@@ -11,9 +11,14 @@ import androidx.annotation.Nullable
 import androidx.core.content.res.ResourcesCompat
 import androidx.viewpager.widget.ViewPager
 import com.example.antenna.R
+import com.example.antenna.`interface`.CommunityService
 import com.example.antenna.adpater.*
+import com.example.antenna.dataclass.CommunityData
 import com.example.antenna.sharedPreference.App
 import kotlinx.android.synthetic.main.fragment_main.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -23,19 +28,23 @@ class MainFragment : Fragment() {
     private val adapter by lazy { activity?.let { ViewPagerAdapter(it.supportFragmentManager) } }
 
     private val list = mutableListOf<DataList>()
-    private val commList = mutableListOf<CommunityList>()
-
     private val adapter1 = RecyclerAdapter(list)
+
+    // 커뮤니티 언급 단어 리스트
+    private val commList = mutableListOf<CommunityList>()
 
     // 커뮤니티 가져오기
     private val adapter2 = CommuityAdapter(commList)
 
-    private val CommunityRetrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("http://ec2-13-125-236-101.ap-northeast-2.compute.amazonaws.com:8000/")
+    private val communityRetrofit: Retrofit = Retrofit.Builder()
+            .baseUrl("http://ec2-3-37-87-254.ap-northeast-2.compute.amazonaws.com:8000/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
     // 서비스 정의하기
+    private val communityServer : CommunityService? = communityRetrofit.create(CommunityService::class.java)
+
+
 
     @Nullable
     override fun onCreateView(
@@ -61,16 +70,7 @@ class MainFragment : Fragment() {
             } else {
                 Username.text = id.toString() + "님 안녕하세요"
 
-                /*list.add(DataList(App.prefs.getArrayList1().companies.company2.toString(), ""))
-            list.add(DataList(App.prefs.getArrayList1().companies.company3.toString(), ""))
-            list.add(DataList(App.prefs.getArrayList1().companies.company4.toString(), ""))
-            list.add(DataList(App.prefs.getArrayList1().companies.company5.toString(), ""))
-            list.add(DataList(App.prefs.getArrayList1().companies.company6.toString(), ""))
-            list.add(DataList(App.prefs.getArrayList1().companies.company7.toString(), ""))
-            list.add(DataList(App.prefs.getArrayList1().companies.company8.toString(), ""))
-            list.add(DataList(App.prefs.getArrayList1().companies.company9.toString(), ""))
-            list.add(DataList(App.prefs.getArrayList1().companies.company10.toString(), ""))*/
-
+                list.add(DataList(App.prefs.getArrayList1().companies.company2.toString(), ""))
                 rv_data.adapter = adapter1
 
                 refreshButton.setOnClickListener {
@@ -94,9 +94,9 @@ class MainFragment : Fragment() {
                         2 -> indicator2_iv_main.setImageDrawable(ResourcesCompat.getDrawable(activity!!.resources, R.drawable.shape_circle_purple, null))
                     }
                 }
-
                 override fun onPageScrollStateChanged(p0: Int) {}
             })
+            loadCommunity()
         }
     }
     fun refreshAdapter() {
@@ -105,7 +105,21 @@ class MainFragment : Fragment() {
         adapter1.notifyDataSetChanged()
     }
 
-    fun loadCommunity(){
+    private fun loadCommunity(){
+        communityServer?.getCommunity()?.enqueue(object : Callback<List<CommunityData>>{
+            override fun onResponse(call: Call<List<CommunityData>>, response: Response<List<CommunityData>>) {
+                // Log.e("body 출력 : " , body.toString())
+                for(i in 0 until 5){
+                    val hotList : String? = response.body()?.elementAt(i)?.title
+                    val hotCount : Int? = response.body()?.elementAt(i)?.count
+                    commList.add(CommunityList(i+1, hotList.toString(), hotCount.toString()))
+                }
+                rv_data_community.adapter = adapter2
+            }
 
+            override fun onFailure(call: Call<List<CommunityData>>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
     }
 }

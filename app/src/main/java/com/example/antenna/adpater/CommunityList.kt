@@ -1,5 +1,5 @@
 package com.example.antenna.adpater
 
 
-class CommunityList(val strName: String, val strPercent:String) {
+class CommunityList(val num : Int, val strName: String, val strCount: String) {
 }

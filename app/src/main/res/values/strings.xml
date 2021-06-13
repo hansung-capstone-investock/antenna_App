@@ -7,10 +7,9 @@
     <string name="my_money">자산</string>
     <string name="home">홈</string>
     <string name="todo">TODO</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="BackTest">백테스팅</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="url">"http://ec2-3-37-87-254.ap-northeast-2.compute.amazonaws.com:8000/"</string>
 
     <string-array name="spinner_code">
         <item>1005":"음식료품</item>

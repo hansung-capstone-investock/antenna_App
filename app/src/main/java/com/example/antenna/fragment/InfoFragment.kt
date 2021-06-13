@@ -33,7 +33,7 @@ class InfoFragment : Fragment() {
     val list : List<String>? = null
 
     val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("http://ec2-13-125-236-101.ap-northeast-2.compute.amazonaws.com:8000/") // 장고 서버 주소 입력
+            .baseUrl("http://ec2-3-37-87-254.ap-northeast-2.compute.amazonaws.com:8000/") // 장고 서버 주소 입력
             .addConverterFactory(GsonConverterFactory.create()) // Retrofit 객체 생성
             .build()
     @Nullable

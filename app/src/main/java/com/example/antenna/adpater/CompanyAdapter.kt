@@ -57,7 +57,7 @@ class CompanyAdapter(private var items: ArrayList<CompanyList>):
 
         holder.itemView.apply {
             inter_name.text = item.str_company
-            inter_code.text = item.str_tst
+            // inter_code.text = item.str_tst
         }
     }
 

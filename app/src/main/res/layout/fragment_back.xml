@@ -151,8 +151,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="8dp"
                 android:orientation="vertical"
-                tools:ignore="MissingConstraints"
-                tools:visibility="invisible">
+                tools:ignore="MissingConstraints">
 
                 <TextView
                     android:id="@+id/title7"

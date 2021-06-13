@@ -201,24 +201,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center|clip_vertical"
                         android:layout_weight="1"
+                        android:background="#BDC09E"
+                        android:fontFamily="sans-serif-black"
                         android:gravity="center"
                         android:text="커뮤니티 HOT"
-                        android:fontFamily="sans-serif-black"
                         android:textColor="#000000"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/volumevalue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center|clip_vertical"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="거래량"
-                        android:fontFamily="sans-serif-black"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -227,13 +215,75 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center|clip_vertical"
                         android:layout_weight="1"
+                        android:background="#BDC09E"
+                        android:fontFamily="sans-serif-black"
                         android:gravity="center"
                         android:text="인기 종목"
-                        android:fontFamily="sans-serif-black"
                         android:textColor="#000000"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
+
                 </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|clip_vertical"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-black"
+                        android:gravity="center"
+                        android:text="순위"
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/commname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|clip_vertical"
+                        android:layout_marginStart="96dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-black"
+                        android:gravity="center"
+                        android:text="언급 단어"
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/commcount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|clip_vertical"
+                        android:layout_marginEnd="16dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-black"
+                        android:gravity="center"
+                        android:text="언급 횟수"
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_data_community"

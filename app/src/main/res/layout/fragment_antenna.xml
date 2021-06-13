@@ -8,6 +8,18 @@
     android:gravity="top"
     android:orientation="vertical">
 
+    <Button
+        android:id="@+id/antennabutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#94B667"
+        android:fontFamily="sans-serif-black"
+        android:text="예측하기"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
@@ -87,7 +99,7 @@
                         android:fontFamily="sans-serif-black"
                         android:text="종목코드"
                         android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/selectcode"
@@ -100,16 +112,10 @@
                         android:fontFamily="sans-serif-black"
                         android:text="선택된 종목 코드"
                         android:textColor="#6E6565"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
-                <Spinner
-                    android:id="@+id/code_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -133,7 +139,7 @@
                         android:fontFamily="sans-serif-black"
                         android:text="예측날짜"
                         android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/textday"
@@ -146,17 +152,39 @@
                         android:fontFamily="sans-serif-black"
                         android:hint="선택된 날짜"
                         android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
-                <Spinner
-                    android:id="@+id/code_spinner2"
-                    android:layout_width="match_parent"
+                <RadioGroup
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_weight="1" />
+                    android:layout_marginStart="16dp">
+
+                    <RadioButton
+                        android:id="@+id/radioButton7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="7일" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton14"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="14일" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton21"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="21일" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton28"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="28일" />
+                </RadioGroup>
 
             </LinearLayout>
 
@@ -165,16 +193,201 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textcoffee3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="sans-serif-black"
-                    android:text="보조지표"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/subvalue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="보조지표"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/checksub"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-black"
+                        android:hint="선택된 보조지표"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="16dp">
+
+                        <RadioButton
+                            android:id="@+id/VPTButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="VPT" />
+
+                        <RadioButton
+                            android:id="@+id/CMFradioButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="CMF" />
+
+                        <RadioButton
+                            android:id="@+id/EoMradioButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="EoM" />
+
+                        <RadioButton
+                            android:id="@+id/FIradioButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="FI" />
+
+                        <RadioButton
+                            android:id="@+id/ADIradioButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="ADI" />
+
+                        <RadioButton
+                            android:id="@+id/VWAPradioButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="VWAP" />
+                    </RadioGroup>
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <RadioButton
+                            android:id="@+id/DCradioButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="DC" />
+
+                        <RadioButton
+                            android:id="@+id/KCradioButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="KC" />
+
+                        <RadioButton
+                            android:id="@+id/PPOradioButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="PPO" />
+
+                        <RadioButton
+                            android:id="@+id/RSIradioButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="RSI" />
+
+                        <RadioButton
+                            android:id="@+id/SRSI"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="SRSI" />
+
+                        <RadioButton
+                            android:id="@+id/TSIradioButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="TSI" />
+                    </RadioGroup>
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <RadioButton
+                            android:id="@+id/UOradioButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="UO" />
+
+                        <RadioButton
+                            android:id="@+id/WRradioButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="WR" />
+
+                        <RadioButton
+                            android:id="@+id/KAMAradioButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="KAMA" />
+
+                        <RadioButton
+                            android:id="@+id/CCIradioButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="CCI" />
+
+                        <RadioButton
+                            android:id="@+id/DPOradioButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="DPO" />
+
+                        <RadioButton
+                            android:id="@+id/KSTradioButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="KST" />
+                    </RadioGroup>
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <RadioButton
+                            android:id="@+id/STCradioButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="STC" />
+
+                        <RadioButton
+                            android:id="@+id/TRIXradioButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="TRIX" />
+
+                        <RadioButton
+                            android:id="@+id/MACDradioButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="MACD" />
+
+                        <RadioButton
+                            android:id="@+id/WMAradioButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="WMA" />
+
+                        <RadioButton
+                            android:id="@+id/EMAradioButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="EMA" />
+                    </RadioGroup>
+
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 

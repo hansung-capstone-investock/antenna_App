@@ -47,10 +47,10 @@ class RecyclerAdapter(private val items: MutableList<DataList>):
                 holder.itemView.apply {
                     if(item.strName == "null"){
                         inter_name.text.isEmpty()
-                        inter_code.text.isEmpty()
+                        //inter_code.text.isEmpty()
                     } else{
                         inter_name.text = item.strName
-                        inter_code.text = item.strNumber
+                        // inter_code.text = item.strNumber
                     }
                 }
             }

@@ -36,7 +36,7 @@ class NewsFragment : Fragment() {
     private val live_adapter = LiveNewsAdapter(live_list)
 
     private val firstRetrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("http://ec2-13-125-236-101.ap-northeast-2.compute.amazonaws.com:8000/")
+            .baseUrl("http://ec2-3-37-87-254.ap-northeast-2.compute.amazonaws.com:8000/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
