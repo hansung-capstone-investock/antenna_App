@@ -217,7 +217,7 @@ class InfoFragment : Fragment() {
                     App.prefs.saveArrayList3(list3)
 
                     App.prefs.group1 = groupName1
-                    App.prefs.group2 = groupName3
+                    App.prefs.group2 = groupName2
                     App.prefs.group3 = groupName3
 
                     Log.d("saveArrayList1 : ", App.prefs.getArrayList1().toString())

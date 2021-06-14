@@ -42,9 +42,12 @@ class SharedPreferences(context: Context) {
     }
 
     fun getArrayList1(): MutableList<String> {
-        val json: String? = prefs.getString("save1", null)
-        val type = object : TypeToken<MutableList<String>>() {}.type
-        return gson.fromJson(json, type)
+        val emptyList = Gson().toJson(ArrayList<String>())
+        return Gson().fromJson(
+                prefs.getString("save1", emptyList),
+                object : TypeToken<MutableList<String>>(){
+                }.type
+        )
     }
 
     fun saveArrayList2(list: MutableList<String>) {
@@ -54,9 +57,12 @@ class SharedPreferences(context: Context) {
     }
 
     fun getArrayList2(): MutableList<String> {
-        val json: String? = prefs.getString("save2", null)
-        val type = object : TypeToken<MutableList<String>>() {}.type
-        return gson.fromJson(json, type)
+        val emptyList = Gson().toJson(ArrayList<String>())
+        return Gson().fromJson(
+                prefs.getString("save2", emptyList),
+                object : TypeToken<MutableList<String>>(){
+                }.type
+        )
     }
 
     fun saveArrayList3(list: MutableList<String>) {
@@ -66,8 +72,11 @@ class SharedPreferences(context: Context) {
     }
 
     fun getArrayList3(): MutableList<String> {
-        val json: String? = prefs.getString("save3", null)
-        val type = object : TypeToken<MutableList<String>>() {}.type
-        return gson.fromJson(json, type)
+        val emptyList = Gson().toJson(ArrayList<String>())
+        return Gson().fromJson(
+                prefs.getString("save3", emptyList),
+                object : TypeToken<MutableList<String>>(){
+                }.type
+        )
     }
 }

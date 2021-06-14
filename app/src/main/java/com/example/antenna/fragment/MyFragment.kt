@@ -21,8 +21,13 @@ import kotlinx.android.synthetic.main.fragment_mypage.*
 
 class MyFragment : Fragment(){
 
-    private val list = mutableListOf<DataList>()
-    private val adapter1 = RecyclerAdapter(list)
+    private val list1 = mutableListOf<DataList>()
+    private val list2 = mutableListOf<DataList>()
+    private val list3 = mutableListOf<DataList>()
+
+    private val adapter1 = RecyclerAdapter(list1)
+    private val adapter2 = RecyclerAdapter(list2)
+    private val adapter3 = RecyclerAdapter(list3)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_mypage, container, false)
@@ -37,9 +42,6 @@ class MyFragment : Fragment(){
             App.prefs.editor.clear()
             App.prefs.editor.commit()
 
-            Log.d("LOG NAME", App.prefs.id.toString())
-//            Log.d("getArrayList1 DELETE", App.prefs.getArrayList1().toString())
-
             (context as Activity).finish()
         }
         mypage_user.text = App.prefs.id.toString() + "님 안녕하세요"
@@ -52,8 +54,40 @@ class MyFragment : Fragment(){
         rv_data_mypage.adapter = adapter1
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onResume() {
-        super.onResume()
 
+        for(i in 0 until App.prefs.getArrayList1().count()){
+            if(App.prefs.getArrayList1()[i] != "null") {
+                list1.add(DataList(App.prefs.getArrayList1()[i]))
+            }
+        }
+
+        for(i in 0 until App.prefs.getArrayList2().count()){
+            if(App.prefs.getArrayList2()[i] != "null") {
+                list2.add(DataList(App.prefs.getArrayList2()[i]))
+            }
+        }
+
+        for(i in 0 until App.prefs.getArrayList3().count()){
+            if(App.prefs.getArrayList3()[i] != "null") {
+                list3.add(DataList(App.prefs.getArrayList3()[i]))
+            }
+        }
+
+        inter_name1.setOnClickListener {
+            inter_name1.setTextColor(R.color.black)
+            rv_data_mypage.adapter = adapter1
+        }
+
+        inter_name2.setOnClickListener {
+            rv_data_mypage.adapter = adapter2
+        }
+
+        inter_name3.setOnClickListener {
+            rv_data_mypage.adapter = adapter3
+        }
+
+        super.onResume()
     }
 }
