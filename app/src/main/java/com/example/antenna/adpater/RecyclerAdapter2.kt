@@ -19,13 +19,13 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RecyclerAdapter(private val items: MutableList<DataList>):
+class RecyclerAdapter2(private val items: MutableList<DataList>):
         RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val TYPE_ITEM : Int = 1
     private val TYPE_FOOTER : Int = 2
 
-    val listGruop1 = mutableListOf<String>()
+    private val listGruop = mutableListOf<String>()
 
     val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("http://ec2-3-37-87-254.ap-northeast-2.compute.amazonaws.com:8000/") // 장고 서버 주소 입력
@@ -65,9 +65,10 @@ class RecyclerAdapter(private val items: MutableList<DataList>):
 
                     removeDL(position)
 
-                    updateData(App.prefs.idGroup1!!.toInt(), App.prefs.id.toString(), App.prefs.group1.toString(), App.prefs.getArrayList1()[0],App.prefs.getArrayList1()[1], App.prefs.getArrayList1()[2],
-                            App.prefs.getArrayList1()[3], App.prefs.getArrayList1()[4], App.prefs.getArrayList1()[5], App.prefs.getArrayList1()[6], App.prefs.getArrayList1()[7],
-                            App.prefs.getArrayList1()[8], App.prefs.getArrayList1()[9])
+                    Log.e("idGroup : ", App.prefs.idGroup3!!.toInt().toString())
+                    updateData(App.prefs.idGroup3!!.toInt(), App.prefs.id.toString(), App.prefs.group3.toString(), App.prefs.getArrayList3()[0],App.prefs.getArrayList3()[1], App.prefs.getArrayList3()[2],
+                            App.prefs.getArrayList3()[3], App.prefs.getArrayList3()[4], App.prefs.getArrayList3()[5], App.prefs.getArrayList3()[6], App.prefs.getArrayList3()[7],
+                            App.prefs.getArrayList3()[8], App.prefs.getArrayList3()[9])
                 }
 
                 holder.itemView.apply {
@@ -100,25 +101,26 @@ class RecyclerAdapter(private val items: MutableList<DataList>):
     private fun removeDL(position: Int){
 
         Log.d("position : " , position.toString())
-        listGruop1.clear()
-        for(i in 0 until App.prefs.getArrayList1().count()){
-            listGruop1.add(App.prefs.getArrayList1()[i])
-            Log.d("getArrayList1 : " , App.prefs.getArrayList1()[i])
+        listGruop.clear()
+        for(i in 0 until App.prefs.getArrayList3().count()){
+            listGruop.add(App.prefs.getArrayList3()[i])
+            Log.d("getArrayList2 : " , App.prefs.getArrayList2()[i])
         }
 
-        for(i in 0 until App.prefs.getArrayList1().count()){
-            Log.d("listGruop1", listGruop1[i])
+        for(i in 0 until App.prefs.getArrayList3().count()){
+            Log.d("listGruop1", listGruop[i])
             Log.d("itemspos", items[position].strName)
-            if(listGruop1[i] == items[position].strName){
-                listGruop1[i] = "null"
+            if(listGruop[i] == items[position].strName){
+                listGruop[i] = "null"
                 items.removeAt(position)
 
                 break
             }
         }
 
-        App.prefs.saveArrayList1(listGruop1)
-        Log.e("getArrayList1 : ", App.prefs.getArrayList1().toString())
+        App.prefs.saveArrayList1(listGruop)
+
+        Log.e("getArrayList2 : ", App.prefs.getArrayList2().toString())
         notifyDataSetChanged()
     }
     

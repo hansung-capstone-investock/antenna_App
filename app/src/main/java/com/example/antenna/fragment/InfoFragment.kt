@@ -126,6 +126,9 @@ class InfoFragment : Fragment() {
 
                 companyData = response.body()
 
+                var id1 : Int? = null
+                var id2 : Int? = null
+                var id3 : Int? = null
                 var groupName : String? = null
                 var group1 : String? = null
                 var group2 : String? = null
@@ -138,6 +141,7 @@ class InfoFragment : Fragment() {
                 var group9 : String? = null
                 var group10 : String? = null
 
+                id1 = companyData!![0].id
                 groupName = companyData!![0].group.toString()
                 group1 = companyData!![0].companies.company1.toString()
                 group2 = companyData!![0].companies.company2.toString()
@@ -162,6 +166,7 @@ class InfoFragment : Fragment() {
                 list1.add(group9)
                 list1.add(group10)
 
+                id2 = companyData!![1].id
                 groupName = companyData!![1].group.toString()
                 group1 = companyData!![1].companies.company1.toString()
                 group2 = companyData!![1].companies.company2.toString()
@@ -174,6 +179,7 @@ class InfoFragment : Fragment() {
                 group9 = companyData!![1].companies.company9.toString()
                 group10 = companyData!![1].companies.company10.toString()
 
+                id3= companyData!![2].id
                 groupName2 = groupName
                 list2.add(group1)
                 list2.add(group2)
@@ -219,6 +225,10 @@ class InfoFragment : Fragment() {
                     App.prefs.group1 = groupName1
                     App.prefs.group2 = groupName2
                     App.prefs.group3 = groupName3
+
+                    App.prefs.idGroup1 = id1.toString()
+                    App.prefs.idGroup2 = id2.toString()
+                    App.prefs.idGroup3 = id3.toString()
 
                     Log.d("saveArrayList1 : ", App.prefs.getArrayList1().toString())
                     Log.d("saveArrayList2 : ", App.prefs.getArrayList2().toString())

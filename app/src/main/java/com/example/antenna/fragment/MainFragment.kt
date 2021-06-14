@@ -21,6 +21,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.system.measureNanoTime
 
 class MainFragment : Fragment() {
 
@@ -70,13 +71,9 @@ class MainFragment : Fragment() {
             } else {
                 Username.text = id.toString() + "님 안녕하세요"
 
-                onResume()
                 refreshButton.setOnClickListener{
                     onResume()
                 }
-
-
-                rv_data.adapter = adapter1
             }
 
             viewPager_main.adapter = adapter
@@ -98,12 +95,18 @@ class MainFragment : Fragment() {
             })
             loadCommunity()
         }
+
+        for(i in 0 until App.prefs.getArrayList1().count()){
+            if(App.prefs.getArrayList1()[i] != "null"){
+                list.add(DataList(App.prefs.getArrayList1()[i]))
+            }
+        }
     }
-    fun refreshAdapter() {
+    /*fun refreshAdapter() {
         // 아예 초기화
         adapter1.setTaskList(list)
         adapter1.notifyDataSetChanged()
-    }
+    }*/
 
     private fun loadCommunity(){
         communityServer?.getCommunity()?.enqueue(object : Callback<List<CommunityData>>{
@@ -125,11 +128,13 @@ class MainFragment : Fragment() {
 
     override fun onResume() {
         intername.text = App.prefs.group1
+        list.clear()
         for(i in 0 until App.prefs.getArrayList1().count()){
             if(App.prefs.getArrayList1()[i] != "null"){
                 list.add(DataList(App.prefs.getArrayList1()[i]))
             }
         }
+        adapter1.notifyDataSetChanged()
         rv_data.adapter = adapter1
         super.onResume()
     }

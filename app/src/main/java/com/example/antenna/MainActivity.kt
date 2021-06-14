@@ -30,11 +30,6 @@ class MainActivity : AppCompatActivity() {
         mBottomNV!!.selectedItemId = R.id.navigation_1
     }
 
-    override fun onRestart() {
-        super.onRestart()
-        MainFragment().refreshAdapter()
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
 
@@ -54,7 +49,6 @@ class MainActivity : AppCompatActivity() {
         var fragment: Fragment? = fragmentManager.findFragmentByTag(tag)
         if (fragment == null) {
             fragment = if (id == R.id.navigation_1) {
-                onRestart()
                 MainFragment()
             }
             else if (id == R.id.navigation_2)

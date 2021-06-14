@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#E0DAA0">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -34,15 +35,13 @@
         android:id="@+id/company_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:fontFamily="sans-serif-black"
         android:gravity="left"
         android:text="Company"
         android:textColor="@color/black"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,7 +49,7 @@
         android:id="@+id/company_code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
+        android:layout_marginStart="24dp"
         android:fontFamily="sans-serif-black"
         android:gravity="left"
         android:text="000000"
@@ -63,7 +62,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
+        android:layout_marginStart="24dp"
         android:gravity="left"
         android:text="어제보다"
         android:textColor="@color/black"
@@ -75,7 +74,7 @@
         android:id="@+id/Fluctuation_rate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:gravity="left"
         android:text="Fluctuation_rate"
         android:textColor="@color/black"
@@ -317,22 +316,21 @@
         android:id="@+id/company_rate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="180dp"
+        android:layout_marginBottom="223dp"
         android:fontFamily="sans-serif-black"
         android:gravity="start|left"
         android:text="F_MONEY"
         android:textColor="@color/black"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/Fluctuation_rate"
-        app:layout_constraintEnd_toStartOf="@+id/AddCompany"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/AddCompany"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:text="관심종목추가"
         app:layout_constraintEnd_toEndOf="parent"
@@ -344,7 +342,6 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="종목코드추가"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AddCompany" />
 
@@ -355,5 +352,34 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toTopOf="@+id/AddCompany"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/groupRadio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/codeaddbtn"
+        app:layout_constraintTop_toTopOf="@+id/AddCompany">
+
+        <RadioButton
+            android:id="@+id/groupname1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RadioButton"
+            android:textColor="#302C2C" />
+
+        <RadioButton
+            android:id="@+id/groupname2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RadioButton"
+            android:textColor="#302C2C" />
+
+        <RadioButton
+            android:id="@+id/groupname3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RadioButton"
+            android:textColor="#302C2C" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

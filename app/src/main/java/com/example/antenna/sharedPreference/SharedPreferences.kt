@@ -15,6 +15,18 @@ class SharedPreferences(context: Context) {
     var editor: SharedPreferences.Editor = prefs.edit()
     val gson = Gson()
 
+    var idGroup1 : String?
+        get() = prefs.getString("idGroup1", "")
+        set(value) = prefs.edit().putString("idGroup1", value).apply()
+
+    var idGroup2 : String?
+        get() = prefs.getString("idGroup2", "")
+        set(value) = prefs.edit().putString("idGroup2", value).apply()
+
+    var idGroup3 : String?
+        get() = prefs.getString("idGroup3", "")
+        set(value) = prefs.edit().putString("idGroup3", value).apply()
+
     var id: String?
         get() = prefs.getString("ID", "")
         set(value) = prefs.edit().putString("ID", value).apply()

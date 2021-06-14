@@ -8,8 +8,8 @@ import retrofit2.http.*
 interface UpdateService {
     @FormUrlEncoded
     @POST("/account/api/interestUpdate/")
-    fun UpdateCompany(
-            // 사용자가 관심기업 추가하는~~~
+    fun updateCompany(
+            @Field("id") id: Int,
             @Field("name") name: String,
             @Field("group") group: String,
             @Field("company1") company1: String,

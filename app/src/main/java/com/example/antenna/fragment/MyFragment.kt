@@ -12,9 +12,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.antenna.MainActivity
 import com.example.antenna.R
-import com.example.antenna.adpater.DataList
-import com.example.antenna.adpater.RecyclerAdapter
-import com.example.antenna.adpater.ViewPagerAdapter
+import com.example.antenna.adpater.*
 import com.example.antenna.sharedPreference.App
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_mypage.*
@@ -26,8 +24,8 @@ class MyFragment : Fragment(){
     private val list3 = mutableListOf<DataList>()
 
     private val adapter1 = RecyclerAdapter(list1)
-    private val adapter2 = RecyclerAdapter(list2)
-    private val adapter3 = RecyclerAdapter(list3)
+    private val adapter2 = RecyclerAdapter1(list2)
+    private val adapter3 = RecyclerAdapter2(list3)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_mypage, container, false)
@@ -57,6 +55,10 @@ class MyFragment : Fragment(){
     @SuppressLint("ResourceAsColor")
     override fun onResume() {
 
+        list1.clear()
+        list2.clear()
+        list3.clear()
+
         for(i in 0 until App.prefs.getArrayList1().count()){
             if(App.prefs.getArrayList1()[i] != "null") {
                 list1.add(DataList(App.prefs.getArrayList1()[i]))
@@ -77,14 +79,22 @@ class MyFragment : Fragment(){
 
         inter_name1.setOnClickListener {
             inter_name1.setTextColor(R.color.black)
+            inter_name2.setTextColor(R.color.white)
+            inter_name3.setTextColor(R.color.white)
             rv_data_mypage.adapter = adapter1
         }
 
         inter_name2.setOnClickListener {
+            inter_name1.setTextColor(R.color.white)
+            inter_name2.setTextColor(R.color.black)
+            inter_name3.setTextColor(R.color.white)
             rv_data_mypage.adapter = adapter2
         }
 
         inter_name3.setOnClickListener {
+            inter_name1.setTextColor(R.color.white)
+            inter_name2.setTextColor(R.color.white)
+            inter_name3.setTextColor(R.color.black)
             rv_data_mypage.adapter = adapter3
         }
 

@@ -5,11 +5,14 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.example.antenna.R
 import com.example.antenna.`interface`.SearchService
 import com.example.antenna.`interface`.UpdateService
+import com.example.antenna.adpater.DataList
 import com.example.antenna.dataclass.CompanyData
+import com.example.antenna.dataclass.UpdateData
 import com.example.antenna.fragment.AntennaFragment
 import com.example.antenna.sharedPreference.App
 import com.github.mikephil.charting.components.AxisBase
@@ -20,6 +23,7 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import kotlinx.android.synthetic.main.company_main.*
 import kotlinx.android.synthetic.main.company_main.lineChart1
+import kotlinx.android.synthetic.main.fragment_antenna.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,6 +41,7 @@ class InterCompany : AppCompatActivity() {
     private val searchService : SearchService = retrofit.create(SearchService::class.java)
     private val updateService : UpdateService = retrofit.create(UpdateService::class.java)
 
+    private var companyname : String? = null
     private lateinit var code : String
     var companyData : CompanyData? = null
     var yesterday : Double? = null
@@ -51,11 +56,7 @@ class InterCompany : AppCompatActivity() {
     // 1년치
     private var dataList = mutableListOf<Double>()
 
-    // 3개월
-    private var dataListMonth = mutableListOf<Double>()
-
     private var isrunningYear = false
-    private var isrunningMonth = false
 
     // 데이터의 최고 최저 값0
     private var dataMax : Double? = null
@@ -64,18 +65,29 @@ class InterCompany : AppCompatActivity() {
     private var dataFirst : String? = null
 
     private val date_list = mutableListOf<String>()
-    private val date_listMonth = mutableListOf<String>()
-    // 스피너 목록
-    // var dataArr
+
+    var groupId : Int? = null
+    var groupName : String? = null
+    private val listGruop1 = mutableListOf<String>()
+    private val listGruop2 = mutableListOf<String>()
+    private val listGruop3 = mutableListOf<String>()
 
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.company_main)
 
+        groupname1.text = App.prefs.group1.toString()
+        groupname2.text = App.prefs.group2.toString()
+        groupname3.text = App.prefs.group3.toString()
+
+        val listener = RadioListener()
+        groupRadio.setOnCheckedChangeListener(listener)
+
         if(intent.hasExtra("name")){
             Log.d("HAVE NAME : ", intent.getStringExtra("name").toString())
-            company_name.text = intent.getStringExtra("name")
+            companyname = intent.getStringExtra("name")
+            company_name.text = companyname
             code = intent.getStringExtra("code").toString()
             company_code.text = code
 
@@ -121,19 +133,6 @@ class InterCompany : AppCompatActivity() {
 //                            Log.e("data list : ", dataList.toString())
                         }
 
-                        // 3개월 데이터 자르기
-                        for(i in count - 90 until count -1){
-                            val graphDataMonth : Double? = companyData?.stockData?.elementAt(i)?.close
-                            val graphDateMonth : String? = companyData?.stockData?.elementAt(i)?.date
-                            if (graphDataMonth != null) {
-                                dataListMonth.add(graphDataMonth)
-                            }
-                            if (graphDateMonth != null){
-                                val graphSub : String = graphDateMonth.substring(2,10)
-                                date_listMonth.add(graphSub)
-                            }
-                        }
-
                         dataMax = dataList.maxOrNull()
                         dataMin = dataList.minOrNull()
                         Log.e("data max : ", dataMax.toString())
@@ -155,19 +154,9 @@ class InterCompany : AppCompatActivity() {
 
                     trading_volume.text = dec.format(volume) + "주"
 
-                    /*third_day.setOnClickListener {
-                        isrunningYear = false
-                        isrunningMonth = true
-                        val thread = ThreadClassThird()
-                        thread.start()
-                    }*/
-
-                   //  one_year.setOnClickListener {
-                        isrunningMonth = false
                         isrunningYear = true
                         val thread = ThreadClass()
                         thread.start()
-                    //}
 
 
                     if (percent1 != null) {
@@ -192,9 +181,23 @@ class InterCompany : AppCompatActivity() {
             Log.d("HAVEN NAME : ", intent.getStringExtra("name").toString())
         }
 
-        /*AddCompany.setOnClickListener {
-            updateService.UpdateCompany()
-        }*/
+        AddCompany.setOnClickListener {
+            addDataList(groupId!!)
+
+            if (groupId!! == 10){
+                updateData(groupId!!.toInt(), App.prefs.id.toString(), groupName.toString(), App.prefs.getArrayList1()[0],App.prefs.getArrayList1()[1], App.prefs.getArrayList1()[2],
+                        App.prefs.getArrayList1()[3], App.prefs.getArrayList1()[4], App.prefs.getArrayList1()[5], App.prefs.getArrayList1()[6], App.prefs.getArrayList1()[7],
+                        App.prefs.getArrayList1()[8], App.prefs.getArrayList1()[9])
+            } else if(groupId!! == 11) {
+                updateData(groupId!!.toInt(), App.prefs.id.toString(), groupName.toString(), App.prefs.getArrayList2()[0], App.prefs.getArrayList2()[1], App.prefs.getArrayList2()[2],
+                        App.prefs.getArrayList2()[3], App.prefs.getArrayList2()[4], App.prefs.getArrayList2()[5], App.prefs.getArrayList2()[6], App.prefs.getArrayList2()[7],
+                        App.prefs.getArrayList2()[8], App.prefs.getArrayList2()[9])
+            } else {
+                updateData(groupId!!.toInt(), App.prefs.id.toString(), groupName.toString(), App.prefs.getArrayList3()[0], App.prefs.getArrayList3()[1], App.prefs.getArrayList3()[2],
+                        App.prefs.getArrayList3()[3], App.prefs.getArrayList3()[4], App.prefs.getArrayList3()[5], App.prefs.getArrayList3()[6], App.prefs.getArrayList3()[7],
+                        App.prefs.getArrayList3()[8], App.prefs.getArrayList3()[9])
+            }
+        }
 
         codeaddbtn.setOnClickListener {
             App.prefs.code = code
@@ -272,75 +275,6 @@ class InterCompany : AppCompatActivity() {
 
     }
 
-    // 3개월 그래프
-    /*inner class ThreadClassThird : Thread(){
-        override fun run() {
-            // Entry 배열
-            val entries : ArrayList<Entry> = ArrayList()
-            // Entry 배열 초기값 입력
-            entries.add(Entry(0F, dataFirst?.toFloat()!!))
-            // 그래프 구현을 위한 LineDataSet 생성
-            val dataSet : LineDataSet = LineDataSet(entries, "").apply {
-                setDrawCircles(false)
-                color = Color.RED
-                highLightColor = Color.TRANSPARENT
-                circleRadius = 0f
-                valueTextSize = 0F
-                lineWidth = 1.5F
-            }
-            // 그래프 data 생성 -> 최종입력 데이터
-            var data : LineData = LineData(dataSet)
-            // activity_main에 배치된 lineChart에 데이터 연결 하기
-            lineChart1.data = data
-
-            setChartMonth()
-            runOnUiThread {
-                lineChart1.animateXY(1, 1)
-            }
-            // 그래프 초기화 설정
-
-            for(i in 0 until dataListMonth.size){
-                // SystemClock.sleep(0.5.toLong())
-                data.addEntry(Entry(i.toFloat(), dataListMonth[i].toFloat()), 0)
-                data.notifyDataChanged()
-                lineChart1.notifyDataSetChanged()
-                lineChart1.invalidate()
-            }
-
-            isrunningMonth = false
-            super.run()
-        }
-    }*/
-
-    /*private fun setChartMonth(){
-
-        // X축
-        lineChart1.xAxis.apply {
-            position = XAxis.XAxisPosition.BOTTOM
-            textSize = 10f
-            setDrawGridLines(false)
-            setDrawAxisLine(false)
-            isGranularityEnabled = true
-
-            valueFormatter = MyXAxisFormatterMonth()
-            setLabelCount(4, true)
-        }
-
-        lineChart1.apply {
-            // Y축
-            axisRight.isEnabled = false
-            axisLeft.axisMaximum = dataMax?.toFloat()!! + 1500F
-            axisLeft.axisMinimum = dataMin?.toFloat()!! - 1500F
-            setPinchZoom(false)
-            description.isEnabled = false
-
-            legend.apply {
-                setDrawInside(false)
-                isEnabled = false
-            }
-        }
-    }*/
-
     // dataListMonth
     inner class MyXAxisFormatter : ValueFormatter(){
 
@@ -350,10 +284,103 @@ class InterCompany : AppCompatActivity() {
         }
     }
 
-    /*inner class MyXAxisFormatterMonth : ValueFormatter(){
-
-        override fun getAxisLabel(value: Float, axis: AxisBase?): String {
-            return date_listMonth.getOrNull(value.toInt()) ?: value.toString()
+    inner class RadioListener : RadioGroup.OnCheckedChangeListener {
+        @SuppressLint("SetTextI18n")
+        override fun onCheckedChanged(p0: RadioGroup?, p1: Int) { // p1 사용자가 선택한 라디오 버튼의 아이디값
+            when (p0?.id) {
+                R.id.groupRadio ->
+                    when (p1) {
+                        R.id.groupname1 -> {
+                            groupId = App.prefs.idGroup1?.toInt()
+                            groupName = App.prefs.group1
+                            Log.e("groupId : ", groupId.toString())
+                            Log.e("groupName : ", groupName.toString())
+                        }
+                        R.id.groupname2 -> {
+                            groupId = App.prefs.idGroup2?.toInt()
+                            groupName = App.prefs.group2
+                            Log.e("groupId : ", groupId.toString())
+                            Log.e("groupName : ", groupName.toString())
+                        }
+                        R.id.groupname3 -> {
+                            groupId = App.prefs.idGroup3?.toInt()
+                            groupName = App.prefs.group3
+                            Log.e("groupId : ", groupId.toString())
+                            Log.e("groupName : ", groupName.toString())
+                        }
+                    }
+            }
         }
-    }*/
+    }
+
+    private fun addDataList(groupId : Int){
+
+        if(groupId == 10){
+            listGruop1.clear()
+            for(i in 0 until App.prefs.getArrayList1().count()){
+                listGruop1.add(App.prefs.getArrayList1()[i])
+                Log.d("getArrayList1 : " , App.prefs.getArrayList1()[i])
+            }
+            for(i in 0 until App.prefs.getArrayList1().count()){
+                Log.d("listGruop1", listGruop1[i])
+                Log.d("itemspos", companyname.toString())
+                if(listGruop1[i] != companyname && listGruop1[i] == "null"){
+                    listGruop1[i] = companyname.toString()
+                    break
+                }
+            }
+            App.prefs.saveArrayList1(listGruop1)
+
+        } else if(groupId == 11){
+            listGruop2.clear()
+            for(i in 0 until App.prefs.getArrayList2().count()){
+                listGruop2.add(App.prefs.getArrayList2()[i])
+                Log.d("getArrayList2 : " , App.prefs.getArrayList2()[i])
+            }
+            for(i in 0 until App.prefs.getArrayList2().count()){
+                Log.d("listGruop1", listGruop2[i])
+                Log.d("itemspos", companyname.toString())
+                if(listGruop2[i] != companyname && listGruop2[i] == "null"){
+                    listGruop2[i] = companyname.toString()
+                    break
+                }
+            }
+            App.prefs.saveArrayList2(listGruop2)
+        }
+        else if(groupId == 12){
+            listGruop3.clear()
+            for(i in 0 until App.prefs.getArrayList3().count()){
+                listGruop3.add(App.prefs.getArrayList3()[i])
+                Log.d("getArrayList3 : " , App.prefs.getArrayList3()[i])
+            }
+            for(i in 0 until App.prefs.getArrayList3().count()){
+                Log.d("listGruop1", listGruop3[i])
+                Log.d("itemspos", companyname.toString())
+                if(listGruop3[i] != companyname && listGruop3[i] == "null"){
+                    listGruop3[i] = companyname.toString()
+                    break
+                }
+            }
+            App.prefs.saveArrayList3(listGruop3)
+        }
+    }
+
+    private fun updateData(id : Int, name : String, group : String, company1 : String, company2 : String, company3 : String, company4 : String, company5 : String,
+                           company6 : String, company7 : String, company8 : String, company9 : String, company10 : String,) {
+        val companyService : UpdateService = retrofit.create(UpdateService::class.java)
+
+        companyService.updateCompany(id, name, group, company1, company2, company3,company4, company5,company6,company7,
+                company8, company9, company10).enqueue(object : Callback<UpdateData>{
+            override fun onResponse(call: Call<UpdateData>, response: Response<UpdateData>) {
+                val removeData = response.body()
+
+                Log.d("response : " , removeData.toString())
+            }
+
+            override fun onFailure(call: Call<UpdateData>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+        })
+    }
 }
