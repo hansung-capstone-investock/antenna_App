@@ -30,7 +30,15 @@ class InfoFragment : Fragment() {
     var loginData: LoginData? = null
     var companyData : LoadData? = null
 
-    val list : List<String>? = null
+    // 관심종목 콜렉션
+    var groupName1 : String? = null
+    val list1 = mutableListOf<String>()
+
+    var groupName2 : String? = null
+    val list2 = mutableListOf<String>()
+
+    var groupName3 : String? = null
+    val list3 = mutableListOf<String>()
 
     val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("http://ec2-3-37-87-254.ap-northeast-2.compute.amazonaws.com:8000/") // 장고 서버 주소 입력
@@ -117,16 +125,104 @@ class InfoFragment : Fragment() {
             override fun onResponse(call: Call<LoadData>, response: Response<LoadData>) {
 
                 companyData = response.body()
-                Log.d("companyData count", companyData?.count().toString())
 
-                if(companyData != null && response.isSuccessful){
-                    App.prefs.saveArrayList1(companyData!![0])
-                    App.prefs.saveArrayList2(companyData!![1])
-                    App.prefs.saveArrayList3(companyData!![2])
+                var groupName : String? = null
+                var group1 : String? = null
+                var group2 : String? = null
+                var group3 : String? = null
+                var group4 : String? = null
+                var group5 : String? = null
+                var group6 : String? = null
+                var group7 : String? = null
+                var group8 : String? = null
+                var group9 : String? = null
+                var group10 : String? = null
 
-                    Log.d("saveArrayList1", App.prefs.getArrayList1().toString())
-                } else{
-                    Log.e("ERROR MESSAGE", response.errorBody().toString())
+                groupName = companyData!![0].group.toString()
+                group1 = companyData!![0].companies.company1.toString()
+                group2 = companyData!![0].companies.company2.toString()
+                group3 = companyData!![0].companies.company3.toString()
+                group4 = companyData!![0].companies.company4.toString()
+                group5 = companyData!![0].companies.company5.toString()
+                group6 = companyData!![0].companies.company6.toString()
+                group7 = companyData!![0].companies.company7.toString()
+                group8 = companyData!![0].companies.company8.toString()
+                group9 = companyData!![0].companies.company9.toString()
+                group10 = companyData!![0].companies.company10.toString()
+
+                groupName1 = groupName
+                list1.add(group1)
+                list1.add(group2)
+                list1.add(group3)
+                list1.add(group4)
+                list1.add(group5)
+                list1.add(group6)
+                list1.add(group7)
+                list1.add(group8)
+                list1.add(group9)
+                list1.add(group10)
+
+                groupName = companyData!![1].group.toString()
+                group1 = companyData!![1].companies.company1.toString()
+                group2 = companyData!![1].companies.company2.toString()
+                group3 = companyData!![1].companies.company3.toString()
+                group4 = companyData!![1].companies.company4.toString()
+                group5 = companyData!![1].companies.company5.toString()
+                group6 = companyData!![1].companies.company6.toString()
+                group7 = companyData!![1].companies.company7.toString()
+                group8 = companyData!![1].companies.company8.toString()
+                group9 = companyData!![1].companies.company9.toString()
+                group10 = companyData!![1].companies.company10.toString()
+
+                groupName2 = groupName
+                list2.add(group1)
+                list2.add(group2)
+                list2.add(group3)
+                list2.add(group4)
+                list2.add(group5)
+                list2.add(group6)
+                list2.add(group7)
+                list2.add(group8)
+                list2.add(group9)
+                list2.add(group10)
+
+                groupName = companyData!![2].group.toString()
+                group1 = companyData!![2].companies.company1.toString()
+                group2 = companyData!![2].companies.company2.toString()
+                group3 = companyData!![2].companies.company3.toString()
+                group4 = companyData!![2].companies.company4.toString()
+                group5 = companyData!![2].companies.company5.toString()
+                group6 = companyData!![2].companies.company6.toString()
+                group7 = companyData!![2].companies.company7.toString()
+                group8 = companyData!![2].companies.company8.toString()
+                group9 = companyData!![2].companies.company9.toString()
+                group10 = companyData!![2].companies.company10.toString()
+
+                groupName3 = groupName
+                list3.add(group1)
+                list3.add(group2)
+                list3.add(group3)
+                list3.add(group4)
+                list3.add(group5)
+                list3.add(group6)
+                list3.add(group7)
+                list3.add(group8)
+                list3.add(group9)
+                list3.add(group10)
+
+                // 저장
+                if(response.isSuccessful) {
+                    App.prefs.saveArrayList1(list1)
+                    App.prefs.saveArrayList2(list2)
+                    App.prefs.saveArrayList3(list3)
+
+                    App.prefs.group1 = groupName1
+                    App.prefs.group2 = groupName3
+                    App.prefs.group3 = groupName3
+
+                    Log.d("saveArrayList1 : ", App.prefs.getArrayList1().toString())
+                    Log.d("saveArrayList2 : ", App.prefs.getArrayList2().toString())
+                    Log.d("saveArrayList3 : ", App.prefs.getArrayList3().toString())
                 }
             }
             override fun onFailure(call: Call<LoadData>, t: Throwable) {

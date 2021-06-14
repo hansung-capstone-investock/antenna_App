@@ -1,9 +1,7 @@
 package com.example.antenna
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -11,7 +9,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.example.antenna.fragment.*
-import com.example.antenna.interest.InterestActivity
 import com.example.antenna.sharedPreference.App
 
 
@@ -61,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                 MainFragment()
             }
             else if (id == R.id.navigation_2)
-                ClickFragment()
+                AntennaFragment()
             else if (id == R.id.navigation_3)
                 NewsFragment()
             else if (id == R.id.navigation_4)

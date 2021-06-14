@@ -20,377 +20,484 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="sans-serif-black"
-            android:text="Antenna"
-            android:textColor="@color/black"
-            android:textSize="24sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/textletter"
+            <LinearLayout
+                android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:fontFamily="sans-serif-black"
-                android:text="만약 3달 전에 알았더라면"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-        </LinearLayout>
+                android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textcoffee4"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-black"
-                        android:text="종목코드"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/selectcode"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-black"
-                        android:text="선택된 종목 코드"
-                        android:textColor="#6E6565"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textcoffee"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-black"
-                        android:text="예측날짜"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/textday"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-black"
-                        android:hint="선택된 날짜"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
-
-                <RadioGroup
+                <TextView
+                    android:id="@+id/Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp">
-
-                    <RadioButton
-                        android:id="@+id/radioButton7"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="7일" />
-
-                    <RadioButton
-                        android:id="@+id/radioButton14"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="14일" />
-
-                    <RadioButton
-                        android:id="@+id/radioButton21"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="21일" />
-
-                    <RadioButton
-                        android:id="@+id/radioButton28"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="28일" />
-                </RadioGroup>
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="Antenna"
+                    android:textColor="@color/black"
+                    android:textSize="24sp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
                     <TextView
-                        android:id="@+id/subvalue"
+                        android:id="@+id/textletter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
                         android:fontFamily="sans-serif-black"
-                        android:text="보조지표"
+                        android:text="만약 3달 전에 알았더라면"
                         android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        android:textSize="18sp" />
 
-                    <TextView
-                        android:id="@+id/checksub"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
                         android:layout_marginEnd="16dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/rank"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|clip_vertical"
+                            android:layout_marginStart="8dp"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-black"
+                            android:gravity="center"
+                            android:text="순위"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/word"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|clip_vertical"
+                            android:layout_marginStart="96dp"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-black"
+                            android:gravity="center"
+                            android:text="종목명"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/wordpercent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|clip_vertical"
+                            android:layout_marginEnd="32dp"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-black"
+                            android:gravity="center"
+                            android:text="상승률"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_data_compare"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:fontFamily="sans-serif-black"
-                        android:hint="선택된 보조지표"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        android:overScrollMode="never"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/list_comm">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
-                    <RadioGroup
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="16dp">
+                        android:orientation="vertical">
 
-                        <RadioButton
-                            android:id="@+id/VPTButton"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/textcoffee4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_weight="1"
+                                android:fontFamily="sans-serif-black"
+                                android:text="종목코드"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/selectcode"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1"
+                                android:fontFamily="sans-serif-black"
+                                android:text="선택된 종목 코드"
+                                android:textColor="#6E6565"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/searchbtn"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="VPT" />
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:background="#D9E4D3"
+                            android:fontFamily="sans-serif-black"
+                            android:text="종목 검색"
+                            android:textColor="#000000" />
 
-                        <RadioButton
-                            android:id="@+id/CMFradioButton"
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="CMF" />
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
 
-                        <RadioButton
-                            android:id="@+id/EoMradioButton"
+                            <TextView
+                                android:id="@+id/textcoffee"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_weight="1"
+                                android:fontFamily="sans-serif-black"
+                                android:text="예측날짜"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/textday"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1"
+                                android:fontFamily="sans-serif-black"
+                                android:hint="선택된 날짜"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+                        <RadioGroup
+                            android:id="@+id/dateGroup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp">
+
+                            <RadioButton
+                                android:id="@+id/radioButton7"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="7일" />
+
+                            <RadioButton
+                                android:id="@+id/radioButton14"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="14일" />
+
+                            <RadioButton
+                                android:id="@+id/radioButton21"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="21일" />
+
+                            <RadioButton
+                                android:id="@+id/radioButton28"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="28일" />
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="16dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="EoM" />
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
 
-                        <RadioButton
-                            android:id="@+id/FIradioButton"
+                            <TextView
+                                android:id="@+id/subvalue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="16dp"
+                                android:fontFamily="sans-serif-black"
+                                android:text="보조지표"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="FI" />
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
 
-                        <RadioButton
-                            android:id="@+id/ADIradioButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="ADI" />
+                            <RadioGroup
+                                android:id="@+id/sub1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp">
 
-                        <RadioButton
-                            android:id="@+id/VWAPradioButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="VWAP" />
-                    </RadioGroup>
+                                <CheckBox
+                                    android:id="@+id/VPTButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="VPT" />
 
-                    <RadioGroup
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
+                                <CheckBox
+                                    android:id="@+id/CMFradioButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="CMF" />
 
-                        <RadioButton
-                            android:id="@+id/DCradioButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="DC" />
+                                <CheckBox
+                                    android:id="@+id/EoMradioButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="EoM" />
 
-                        <RadioButton
-                            android:id="@+id/KCradioButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="KC" />
+                                <CheckBox
+                                    android:id="@+id/FIradioButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="FI" />
 
-                        <RadioButton
-                            android:id="@+id/PPOradioButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="PPO" />
+                                <CheckBox
+                                    android:id="@+id/ADIradioButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="ADI" />
 
-                        <RadioButton
-                            android:id="@+id/RSIradioButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="RSI" />
+                            </RadioGroup>
 
-                        <RadioButton
-                            android:id="@+id/SRSI"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="SRSI" />
+                            <RadioGroup
+                                android:id="@+id/sub2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
 
-                        <RadioButton
-                            android:id="@+id/TSIradioButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="TSI" />
-                    </RadioGroup>
+                                <CheckBox
+                                    android:id="@+id/DCradioButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="DC" />
 
-                    <RadioGroup
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
+                                <CheckBox
+                                    android:id="@+id/KCradioButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="KC" />
 
-                        <RadioButton
-                            android:id="@+id/UOradioButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="UO" />
+                                <CheckBox
+                                    android:id="@+id/PPOradioButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="PPO" />
 
-                        <RadioButton
-                            android:id="@+id/WRradioButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="WR" />
+                                <CheckBox
+                                    android:id="@+id/RSIradioButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="RSI" />
 
-                        <RadioButton
-                            android:id="@+id/KAMAradioButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="KAMA" />
+                                <CheckBox
+                                    android:id="@+id/SRSI"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="SRSI" />
 
-                        <RadioButton
-                            android:id="@+id/CCIradioButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="CCI" />
+                            </RadioGroup>
 
-                        <RadioButton
-                            android:id="@+id/DPOradioButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="DPO" />
+                            <RadioGroup
+                                android:id="@+id/sub3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
 
-                        <RadioButton
-                            android:id="@+id/KSTradioButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="KST" />
-                    </RadioGroup>
+                                <CheckBox
+                                    android:id="@+id/UOradioButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="UO" />
 
-                    <RadioGroup
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
+                                <CheckBox
+                                    android:id="@+id/WRradioButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="WR" />
 
-                        <RadioButton
-                            android:id="@+id/STCradioButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="STC" />
+                                <CheckBox
+                                    android:id="@+id/KAMAradioButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="KAMA" />
 
-                        <RadioButton
-                            android:id="@+id/TRIXradioButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="TRIX" />
+                                <CheckBox
+                                    android:id="@+id/CCIradioButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="CCI" />
 
-                        <RadioButton
-                            android:id="@+id/MACDradioButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="MACD" />
+                                <CheckBox
+                                    android:id="@+id/DPOradioButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="DPO" />
 
-                        <RadioButton
-                            android:id="@+id/WMAradioButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="WMA" />
+                            </RadioGroup>
 
-                        <RadioButton
-                            android:id="@+id/EMAradioButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="EMA" />
-                    </RadioGroup>
+                            <RadioGroup
+                                android:id="@+id/sub4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
 
+                                <CheckBox
+                                    android:id="@+id/STCradioButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="STC" />
+
+                                <CheckBox
+                                    android:id="@+id/TRIXradioButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="TRIX" />
+
+                                <CheckBox
+                                    android:id="@+id/MACDradioButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="MACD" />
+
+                                <CheckBox
+                                    android:id="@+id/WMAradioButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="WMA" />
+
+                                <CheckBox
+                                    android:id="@+id/EMAradioButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="EMA" />
+
+                            </RadioGroup>
+
+                            <RadioGroup
+                                android:id="@+id/sub5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent">
+
+                                <CheckBox
+                                    android:id="@+id/KSTradioButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="KST" />
+
+                                <CheckBox
+                                    android:id="@+id/VWAPradioButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="VWAP" />
+
+                                <CheckBox
+                                    android:id="@+id/TSIradioButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="TSI" />
+
+                                <CheckBox
+                                    android:id="@+id/DIFFradioButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="DIFF" />
+
+                                <CheckBox
+                                    android:id="@+id/DIFFRATEradioButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="DIFFRATE" />
+                            </RadioGroup>
+
+                        </LinearLayout>
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
 
-    </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

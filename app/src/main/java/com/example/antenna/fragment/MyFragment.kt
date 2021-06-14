@@ -44,9 +44,9 @@ class MyFragment : Fragment(){
         }
         mypage_user.text = App.prefs.id.toString() + "님 안녕하세요"
 
-        inter_name1.text = App.prefs.getArrayList1().group as CharSequence?
-        inter_name2.text = App.prefs.getArrayList2()?.group as CharSequence?
-        inter_name3.text = App.prefs.getArrayList3()?.group as CharSequence?
+        inter_name1.text = App.prefs.group1
+        inter_name2.text = App.prefs.group2
+        inter_name3.text = App.prefs.group3
 
         // 관심종목 리스트 추가
         rv_data_mypage.adapter = adapter1

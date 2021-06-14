@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.antenna.R
 import kotlinx.android.synthetic.main.list_comm.view.*
 
-class CommuityAdapter(private val items : MutableList<CommunityList>):
+class CompareAdapter(private val items : MutableList<CommunityList>):
         RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private fun ViewGroup.inflate(layoutRes : Int) : View = LayoutInflater.from(context).inflate(layoutRes, this, false)
@@ -25,7 +25,7 @@ class CommuityAdapter(private val items : MutableList<CommunityList>):
         holder.itemView.apply {
             listnum.text = item.num.toString()
             listname.text = item.strName
-            listcount.text = item.strCount.toString() + "회"
+            listcount.text = item.strCount.toString() + "%"
         }
     }
 

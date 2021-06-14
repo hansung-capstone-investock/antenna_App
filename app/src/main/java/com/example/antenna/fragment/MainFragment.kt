@@ -70,13 +70,24 @@ class MainFragment : Fragment() {
             } else {
                 Username.text = id.toString() + "님 안녕하세요"
 
-                list.add(DataList(App.prefs.getArrayList1().companies.company2.toString(), ""))
+                intername.text = App.prefs.group1
+
+                Log.d("intername1 : ", intername.text.toString())
+                Log.d("LIST1 : ", App.prefs.getArrayList1().toString())
+                /*for(i in 0 until App.prefs.getArrayList1().count()){
+                    if(App.prefs.getArrayList1()[i] != "null"){
+                        list.add(DataList(App.prefs.getArrayList1()[i]))
+                    } else {
+                        println("NULL 값")
+                    }
+                }*/
+
                 rv_data.adapter = adapter1
 
-                refreshButton.setOnClickListener {
+                /*refreshButton.setOnClickListener {
                     println("refrsh button click")
                     App.prefs.getArrayList1()
-                }
+                }*/
             }
 
             viewPager_main.adapter = adapter

@@ -1,6 +1,7 @@
 package com.example.antenna.interest
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,8 @@ import com.example.antenna.R
 import com.example.antenna.`interface`.SearchService
 import com.example.antenna.`interface`.UpdateService
 import com.example.antenna.dataclass.CompanyData
+import com.example.antenna.fragment.AntennaFragment
+import com.example.antenna.sharedPreference.App
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
@@ -143,10 +146,10 @@ class InterCompany : AppCompatActivity() {
                     company_rate.text = dec.format(today) + "원"
                     Fluctuation_rate.text = percent1.toString() + "%"
 
-                    one_max.text = dec.format(dataMax)
-                    one_min.text = dec.format(dataMin)
+                    one_max.text = dec.format(dataMax) + "원"
+                    one_min.text = dec.format(dataMin) + "원"
 
-                    capvalue.text = dec.format(cap)
+                    capvalue.text = dec.format(cap) + "원"
                     PER.text = dec.format(per)
                     PBR.text = dec.format(pbr)
 
@@ -192,6 +195,11 @@ class InterCompany : AppCompatActivity() {
         /*AddCompany.setOnClickListener {
             updateService.UpdateCompany()
         }*/
+
+        codeaddbtn.setOnClickListener {
+            App.prefs.code = code
+            Log.d("CODE 추가 : " , App.prefs.code!!)
+        }
     }
 
     // 1년 그래프

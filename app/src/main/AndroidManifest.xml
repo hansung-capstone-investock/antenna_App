@@ -17,6 +17,7 @@
         <activity android:name=".interest.InterestActivity"/>
         <activity android:name=".interest.InterCompany"/>
         <activity android:name=".BackResult"/>
+        <activity android:name=".AntennaResult"/>
         <activity
             android:name=".MainActivity">
             <intent-filter>
