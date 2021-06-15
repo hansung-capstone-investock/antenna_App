@@ -118,7 +118,7 @@ class RecyclerAdapter1(private val items: MutableList<DataList>):
             }
         }
 
-        App.prefs.saveArrayList1(listGruop)
+        App.prefs.saveArrayList2(listGruop)
 
         Log.e("getArrayList2 : ", App.prefs.getArrayList2().toString())
         notifyDataSetChanged()

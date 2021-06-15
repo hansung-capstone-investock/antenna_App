@@ -104,7 +104,7 @@ class RecyclerAdapter2(private val items: MutableList<DataList>):
         listGruop.clear()
         for(i in 0 until App.prefs.getArrayList3().count()){
             listGruop.add(App.prefs.getArrayList3()[i])
-            Log.d("getArrayList2 : " , App.prefs.getArrayList2()[i])
+            Log.d("getArrayList3 : " , App.prefs.getArrayList3()[i])
         }
 
         for(i in 0 until App.prefs.getArrayList3().count()){
@@ -118,9 +118,9 @@ class RecyclerAdapter2(private val items: MutableList<DataList>):
             }
         }
 
-        App.prefs.saveArrayList1(listGruop)
+        App.prefs.saveArrayList3(listGruop)
 
-        Log.e("getArrayList2 : ", App.prefs.getArrayList2().toString())
+        Log.e("getArrayList2 : ", App.prefs.getArrayList3().toString())
         notifyDataSetChanged()
     }
     

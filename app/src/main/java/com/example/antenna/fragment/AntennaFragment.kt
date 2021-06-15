@@ -28,6 +28,7 @@ import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Response.success
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.ArrayList
@@ -104,10 +105,9 @@ class AntennaFragment : Fragment() {
         }
 
         antennabutton.setOnClickListener {
-            code?.let { predictDate?.let { it1 -> antenna(it, subList, it1) } }
-
-            val intentBack = Intent(context, AntennaResult::class.java)
-            startActivity(intentBack)
+            antenna(code!!, subList, predictDate!!.toInt())
+            /*val intentBack = Intent(context, AntennaResult::class.java)
+            startActivity(intentBack)*/
         }
 
         compare()
@@ -163,25 +163,25 @@ class AntennaFragment : Fragment() {
         }
     }
 
-    fun antenna(code :  String, indicator : ArrayList<String>, predictDate :  Int){
+    fun antenna(code : String, indicator : ArrayList<String>, predictDate : Int){
         val AntennaService : AntennaService = retrofit.create(AntennaService::class.java)
-
         var antennaData : AntennaData? = null
         AntennaService.requestAntenna(code, indicator, predictDate).enqueue(object : Callback<AntennaData>{
             override fun onResponse(call: Call<AntennaData>, response: Response<AntennaData>) {
 
-                runBlocking {
+                val data = response.body()
+                data?.let { success(data) }
+                Log.e("data : ", data.toString())
+                /*runBlocking {
                     delay(20000L)
-                }
-
-                Log.e("code : ", code)
-                Log.e("indicator : ", indicator.toString())
-                Log.e("predictDate : ", predictDate.toString())
-
+                }*/
                 antennaData = response.body()
-
-                Log.e("antennaData : ", response.body().toString())
-                Log.e("antennaData : ", response.errorBody().toString())
+                if(response.isSuccessful){
+                    Log.e("antennaData : ", antennaData.toString())
+                } else {
+                    Log.e("antennaData : ", response.errorBody().toString())
+                    Log.e("antennaData : ", response.code().toString())
+                }
             }
 
             override fun onFailure(call: Call<AntennaData>, t: Throwable) {

@@ -120,7 +120,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
                     <EditText
-                        android:id="@+id/editTextDate"
+                        android:id="@+id/editStart"
                         android:layout_width="100dp"
                         android:layout_height="40dp"
                         android:layout_marginStart="8dp"
@@ -132,7 +132,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <EditText
-                        android:id="@+id/editTextDate2"
+                        android:id="@+id/editEnd"
                         android:layout_width="100dp"
                         android:layout_height="40dp"
                         android:layout_marginStart="8dp"
@@ -141,7 +141,7 @@
                         android:hint="마감일 입력"
                         android:inputType="date"
                         app:layout_constraintStart_toEndOf="@+id/textView7"
-                        app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
+                        app:layout_constraintTop_toBottomOf="@+id/editStart" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
@@ -152,238 +152,6 @@
                 android:layout_marginTop="8dp"
                 android:orientation="vertical"
                 tools:ignore="MissingConstraints">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <RadioGroup
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintStart_toEndOf="@+id/radioGroup8"
-                        app:layout_constraintTop_toBottomOf="@+id/radioGroup7">
-
-                        <CheckBox
-                            android:id="@+id/kosdaq24"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="인터넷" />
-
-                        <CheckBox
-                            android:id="@+id/kosdaq26"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="소프트웨어" />
-
-                        <CheckBox
-                            android:id="@+id/kosdaq25"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="디지털컨텐츠" />
-
-                    </RadioGroup>
-
-                    <RadioGroup
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        app:layout_constraintStart_toEndOf="@+id/radioGroup7"
-                        app:layout_constraintTop_toBottomOf="@+id/Kosdaq">
-
-                        <CheckBox
-                            android:id="@+id/kosdaq12"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="종이·목재" />
-
-                        <CheckBox
-                            android:id="@+id/kosdaq11"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="섬유·의류" />
-
-                        <CheckBox
-                            android:id="@+id/kosdaq15"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="제약" />
-
-                        <CheckBox
-                            android:id="@+id/kosdaq17"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="기계·장비" />
-
-                        <CheckBox
-                            android:id="@+id/kosdaq16"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="금속" />
-
-                        <CheckBox
-                            android:id="@+id/kosdaq21"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="기타제조" />
-
-                        <CheckBox
-                            android:id="@+id/kosdaq23"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="통신서비스" />
-
-                        <CheckBox
-                            android:id="@+id/kosdaq10"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="방송서비스" />
-
-                        <CheckBox
-                            android:id="@+id/kosdaq2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="건설" />
-                    </RadioGroup>
-
-                    <RadioGroup
-                        android:id="@+id/radioGroup7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        app:layout_constraintStart_toEndOf="@+id/radioGroup6"
-                        app:layout_constraintTop_toBottomOf="@+id/Kosdaq">
-
-                        <CheckBox
-                            android:id="@+id/kosdaq20"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="일반전기전자" />
-
-                        <CheckBox
-                            android:id="@+id/kosdaq22"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="운송장비·부품" />
-
-                        <CheckBox
-                            android:id="@+id/kosdaq13"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="화학" />
-
-                        <CheckBox
-                            android:id="@+id/kosdaq14"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="출판·매체복제" />
-
-                        <CheckBox
-                            android:id="@+id/kosdaq19"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="의료·정밀기기" />
-
-                        <CheckBox
-                            android:id="@+id/kosdaq18"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="비금속" />
-                    </RadioGroup>
-
-                    <TextView
-                        android:id="@+id/Kosdaq"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:text="코스닥"
-                        android:textColor="#000000"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <RadioGroup
-                        android:id="@+id/radioGroup6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/Kosdaq">
-
-                        <CheckBox
-                            android:id="@+id/kosdaqIT"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="코스닥 IT" />
-
-                        <CheckBox
-                            android:id="@+id/kosdaq5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="금융" />
-
-                        <CheckBox
-                            android:id="@+id/kosdaq6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="오락·문화" />
-
-                        <CheckBox
-                            android:id="@+id/kosdaq7"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="통신방송서비스" />
-
-                        <CheckBox
-                            android:id="@+id/kosdaq9"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="IT H/W" />
-
-                        <CheckBox
-                            android:id="@+id/kosdaq"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="음식료·담배" />
-                    </RadioGroup>
-
-                    <RadioGroup
-                        android:id="@+id/radioGroup8"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/radioGroup6">
-
-                        <CheckBox
-                            android:id="@+id/kosdaq3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="유통" />
-
-                        <CheckBox
-                            android:id="@+id/kosdaq1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="제조업" />
-
-                        <CheckBox
-                            android:id="@+id/kosdaq4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="운송" />
-
-                        <CheckBox
-                            android:id="@+id/kosdaq8"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="IT S/W &amp; SVC" />
-
-                    </RadioGroup>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
                     android:id="@+id/title7"
@@ -416,7 +184,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <RadioGroup
-                        android:id="@+id/radioGroup"
+                        android:id="@+id/KospiGroup1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -424,25 +192,25 @@
                         app:layout_constraintTop_toBottomOf="@+id/Kospi">
 
                         <CheckBox
-                            android:id="@+id/checkBox15"
+                            android:id="@+id/btn1015"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="운수장비" />
 
                         <CheckBox
-                            android:id="@+id/checkBox14"
+                            android:id="@+id/btn1014"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="의료정밀" />
 
                         <CheckBox
-                            android:id="@+id/checkBox16"
+                            android:id="@+id/btn1016"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="유통업" />
 
                         <CheckBox
-                            android:id="@+id/checkBox13"
+                            android:id="@+id/btn1012"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
@@ -450,52 +218,58 @@
                             android:text="기계" />
 
                         <CheckBox
-                            android:id="@+id/checkBox12"
+                            android:id="@+id/btn1011"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="철강금속" />
 
                         <CheckBox
-                            android:id="@+id/checkBox5"
+                            android:id="@+id/btn1008"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="화학" />
                     </RadioGroup>
 
                     <RadioGroup
-                        android:id="@+id/radioGroup3"
+                        android:id="@+id/KospiGroup2"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        app:layout_constraintStart_toEndOf="@+id/radioGroup"
+                        app:layout_constraintStart_toEndOf="@+id/KospiGroup1"
                         app:layout_constraintTop_toBottomOf="@+id/Kospi">
 
                         <CheckBox
-                            android:id="@+id/checkBox3"
+                            android:id="@+id/btn1013"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="전기전자" />
+
+                        <CheckBox
+                            android:id="@+id/btn1006"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="섬유의복" />
 
                         <CheckBox
-                            android:id="@+id/checkBox2"
+                            android:id="@+id/btn1005"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="음식료품" />
 
                         <CheckBox
-                            android:id="@+id/checkBox6"
+                            android:id="@+id/btn1009"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="의약품" />
 
                         <CheckBox
-                            android:id="@+id/checkBox11"
+                            android:id="@+id/btn1010"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="비금속광물" />
 
                         <CheckBox
-                            android:id="@+id/checkBox4"
+                            android:id="@+id/btn1007"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="종이목재" />
@@ -503,78 +277,343 @@
                     </RadioGroup>
 
                     <RadioGroup
-                        android:id="@+id/radioGroup4"
+                        android:id="@+id/KospiGroup3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toEndOf="@+id/radioGroup3"
+                        app:layout_constraintStart_toEndOf="@+id/KospiGroup2"
                         app:layout_constraintTop_toBottomOf="@+id/Kospi">
 
                         <CheckBox
-                            android:id="@+id/checkBox24"
+                            android:id="@+id/btn1026"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="서비스업" />
 
                         <CheckBox
-                            android:id="@+id/checkBox21"
+                            android:id="@+id/btn1022"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="은행" />
 
                         <CheckBox
-                            android:id="@+id/checkBox23"
+                            android:id="@+id/btn1021"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="금융업" />
 
                         <CheckBox
-                            android:id="@+id/checkBox10"
+                            android:id="@+id/btn1027"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="제조업" />
 
                         <CheckBox
-                            android:id="@+id/checkBox25"
+                            android:id="@+id/btn1024"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="증권" />
                     </RadioGroup>
 
                     <RadioGroup
+                        android:id="@+id/KospiGroup4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toEndOf="@+id/radioGroup4"
+                        app:layout_constraintStart_toEndOf="@+id/KospiGroup3"
                         app:layout_constraintTop_toBottomOf="@+id/Kospi">
 
                         <CheckBox
-                            android:id="@+id/checkBox9"
+                            android:id="@+id/btn1025"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="금융업" />
+                            android:text="보험" />
 
                         <CheckBox
-                            android:id="@+id/checkBox18"
+                            android:id="@+id/btn1017"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="전기가스업" />
 
                         <CheckBox
-                            android:id="@+id/checkBox8"
+                            android:id="@+id/btn1019"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="운수창고업" />
 
                         <CheckBox
-                            android:id="@+id/checkBox17"
+                            android:id="@+id/btn1018"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="건설업" />
 
                         <CheckBox
-                            android:id="@+id/checkBox20"
+                            android:id="@+id/btn1020"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="통신업" />
+                    </RadioGroup>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/Kosdaq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:text="코스닥"
+                        android:textColor="#000000"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <RadioGroup
+                        android:id="@+id/KosdapGroup1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        app:layout_constraintStart_toEndOf="@+id/KosdapGroup5"
+                        app:layout_constraintTop_toBottomOf="@+id/KosdapGroup3">
+
+                        <CheckBox
+                            android:id="@+id/btn2153"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="인터넷" />
+
+                        <CheckBox
+                            android:id="@+id/btn2155"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="소프트웨어" />
+
+                        <CheckBox
+                            android:id="@+id/btn2154"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="디지털컨텐츠" />
+
+                        <CheckBox
+                            android:id="@+id/btn2156"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="컴퓨터서비스" />
+
+                        <CheckBox
+                            android:id="@+id/btn2159"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="반도체" />
+
+                    </RadioGroup>
+
+                    <RadioGroup
+                        android:id="@+id/KosdapGroup2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintStart_toEndOf="@+id/KosdapGroup3"
+                        app:layout_constraintTop_toBottomOf="@+id/Kosdaq">
+
+                        <CheckBox
+                            android:id="@+id/btn2062"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="종이·목재" />
+
+                        <CheckBox
+                            android:id="@+id/btn2058"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="섬유·의류" />
+
+                        <CheckBox
+                            android:id="@+id/btn2066"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="제약" />
+
+                        <CheckBox
+                            android:id="@+id/btn2070"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="기계·장비" />
+
+                        <CheckBox
+                            android:id="@+id/btn2068"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="금속" />
+
+                        <CheckBox
+                            android:id="@+id/btn2077"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="기타제조" />
+
+                        <CheckBox
+                            android:id="@+id/btn2151"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="통신서비스" />
+
+                        <CheckBox
+                            android:id="@+id/btn2152"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="방송서비스" />
+
+                        <CheckBox
+                            android:id="@+id/btn2026"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="건설" />
+
+                        <CheckBox
+                            android:id="@+id/btn2157"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="통신장비" />
+
+                        <CheckBox
+                            android:id="@+id/btn2160"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="IT부품" />
+                    </RadioGroup>
+
+                    <RadioGroup
+                        android:id="@+id/KosdapGroup3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintStart_toEndOf="@+id/KosdapGroup4"
+                        app:layout_constraintTop_toBottomOf="@+id/Kosdaq">
+
+                        <CheckBox
+                            android:id="@+id/btn2072"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="일반전기전자" />
+
+                        <CheckBox
+                            android:id="@+id/btn2075"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="운송장비·부품" />
+
+                        <CheckBox
+                            android:id="@+id/btn2065"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="화학" />
+
+                        <CheckBox
+                            android:id="@+id/btn2063"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="출판·매체복제" />
+
+                        <CheckBox
+                            android:id="@+id/btn2074"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="의료·정밀기기" />
+
+                        <CheckBox
+                            android:id="@+id/btn2067"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="비금속" />
+                    </RadioGroup>
+
+                    <RadioGroup
+                        android:id="@+id/KosdapGroup4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/Kosdaq">
+
+                        <CheckBox
+                            android:id="@+id/btn2015"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="코스닥 IT" />
+
+                        <CheckBox
+                            android:id="@+id/btn2031"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="금융" />
+
+                        <CheckBox
+                            android:id="@+id/btn2037"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="오락·문화" />
+
+                        <CheckBox
+                            android:id="@+id/btn2041"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="통신방송서비스" />
+
+                        <CheckBox
+                            android:id="@+id/btn2043"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="IT H/W" />
+
+                        <CheckBox
+                            android:id="@+id/btn2056"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="음식료·담배" />
+                    </RadioGroup>
+
+                    <RadioGroup
+                        android:id="@+id/KosdapGroup5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/KosdapGroup4">
+
+                        <CheckBox
+                            android:id="@+id/btn2027"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="유통" />
+
+                        <CheckBox
+                            android:id="@+id/btn2024"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="제조업" />
+
+                        <CheckBox
+                            android:id="@+id/btn2029"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="운송" />
+
+                        <CheckBox
+                            android:id="@+id/btn2042"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="IT S/W &amp; SVC" />
+
+                        <CheckBox
+                            android:id="@+id/btn2158"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="정보기기" />
+
                     </RadioGroup>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

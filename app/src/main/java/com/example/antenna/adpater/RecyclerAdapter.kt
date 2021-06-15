@@ -92,13 +92,11 @@ class RecyclerAdapter(private val items: MutableList<DataList>):
     // 내부 데이터 추가 함수
     fun addDataList(DL : DataList){
         items.add(DL)
-
         notifyDataSetChanged()
     }
 
     // 내부 데이터 값 제거 함수
     private fun removeDL(position: Int){
-
         Log.d("position : " , position.toString())
         listGruop1.clear()
         for(i in 0 until App.prefs.getArrayList1().count()){
@@ -112,7 +110,6 @@ class RecyclerAdapter(private val items: MutableList<DataList>):
             if(listGruop1[i] == items[position].strName){
                 listGruop1[i] = "null"
                 items.removeAt(position)
-
                 break
             }
         }

@@ -179,7 +179,7 @@ class InfoFragment : Fragment() {
                 group9 = companyData!![1].companies.company9.toString()
                 group10 = companyData!![1].companies.company10.toString()
 
-                id3= companyData!![2].id
+
                 groupName2 = groupName
                 list2.add(group1)
                 list2.add(group2)
@@ -192,6 +192,7 @@ class InfoFragment : Fragment() {
                 list2.add(group9)
                 list2.add(group10)
 
+                id3= companyData!![2].id
                 groupName = companyData!![2].group.toString()
                 group1 = companyData!![2].companies.company1.toString()
                 group2 = companyData!![2].companies.company2.toString()

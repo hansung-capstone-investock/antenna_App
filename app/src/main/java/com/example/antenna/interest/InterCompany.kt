@@ -14,6 +14,7 @@ import com.example.antenna.adpater.DataList
 import com.example.antenna.dataclass.CompanyData
 import com.example.antenna.dataclass.UpdateData
 import com.example.antenna.fragment.AntennaFragment
+import com.example.antenna.fragment.MyFragment
 import com.example.antenna.sharedPreference.App
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
@@ -184,6 +185,8 @@ class InterCompany : AppCompatActivity() {
         AddCompany.setOnClickListener {
             addDataList(groupId!!)
 
+            // val intent = Intent(this, MyFragment::class.java)
+
             if (groupId!! == 10){
                 updateData(groupId!!.toInt(), App.prefs.id.toString(), groupName.toString(), App.prefs.getArrayList1()[0],App.prefs.getArrayList1()[1], App.prefs.getArrayList1()[2],
                         App.prefs.getArrayList1()[3], App.prefs.getArrayList1()[4], App.prefs.getArrayList1()[5], App.prefs.getArrayList1()[6], App.prefs.getArrayList1()[7],
@@ -197,6 +200,8 @@ class InterCompany : AppCompatActivity() {
                         App.prefs.getArrayList3()[3], App.prefs.getArrayList3()[4], App.prefs.getArrayList3()[5], App.prefs.getArrayList3()[6], App.prefs.getArrayList3()[7],
                         App.prefs.getArrayList3()[8], App.prefs.getArrayList3()[9])
             }
+
+            // startActivity(intent)
         }
 
         codeaddbtn.setOnClickListener {
