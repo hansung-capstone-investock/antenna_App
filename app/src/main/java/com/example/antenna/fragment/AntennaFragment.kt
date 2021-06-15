@@ -214,7 +214,9 @@ class AntennaFragment : Fragment() {
     }
 
     override fun onResume() {
+        selectname.text = App.prefs.codeName
         selectcode.text = App.prefs.code
+
         code = selectcode.text as String?
         super.onResume()
     }

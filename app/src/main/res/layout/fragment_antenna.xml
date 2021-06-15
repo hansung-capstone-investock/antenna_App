@@ -172,10 +172,23 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
                                 android:layout_marginTop="16dp"
-                                android:layout_weight="1"
+                                android:layout_weight="2"
                                 android:fontFamily="sans-serif-black"
                                 android:text="종목코드"
                                 android:textColor="@color/black"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/selectname"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1"
+                                android:fontFamily="sans-serif-black"
+                                android:text="선택된 종목 이름"
+                                android:textColor="#6E6565"
                                 android:textSize="14sp" />
 
                             <TextView

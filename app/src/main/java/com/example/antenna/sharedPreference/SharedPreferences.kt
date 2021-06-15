@@ -31,6 +31,11 @@ class SharedPreferences(context: Context) {
         get() = prefs.getString("ID", "")
         set(value) = prefs.edit().putString("ID", value).apply()
 
+    // 종목명
+    var codeName: String?
+        get() = prefs.getString("codeName", "")
+        set(value) = prefs.edit().putString("codeName", value).apply()
+
     var code: String?
         get() = prefs.getString("code", "")
         set(value) = prefs.edit().putString("code", value).apply()

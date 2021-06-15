@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">INVESTOCK</string>
-    <string name="INVESTOCK">Investock</string>
+    <string name="app_name">Investock</string>
     <string name="one_click">Antenna</string>
     <string name="news">뉴스</string>
     <string name="info">마이페이지</string>
@@ -9,7 +8,6 @@
     <string name="todo">TODO</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="BackTest">백테스팅</string>
-    <string name="url">"http://ec2-3-37-87-254.ap-northeast-2.compute.amazonaws.com:8000/"</string>
 
     <string-array name="spinner_code">
         <item>1005":"음식료품</item>

@@ -18,6 +18,7 @@ class InterestActivity : AppCompatActivity(){
     private val list = ArrayList<CompanyList>()
     private val adapter1 = CompanyAdapter(list)
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_company)
@@ -29,7 +30,6 @@ class InterestActivity : AppCompatActivity(){
             override fun onQueryTextSubmit(query: String?): Boolean {
                 // 검색 버튼을 누르면 호출 되는 함수
                 Log.d("Change SEARCH TEXT : ", query.toString())
-
                 return false
             }
 

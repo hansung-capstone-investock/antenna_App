@@ -9,11 +9,21 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import androidx.annotation.Nullable
 import com.example.antenna.R
+import com.example.antenna.`interface`.BackService
 import com.example.antenna.dataclass.*
 import kotlinx.android.synthetic.main.fragment_back.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class BackFragment : Fragment() {
 
+    val retrofit: Retrofit = Retrofit.Builder()
+            .baseUrl("http://ec2-3-37-87-254.ap-northeast-2.compute.amazonaws.com:8000/") // 장고 서버 주소 입력
+            .addConverterFactory(GsonConverterFactory.create()) // Retrofit 객체 생성
+            .build()
     // 백테스팅 변수 설정
     var start : String? = null
     var end : String? = null
@@ -29,7 +39,7 @@ class BackFragment : Fragment() {
     var conditionsRoa = mutableListOf<roaData>()
     var conditionsRoe = mutableListOf<roeData>()
 
-    var conditions = mutableListOf<String>()
+    var conditions = mutableListOf<sectorData>()
     var sellCondition = mutableListOf<Int>()
 
     var maxValue : Int? = null
@@ -84,32 +94,39 @@ class BackFragment : Fragment() {
             startActivity(intentBack)*/
 
             if (PER.isNotEmpty()) {
-                conditionsPer.add(perData(PER))
+                //conditionsPer.add(perData(PER))
                 Log.d("conditionsPer :", conditionsPer.toString())
-                conditions.add(conditionsPer.toString())
+                conditions.add(sectorData(perData(PER)))
             }
             if (PBR.isNotEmpty()) {
-                conditionsPbr.add(pbrData(PBR))
+                // conditionsPbr.add(pbrData(PBR))
                 Log.d("conditionsPbr :", conditionsPbr.toString())
-                conditions.add(conditionsPbr.toString())
+                conditions.add(sectorData(perData(PBR)))
             }
             if (PSR.isNotEmpty()) {
-                conditionsPsr.add(psrData(PSR))
+                //conditionsPsr.add(psrData(PSR))
                 Log.d("conditionsPsr :", conditionsPsr.toString())
-                conditions.add(conditionsPsr.toString())
+                conditions.add(sectorData(perData(PSR)))
             }
             if (ROE.isNotEmpty()) {
-                conditionsRoe.add(roeData(ROE))
+                //conditionsRoe.add(roeData(ROE))
                 Log.d("conditionsRoe :", conditionsRoe.toString())
-                conditions.add(conditionsRoe.toString())
+                conditions.add(sectorData(perData(ROE)))
             }
             if (ROA.isNotEmpty()) {
-                conditionsRoa.add(roaData(ROA))
+                //conditionsRoa.add(roaData(ROA))
                 Log.d("conditionsRoa :", conditionsRoa.toString())
-                conditions.add(conditionsRoa.toString())
+                conditions.add(sectorData(perData(ROA)))
             }
 
+            Log.d("start :", start.toString())
+            Log.d("end :", end.toString())
+            Log.d("market :", market.toString())
+            Log.d("changeCode :", changeCode.toString())
             Log.d("conditions :", conditions.toString())
+            Log.d("sellCondition :", sellCondition.toString())
+
+            startBack(start!!, end!!, market, changeCode, conditions, sellCondition)
 
             super.onViewCreated(view, savedInstanceState)
         }
@@ -843,4 +860,25 @@ class BackFragment : Fragment() {
         ROAcheckBox.setOnCheckedChangeListener(condition)
     }
 
+    private fun startBack(start: String, end: String, market: List<Int>, sector: ArrayList<Int>, conditions: MutableList<sectorData>, sellCondition: List<Int>){
+        val backService : BackService = retrofit.create(BackService::class.java)
+        val backData : BackData? = null
+
+        backService.requestBack(start, end, market, sector, conditions, sellCondition).enqueue(object : Callback<BackData>{
+            override fun onResponse(call: Call<BackData>, response: Response<BackData>) {
+                val data = response.body()
+
+                if(response.isSuccessful) {
+                    Log.e("antennaData : ", backData.toString())
+                } else{
+                    Log.e("antennaData : ", response.errorBody().toString())
+                    Log.e("antennaData : ", response.code().toString())
+                }
+            }
+
+            override fun onFailure(call: Call<BackData>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+    }
 }

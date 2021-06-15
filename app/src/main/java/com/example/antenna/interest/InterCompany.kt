@@ -149,7 +149,7 @@ class InterCompany : AppCompatActivity() {
                     one_max.text = dec.format(dataMax) + "원"
                     one_min.text = dec.format(dataMin) + "원"
 
-                    capvalue.text = dec.format(cap) + "원"
+                    capvalue.text = dec.format(cap?.div(100000000)) + "억"
                     PER.text = dec.format(per)
                     PBR.text = dec.format(pbr)
 
@@ -205,7 +205,9 @@ class InterCompany : AppCompatActivity() {
         }
 
         codeaddbtn.setOnClickListener {
+            App.prefs.codeName = companyname
             App.prefs.code = code
+            Log.d("codeName 추가 : " , App.prefs.codeName!!)
             Log.d("CODE 추가 : " , App.prefs.code!!)
         }
     }

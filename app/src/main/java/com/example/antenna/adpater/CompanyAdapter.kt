@@ -1,6 +1,7 @@
 package com.example.antenna.adpater
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +24,7 @@ class CompanyAdapter(private var items: ArrayList<CompanyList>):
     var companyFilterList = ArrayList<CompanyList>()
 
     init{
-        companyFilterList = items
+        companyFilterList = items as ArrayList<CompanyList>
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -36,6 +37,7 @@ class CompanyAdapter(private var items: ArrayList<CompanyList>):
         val intent = Intent(holder.itemView.context, InterCompany::class.java)
         // 필터 행에 대한 항목 가져오기
         holder.itemView.commpanyName.text = companyFilterList[position].str_company
+        holder.itemView.commpanyCode.text = companyFilterList[position].str_tst
 
         // 종목 클릭시 이동
         holder.itemView.setOnClickListener {
@@ -58,13 +60,16 @@ class CompanyAdapter(private var items: ArrayList<CompanyList>):
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
+                Log.e("constraint : ", constraint.toString())
                 val charSearch = constraint.toString()
                 if(charSearch.isEmpty()){
-                    companyFilterList = items
+                    companyFilterList = items as ArrayList<CompanyList>
+                    println("not search")
                 } else {
+                    println(charSearch)
                     val resultList = ArrayList<CompanyList>()
                     for(row in items){
-                        if(row.str_tst.toLowerCase(Locale.ROOT).contains(charSearch.toLowerCase(Locale.ROOT))) {
+                        if(row.str_tst.contains(charSearch)) {
                             resultList.add(row)
                         }
                     }
@@ -82,5 +87,7 @@ class CompanyAdapter(private var items: ArrayList<CompanyList>):
             }
         }
     }
+
+
 
 }
