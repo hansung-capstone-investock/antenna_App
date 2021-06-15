@@ -1,6 +1,5 @@
 package com.example.antenna.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,10 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import androidx.annotation.Nullable
-import com.example.antenna.BackResult
 import com.example.antenna.R
+import com.example.antenna.dataclass.*
 import kotlinx.android.synthetic.main.fragment_back.*
-import kotlin.reflect.jvm.internal.impl.renderer.KeywordStringsGenerated
 
 class BackFragment : Fragment() {
 
@@ -21,8 +19,27 @@ class BackFragment : Fragment() {
     var end : String? = null
     var market = mutableListOf<Int>()
     var sector : ArrayList<String> = arrayListOf()
+
+    // 실제 넘겨줄 값
+    private val changeCode : ArrayList<Int> = arrayListOf()
+
+    var conditionsPbr = mutableListOf<pbrData>()
+    var conditionsPer = mutableListOf<perData>()
+    var conditionsPsr = mutableListOf<psrData>()
+    var conditionsRoa = mutableListOf<roaData>()
+    var conditionsRoe = mutableListOf<roeData>()
+
     var conditions = mutableListOf<String>()
     var sellCondition = mutableListOf<Int>()
+
+    var maxValue : Int? = null
+    var minValue : Int? = null
+
+    private val PER : ArrayList<Int> = arrayListOf()
+    private val PBR : ArrayList<Int> = arrayListOf()
+    private val PSR : ArrayList<Int> = arrayListOf()
+    private val ROE : ArrayList<Int> = arrayListOf()
+    private val ROA : ArrayList<Int> = arrayListOf()
 
     @Nullable
     override fun onCreateView(
@@ -36,30 +53,74 @@ class BackFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        start = editStart.text.toString()
-        end = editEnd.text.toString()
+        startbtn.setOnClickListener {
+            start = editStart.text.toString()
+            end = editEnd.text.toString()
+
+            println(start)
+            println(end)
+        }
+        valuebtn.setOnClickListener {
+            sellCondition.clear()
+            maxValue = MaxValue.text.toString().toInt()
+            minValue = MinValue.text.toString().toInt()
+
+            println(maxValue)
+            println(minValue)
+
+            sellCondition.add(maxValue!!)
+            sellCondition.add(minValue!!)
+
+            Log.d("sellcondtion : ", sellCondition.toString())
+        }
 
         // 체크박스 구현
         addCheck()
-
-
-
         // 백테스팅 시작
         backbutton.setOnClickListener {
-            val intentBack = Intent(context, BackResult::class.java)
+            conditions.clear()
+            /*val intentBack = Intent(context, BackResult::class.java)
 
-            startActivity(intentBack)
+            startActivity(intentBack)*/
+
+            if (PER.isNotEmpty()) {
+                conditionsPer.add(perData(PER))
+                Log.d("conditionsPer :", conditionsPer.toString())
+                conditions.add(conditionsPer.toString())
+            }
+            if (PBR.isNotEmpty()) {
+                conditionsPbr.add(pbrData(PBR))
+                Log.d("conditionsPbr :", conditionsPbr.toString())
+                conditions.add(conditionsPbr.toString())
+            }
+            if (PSR.isNotEmpty()) {
+                conditionsPsr.add(psrData(PSR))
+                Log.d("conditionsPsr :", conditionsPsr.toString())
+                conditions.add(conditionsPsr.toString())
+            }
+            if (ROE.isNotEmpty()) {
+                conditionsRoe.add(roeData(ROE))
+                Log.d("conditionsRoe :", conditionsRoe.toString())
+                conditions.add(conditionsRoe.toString())
+            }
+            if (ROA.isNotEmpty()) {
+                conditionsRoa.add(roaData(ROA))
+                Log.d("conditionsRoa :", conditionsRoa.toString())
+                conditions.add(conditionsRoa.toString())
+            }
+
+            Log.d("conditions :", conditions.toString())
+
+            super.onViewCreated(view, savedInstanceState)
         }
-        super.onViewCreated(view, savedInstanceState)
     }
-
+    // 세터값 변환
     inner class CheckBoxListener : CompoundButton.OnCheckedChangeListener{
         val code : ArrayList<Int> = arrayListOf(1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013,
                 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1022, 1024, 1025, 1026, 1027,
                 2015, 2024, 2026, 2027, 2029, 2031, 2037, 2041, 2042,
                 2043, 2056, 2058, 2062, 2063, 2065, 2066, 2067, 2068, 2070, 2072,
                 2074, 2075, 2077, 2151, 2152, 2153, 2154, 2155, 2156, 2157, 2158, 2159, 2160)
-        val changeCode : ArrayList<Int> = arrayListOf()
         override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
             if(p1)
                 if (p0 != null) {
@@ -612,16 +673,6 @@ class BackFragment : Fragment() {
                         changeCode.remove(code[54])
                         Log.e("삭제 완료 : ", changeCode.toString())
                     }
-
-
-
-
-
-
-
-
-
-
                     else {
                         println("실패")
                     }
@@ -631,10 +682,100 @@ class BackFragment : Fragment() {
             }
         }
     }
+    // 코스피 코스닥 타입 변환
+    inner class CheckBoxListener1 : CompoundButton.OnCheckedChangeListener{
+        val code : ArrayList<Int> = arrayListOf(1, 2)
+        override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
+            if(p1)
+                if (p0 != null) {
+                    if(p0.text as String == "코스피"){
+                        market.add(code[0])
+                        Log.d("market : " , market.toString())
+                    } else if(p0.text as String == "코스닥"){
+                        market.add(code[1])
+                        Log.d("market : " , market.toString())
+                    }
+                } else{
+                    println("LIST $market")
+                }
+            else {
+                if(p0?.text as String == "코스피"){
+                    market.remove(code[0])
+                    Log.d("remove : " , market.toString())
+                } else if(p0?.text as String == "코스닥"){
+                    market.remove(code[1])
+                    Log.d("remove : " , market.toString())
+                }
+            }
+        }
+    }
+    // 매수 우선순위 변경
+    inner class CheckBoxListener2 : CompoundButton.OnCheckedChangeListener{
+
+        override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
+            if(p1)
+                if (p0 != null) {
+                    if(p0.text as String == "PER"){
+                        PER.add(PERMin.text.toString().toInt())
+                        PER.add(PERMax.text.toString().toInt())
+                        PER.add(PERedit.text.toString().toInt())
+                        Log.d("PER : " , PER.toString())
+                    } else if(p0.text as String == "PBR"){
+                        PBR.add(PBRMin.text.toString().toInt())
+                        PBR.add(PBRMax.text.toString().toInt())
+                        PBR.add(PBRedit.text.toString().toInt())
+                        Log.d("PBR : " , PBR.toString())
+                    } else if(p0.text as String == "PSR"){
+                        PSR.add(PSRMin.text.toString().toInt())
+                        PSR.add(PSRMax.text.toString().toInt())
+                        PSR.add(PSRedit.text.toString().toInt())
+                        Log.d("PSR : " , PSR.toString())
+                    } else if(p0.text as String == "ROE(단위:%)"){
+                        ROE.add(ROEMin.text.toString().toInt())
+                        ROE.add(ROEMax.text.toString().toInt())
+                        ROE.add(ROEedit.text.toString().toInt())
+                        Log.d("ROE : " , ROE.toString())
+                    } else if(p0.text as String == "ROA(단위:%)"){
+                        ROA.add(ROAMin.text.toString().toInt())
+                        ROA.add(ROAMax.text.toString().toInt())
+                        ROA.add(ROAedit.text.toString().toInt())
+                        Log.d("ROA : " , ROA.toString())
+                    }
+                } else{
+                    println("LIST $market")
+                }
+            else {
+                if(p0?.text as String == "PER"){
+                    PER.clear()
+                    Log.d("PER : " , PER.toString())
+                    println("PER CLEAR")
+                } else if(p0.text as String == "PBR"){
+                    PBR.clear()
+                    Log.d("PBR : " , PBR.toString())
+                    println("PBR CLEAR")
+                } else if(p0.text as String == "PSR"){
+                    PSR.clear()
+                    Log.d("PSR : " , PSR.toString())
+                    println("PSR CLEAR")
+                } else if(p0.text as String == "ROE(단위:%)"){
+                    ROE.clear()
+                    Log.d("ROE : " , ROE.toString())
+                    println("ROE CLEAR")
+                } else if(p0.text as String == "ROA(단위:%)"){
+                    ROA.clear()
+                    Log.d("ROA : " , ROA.toString())
+                    println("ROA CLEAR")
+                }
+            }
+        }
+    }
 
     // 체크 박스
     private fun addCheck(){
         val subListener = CheckBoxListener()
+        val market = CheckBoxListener1()
+        val condition = CheckBoxListener2()
+
         // Kospi 체크박스 연결
         btn1005.setOnCheckedChangeListener(subListener)
         btn1006.setOnCheckedChangeListener(subListener)
@@ -691,10 +832,15 @@ class BackFragment : Fragment() {
         btn2158.setOnCheckedChangeListener(subListener)
         btn2159.setOnCheckedChangeListener(subListener)
         btn2160.setOnCheckedChangeListener(subListener)
+
+        Kospicheck.setOnCheckedChangeListener(market)
+        Kosdaqcheck.setOnCheckedChangeListener(market)
+
+        PERcheckBox.setOnCheckedChangeListener(condition)
+        PBRcheckBox.setOnCheckedChangeListener(condition)
+        PSRcheckBox.setOnCheckedChangeListener(condition)
+        ROEcheckBox.setOnCheckedChangeListener(condition)
+        ROAcheckBox.setOnCheckedChangeListener(condition)
     }
 
-    // 종목 코드로 변환
-    /*private fun changeCode(sector : ArrayList<String>){
-
-    }*/
 }

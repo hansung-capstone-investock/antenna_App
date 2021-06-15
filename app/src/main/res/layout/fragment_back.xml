@@ -81,17 +81,31 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0" />
 
-                <TextView
-                    android:id="@+id/textView10"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_weight="1"
-                    android:text="년도(0000)-일자(00)-일(00) 순서로 입력해주세요"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/Title" />
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="1"
+                        android:text="년도(0000)-일자(00)-일(00) 순서로 입력해주세요"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/Title" />
+
+                    <Button
+                        android:id="@+id/startbtn"
+                        android:layout_width="70dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="12dp"
+                        android:text="확인" />
+                </LinearLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -142,6 +156,7 @@
                         android:inputType="date"
                         app:layout_constraintStart_toEndOf="@+id/textView7"
                         app:layout_constraintTop_toBottomOf="@+id/editStart" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
@@ -171,25 +186,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <TextView
-                        android:id="@+id/Kospi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:text="코스피"
-                        android:textColor="#000000"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
                     <RadioGroup
                         android:id="@+id/KospiGroup1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/Kospi">
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <CheckBox
+                            android:id="@+id/Kospicheck"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="코스피"
+                            android:textColor="#000000"
+                            android:textStyle="bold" />
 
                         <CheckBox
                             android:id="@+id/btn1015"
@@ -235,7 +245,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         app:layout_constraintStart_toEndOf="@+id/KospiGroup1"
-                        app:layout_constraintTop_toBottomOf="@+id/Kospi">
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <CheckBox
                             android:id="@+id/btn1013"
@@ -281,7 +291,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintStart_toEndOf="@+id/KospiGroup2"
-                        app:layout_constraintTop_toBottomOf="@+id/Kospi">
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <CheckBox
                             android:id="@+id/btn1026"
@@ -319,7 +329,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintStart_toEndOf="@+id/KospiGroup3"
-                        app:layout_constraintTop_toBottomOf="@+id/Kospi">
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <CheckBox
                             android:id="@+id/btn1025"
@@ -357,18 +367,6 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/Kosdaq"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:text="코스닥"
-                        android:textColor="#000000"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
 
                     <RadioGroup
                         android:id="@+id/KosdapGroup1"
@@ -414,9 +412,8 @@
                         android:id="@+id/KosdapGroup2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
                         app:layout_constraintStart_toEndOf="@+id/KosdapGroup3"
-                        app:layout_constraintTop_toBottomOf="@+id/Kosdaq">
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <CheckBox
                             android:id="@+id/btn2062"
@@ -489,9 +486,8 @@
                         android:id="@+id/KosdapGroup3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
                         app:layout_constraintStart_toEndOf="@+id/KosdapGroup4"
-                        app:layout_constraintTop_toBottomOf="@+id/Kosdaq">
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <CheckBox
                             android:id="@+id/btn2072"
@@ -535,9 +531,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/Kosdaq">
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <CheckBox
+                            android:id="@+id/Kosdaqcheck"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="코스닥"
+                            android:textColor="#000000"
+                            android:textStyle="bold" />
 
                         <CheckBox
                             android:id="@+id/btn2015"
@@ -885,19 +888,26 @@
                 android:layout_marginTop="8dp"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/title10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:fontFamily="sans-serif-black"
-                    android:text="매도조건"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/title10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="매도조건"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                </LinearLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -949,6 +959,19 @@
                         android:textSize="18sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/minvalue" />
+
+                    <Button
+                        android:id="@+id/valuebtn"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:text="확인"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/MinValue"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
