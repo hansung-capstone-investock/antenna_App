@@ -82,11 +82,18 @@
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
+                        <ImageView
+                            android:id="@+id/interedit1"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_weight="0.5"
+                            app:srcCompat="@drawable/ic_baseline_edit_24" />
+
                         <TextView
                             android:id="@+id/inter_name2"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
                             android:layout_marginTop="8dp"
                             android:layout_weight="0.5"
                             android:fontFamily="sans-serif-black"
@@ -96,11 +103,18 @@
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
+                        <ImageView
+                            android:id="@+id/interedit2"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_weight="0.5"
+                            app:srcCompat="@drawable/ic_baseline_edit_24" />
+
                         <TextView
                             android:id="@+id/inter_name3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
                             android:layout_marginTop="8dp"
                             android:layout_weight="0.5"
                             android:fontFamily="sans-serif-black"
@@ -109,6 +123,14 @@
                             android:textColor="#FFFFFF"
                             android:textSize="18sp"
                             android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/interedit3"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_weight="0.5"
+                            app:srcCompat="@drawable/ic_baseline_edit_24" />
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView

@@ -2,7 +2,10 @@ package com.example.antenna
 
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Parcelable
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.antenna.sharedPreference.App
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
@@ -23,6 +26,10 @@ class AntennaResult : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.antennaresult)
+
+
+        Log.e("actual :", App.prefs.actualAntennaGET().toString())
+        Log.e("predict :", App.prefs.predictAntennaGET().toString())
 
         val thread = ThreadClass()
         thread.start()

@@ -32,14 +32,7 @@ class BackFragment : Fragment() {
 
     // 실제 넘겨줄 값
     private val changeCode : ArrayList<Int> = arrayListOf()
-
-    var conditionsPbr = mutableListOf<pbrData>()
-    var conditionsPer = mutableListOf<perData>()
-    var conditionsPsr = mutableListOf<psrData>()
-    var conditionsRoa = mutableListOf<roaData>()
-    var conditionsRoe = mutableListOf<roeData>()
-
-    var conditions = mutableListOf<sectorData>()
+    var conditions = mutableListOf<List<String>>()
     var sellCondition = mutableListOf<Int>()
 
     var maxValue : Int? = null
@@ -93,7 +86,7 @@ class BackFragment : Fragment() {
 
             startActivity(intentBack)*/
 
-            if (PER.isNotEmpty()) {
+            /*if (PER.isNotEmpty()) {
                 //conditionsPer.add(perData(PER))
                 Log.d("conditionsPer :", conditionsPer.toString())
                 conditions.add(sectorData(perData(PER)))
@@ -113,20 +106,30 @@ class BackFragment : Fragment() {
                 Log.d("conditionsRoe :", conditionsRoe.toString())
                 conditions.add(sectorData(perData(ROE)))
             }
-            if (ROA.isNotEmpty()) {
-                //conditionsRoa.add(roaData(ROA))
+                if (ROA.isNotEmpty()) {
+                conditionsRoa.add(roaData(ROA))
                 Log.d("conditionsRoa :", conditionsRoa.toString())
-                conditions.add(sectorData(perData(ROA)))
-            }
+                conditions.add(conditionsRoa)
+            }*/
 
             Log.d("start :", start.toString())
             Log.d("end :", end.toString())
             Log.d("market :", market.toString())
             Log.d("changeCode :", changeCode.toString())
-            Log.d("conditions :", conditions.toString())
             Log.d("sellCondition :", sellCondition.toString())
+            Log.d("PER :", PER.toString())
+            Log.d("PBR :", PBR.toString())
+            Log.d("PSR :", PSR.toString())
+            Log.d("ROA :", ROA.toString())
+            Log.d("ROE :", ROE.toString())
 
-            startBack(start!!, end!!, market, changeCode, conditions, sellCondition)
+            startBack(start!!, end!!, market, changeCode, PER, PBR, PSR, ROA, ROE, sellCondition)
+            if(ROE.isEmpty()){
+                println("empty")
+                ROE.add(-9999)
+                println(ROE)
+                println(ROE[0])
+            }
 
             super.onViewCreated(view, savedInstanceState)
         }
@@ -860,11 +863,12 @@ class BackFragment : Fragment() {
         ROAcheckBox.setOnCheckedChangeListener(condition)
     }
 
-    private fun startBack(start: String, end: String, market: List<Int>, sector: ArrayList<Int>, conditions: MutableList<sectorData>, sellCondition: List<Int>){
+    private fun startBack(start: String, end: String, market: List<Int>, sector: ArrayList<Int>, perconditions: ArrayList<Int>? = null, psrconditions: ArrayList<Int>? = null,
+            pbrconditions: ArrayList<Int>? = null, roaconditions: ArrayList<Int>? = null, roeconditions: ArrayList<Int>? = null, sellCondition: List<Int>){
         val backService : BackService = retrofit.create(BackService::class.java)
         val backData : BackData? = null
 
-        backService.requestBack(start, end, market, sector, conditions, sellCondition).enqueue(object : Callback<BackData>{
+        backService.requestBack(BackInfo(start, end, market, sector, perconditions, psrconditions, pbrconditions, roaconditions, roeconditions, sellCondition)).enqueue(object : Callback<BackData>{
             override fun onResponse(call: Call<BackData>, response: Response<BackData>) {
                 val data = response.body()
 

@@ -96,4 +96,34 @@ class SharedPreferences(context: Context) {
                 }.type
         )
     }
+
+    fun predictAntennaGET(): ArrayList<Double> {
+        val emptyList = Gson().toJson(ArrayList<Double>())
+        return Gson().fromJson(
+                prefs.getString("predict", emptyList),
+                object : TypeToken<ArrayList<Double>>(){
+                }.type
+        )
+    }
+
+    fun predictAntennaListSV(list: ArrayList<Double>) {
+        val json = gson.toJson(list)
+        editor.putString("predict", json)
+        editor.apply() // This line is IMPORTANT !!!
+    }
+
+    fun actualAntennaGET(): ArrayList<Double> {
+        val emptyList = Gson().toJson(ArrayList<Double>())
+        return Gson().fromJson(
+                prefs.getString("actual", emptyList),
+                object : TypeToken<ArrayList<Double>>(){
+                }.type
+        )
+    }
+
+    fun actualAntennaListSV(list: ArrayList<Double>) {
+        val json = gson.toJson(list)
+        editor.putString("actual", json)
+        editor.apply() // This line is IMPORTANT !!!
+    }
 }

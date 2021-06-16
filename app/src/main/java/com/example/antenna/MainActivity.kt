@@ -10,9 +10,14 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.example.antenna.fragment.*
 import com.example.antenna.sharedPreference.App
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlin.coroutines.CoroutineContext
 
 
 class MainActivity : AppCompatActivity() {
+
     private var mBottomNV: BottomNavigationView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         // 초기 화면 설정
         mBottomNV!!.selectedItemId = R.id.navigation_1
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
