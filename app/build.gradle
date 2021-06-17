@@ -42,6 +42,10 @@ android {
     repositories{
         maven { url "https://jitpack.io" }
     }
+
+    lintOptions {
+        checkReleaseBuilds false
+    }
 }
 
 dependencies {

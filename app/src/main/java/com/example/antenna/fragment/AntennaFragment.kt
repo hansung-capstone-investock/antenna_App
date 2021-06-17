@@ -28,6 +28,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
@@ -39,6 +41,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 import java.lang.Exception
 import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 import kotlin.coroutines.CoroutineContext
 
@@ -50,10 +53,25 @@ class AntennaFragment : Fragment(), CoroutineScope {
         get() = Dispatchers.Main + job
 
 
+    private val client : OkHttpClient = OkHttpClient.Builder()
+            .connectTimeout(1, TimeUnit.MINUTES)
+            .readTimeout(1, TimeUnit.MINUTES)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .retryOnConnectionFailure(true)
+            .build()
+
+    val request : Request = Request.Builder()
+            .url("http://ec2-3-37-87-254.ap-northeast-2.compute.amazonaws.com:8000/")
+            .addHeader("Connection", "close")
+            .get()
+            .build()
+
     val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("http://ec2-3-37-87-254.ap-northeast-2.compute.amazonaws.com:8000/") // 장고 서버 주소 입력
+            .client(client)
             .addConverterFactory(GsonConverterFactory.create()) // Retrofit 객체 생성
             .build()
+
     // 종목 코드
     var code : String? = null
     // 보조지표 리스트
@@ -122,15 +140,6 @@ class AntennaFragment : Fragment(), CoroutineScope {
             startActivity(searchIntent)
         }
 
-        antennabutton.setOnClickListener {
-
-            Log.e("code : " , code.toString())
-            Log.e("indicator : " , indicator.toString())
-            Log.e("predictDate : " , predictDate.toString())
-
-            antenna(code!!, indicator, predictDate!!)
-        }
-
         compare()
         super.onViewCreated(view, savedInstanceState)
         job = Job()
@@ -139,6 +148,10 @@ class AntennaFragment : Fragment(), CoroutineScope {
     override fun onDestroyView() {
         super.onDestroyView()
         job.cancel()
+    }
+
+    inner class Thraed : Thread(){
+
     }
 
     inner class RadioListener : RadioGroup.OnCheckedChangeListener {
@@ -191,8 +204,12 @@ class AntennaFragment : Fragment(), CoroutineScope {
     fun antenna(code : String, indicator : List<String>, predictDate : Int){
 
         val antennaService : AntennaService = retrofit.create(AntennaService::class.java)
-            antennaService.requestAntenna(AtennaInfo(code, indicator, predictDate)).enqueue(object : Callback<AntennaData>{
+        val intentBack = Intent(context, AntennaResult::class.java)
+
+        launch {
+            antennaService.requestAntenna(AtennaInfo(code, indicator, predictDate)).enqueue(object : Callback<AntennaData> {
                 override fun onFailure(call: Call<AntennaData>, t: Throwable) {
+                    Log.e("ERROR : ", t.toString())
                     t.printStackTrace()
                 }
 
@@ -200,11 +217,12 @@ class AntennaFragment : Fragment(), CoroutineScope {
                     val data = response.body()
                     data?.let { success(data) }
 
-                    if(response.isSuccessful){
-                        Log.e("antennaData : predict", data?.predict.toString())
-                        Log.e("antennaData : actual ", data?.actual.toString())
+                    if (response.isSuccessful) {
+                        /*Log.e("antennaData : predict", data?.predict.toString())
+                        Log.e("antennaData : actual ", data?.actual.toString())*/
+                        Log.e("data :  ", data!!.toString())
 
-                        predictList.add(data?.predict!!.day1)
+                        predictList.add(data.predict.day1)
                         predictList.add(data.predict.day2)
                         predictList.add(data.predict.day3)
                         predictList.add(data.predict.day4)
@@ -409,21 +427,21 @@ class AntennaFragment : Fragment(), CoroutineScope {
                         actualList.add(data.actual.day97)
                         actualList.add(data.actual.day98)
 
-                        val intentBack = Intent(context, AntennaResult::class.java)
                         App.prefs.predictAntennaListSV(predictList)
-                        App.prefs.predictAntennaListSV(actualList)
+                        App.prefs.actualAntennaListSV(actualList)
                         startActivity(intentBack)
+
                     } else {
                         Log.e("code : ", response.code().toString())
                         try {
                             Log.v("FAILL :", response.body().toString())
-                        } catch (e : IOException){
+                        } catch (e: IOException) {
                             e.printStackTrace()
                         }
                     }
                 }
             })
-
+        }
     }
 
     private fun compare(){
@@ -450,10 +468,20 @@ class AntennaFragment : Fragment(), CoroutineScope {
     }
 
     override fun onResume() {
+
         selectname.text = App.prefs.codeName
         selectcode.text = App.prefs.code
 
-        code = selectcode.text as String?
+        antennabutton.setOnClickListener {
+            code = selectcode.text as String?
+            Log.e("code : " , code.toString())
+            Log.e("indicator : " , indicator.toString())
+            Log.e("predictDate : " , predictDate.toString())
+
+            code?.let { it1 -> antenna(it1, indicator, predictDate!!) }
+
+        }
+
         super.onResume()
     }
 }

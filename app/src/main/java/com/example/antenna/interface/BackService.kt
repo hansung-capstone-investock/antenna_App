@@ -1,12 +1,13 @@
 package com.example.antenna.`interface`
 
 import com.example.antenna.dataclass.*
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
 interface BackService {
-    @POST("/stock/bt/")
+    @POST("/stock/btApp/")
     fun requestBack(
-        @Body() backInfo : BackInfo
-    ) : Call<BackData>
+        @Body() backInfo : BackDataX
+    ) : Call<ResponseBody>
 }

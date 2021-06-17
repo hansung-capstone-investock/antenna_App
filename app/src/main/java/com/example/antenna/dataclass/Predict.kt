@@ -12,6 +12,7 @@ data class Predict(
     val day103: Double,
     val day104: Double,
     val day105: Double,
+    val day106: Double,
     val day11: Double,
     val day12: Double,
     val day13: Double,

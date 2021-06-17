@@ -4,32 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E0DAA0">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
-
-        <TextView
-            android:id="@+id/company_news"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-black"
-            android:text="뉴스"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    android:background="#ECEAD7">
 
     <TextView
         android:id="@+id/company_name"
@@ -109,8 +84,8 @@
             android:id="@+id/lineChart1"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp">
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp">
 
         </com.github.mikephil.charting.charts.LineChart>
 
@@ -201,6 +176,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="26sp"
+                        android:layout_marginTop="8dp"
                         android:gravity="left"
                         android:text="거래량"
                         android:textColor="#000000" />
@@ -210,6 +186,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="80dp"
+                        android:layout_marginTop="8dp"
                         android:gravity="right"
                         android:text="-"
                         android:textColor="#000000"
@@ -226,6 +203,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="26sp"
+                        android:layout_marginTop="8dp"
                         android:gravity="left"
                         android:text="시가총액"
                         android:textColor="#000000" />
@@ -235,6 +213,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="80sp"
+                        android:layout_marginTop="8dp"
                         android:gravity="right"
                         android:text="-"
                         android:textColor="#000000"
@@ -251,6 +230,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="26sp"
+                        android:layout_marginTop="8dp"
                         android:gravity="left"
                         android:text="PER"
                         android:textColor="#000000" />
@@ -260,6 +240,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="80sp"
+                        android:layout_marginTop="8dp"
                         android:gravity="right"
                         android:text="-"
                         android:textColor="#000000"
@@ -276,6 +257,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="26sp"
+                        android:layout_marginTop="8dp"
                         android:gravity="left"
                         android:text="PBR"
                         android:textColor="#000000" />
@@ -285,6 +267,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="80sp"
+                        android:layout_marginTop="8dp"
                         android:gravity="right"
                         android:text="-"
                         android:textColor="#000000"
@@ -316,8 +299,8 @@
         android:id="@+id/company_rate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="180dp"
-        android:layout_marginBottom="223dp"
+        android:layout_marginEnd="160dp"
+        android:layout_marginBottom="210dp"
         android:fontFamily="sans-serif-black"
         android:gravity="start|left"
         android:text="F_MONEY"
@@ -344,14 +327,6 @@
         android:text="종목코드추가"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AddCompany" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="101dp"
-        android:layout_height="29dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/AddCompany"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <RadioGroup
         android:id="@+id/groupRadio"

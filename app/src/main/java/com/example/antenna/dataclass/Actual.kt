@@ -101,5 +101,6 @@ data class Actual(
     val day95: Double,
     val day96: Double,
     val day97: Double,
-    val day98: Double
+    val day98: Double,
+    val day99: Double
 )

@@ -1,5 +1,6 @@
 package com.example.antenna.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,17 +9,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import androidx.annotation.Nullable
+import com.example.antenna.BackResult
 import com.example.antenna.R
 import com.example.antenna.`interface`.BackService
 import com.example.antenna.dataclass.*
+import com.example.antenna.sharedPreference.App
 import kotlinx.android.synthetic.main.fragment_back.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.coroutines.CoroutineContext
 
-class BackFragment : Fragment() {
+class BackFragment : Fragment(), CoroutineScope {
+
+    private lateinit var job: Job // 2
+    override val coroutineContext: CoroutineContext // 3
+        get() = Dispatchers.Main + job
 
     val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("http://ec2-3-37-87-254.ap-northeast-2.compute.amazonaws.com:8000/") // 장고 서버 주소 입력
@@ -27,12 +40,12 @@ class BackFragment : Fragment() {
     // 백테스팅 변수 설정
     var start : String? = null
     var end : String? = null
-    var market = mutableListOf<Int>()
+    var market : ArrayList<Int> = arrayListOf()
     var sector : ArrayList<String> = arrayListOf()
 
     // 실제 넘겨줄 값
     private val changeCode : ArrayList<Int> = arrayListOf()
-    var conditions = mutableListOf<List<String>>()
+    //var conditions = mutableListOf<List<String>>()
     var sellCondition = mutableListOf<Int>()
 
     var maxValue : Int? = null
@@ -43,6 +56,8 @@ class BackFragment : Fragment() {
     private val PSR : ArrayList<Int> = arrayListOf()
     private val ROE : ArrayList<Int> = arrayListOf()
     private val ROA : ArrayList<Int> = arrayListOf()
+
+    private val backList = ArrayList<Any>()
 
     @Nullable
     override fun onCreateView(
@@ -55,84 +70,82 @@ class BackFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        startbtn.setOnClickListener {
-            start = editStart.text.toString()
-            end = editEnd.text.toString()
-
-            println(start)
-            println(end)
-        }
-        valuebtn.setOnClickListener {
-            sellCondition.clear()
-            maxValue = MaxValue.text.toString().toInt()
-            minValue = MinValue.text.toString().toInt()
-
-            println(maxValue)
-            println(minValue)
-
-            sellCondition.add(maxValue!!)
-            sellCondition.add(minValue!!)
-
-            Log.d("sellcondtion : ", sellCondition.toString())
-        }
-
+        job = Job()
         // 체크박스 구현
         addCheck()
-        // 백테스팅 시작
-        backbutton.setOnClickListener {
-            conditions.clear()
-            /*val intentBack = Intent(context, BackResult::class.java)
 
-            startActivity(intentBack)*/
+        launch {
+            // 백테스팅 시작
+            backbutton.setOnClickListener {
+                // 값들 가져오기
+                start = editStart.text.toString()
+                end = editEnd.text.toString()
 
-            /*if (PER.isNotEmpty()) {
-                //conditionsPer.add(perData(PER))
-                Log.d("conditionsPer :", conditionsPer.toString())
-                conditions.add(sectorData(perData(PER)))
-            }
-            if (PBR.isNotEmpty()) {
-                // conditionsPbr.add(pbrData(PBR))
-                Log.d("conditionsPbr :", conditionsPbr.toString())
-                conditions.add(sectorData(perData(PBR)))
-            }
-            if (PSR.isNotEmpty()) {
-                //conditionsPsr.add(psrData(PSR))
-                Log.d("conditionsPsr :", conditionsPsr.toString())
-                conditions.add(sectorData(perData(PSR)))
-            }
-            if (ROE.isNotEmpty()) {
-                //conditionsRoe.add(roeData(ROE))
-                Log.d("conditionsRoe :", conditionsRoe.toString())
-                conditions.add(sectorData(perData(ROE)))
-            }
-                if (ROA.isNotEmpty()) {
-                conditionsRoa.add(roaData(ROA))
-                Log.d("conditionsRoa :", conditionsRoa.toString())
-                conditions.add(conditionsRoa)
-            }*/
+                sellCondition.clear()
+                maxValue = MaxValue.text.toString().toInt()
+                minValue = MinValue.text.toString().toInt()
+                sellCondition.add(maxValue!!)
+                sellCondition.add(minValue!!)
 
-            Log.d("start :", start.toString())
-            Log.d("end :", end.toString())
-            Log.d("market :", market.toString())
-            Log.d("changeCode :", changeCode.toString())
-            Log.d("sellCondition :", sellCondition.toString())
-            Log.d("PER :", PER.toString())
-            Log.d("PBR :", PBR.toString())
-            Log.d("PSR :", PSR.toString())
-            Log.d("ROA :", ROA.toString())
-            Log.d("ROE :", ROE.toString())
+                if(PER.isEmpty()){
+                    println("empty")
+                    PER.add(-9999)
+                    println(PER)
+                    println(PER[0])
+                }
+                if(PBR.isEmpty()){
+                    println("empty")
+                    PBR.add(-9999)
+                    println(PBR)
+                    println(PBR[0])
+                }
+                if(PSR.isEmpty()){
+                    println("empty")
+                    PSR.add(-9999)
+                    println(PSR)
+                    println(PSR[0])
+                }
+                if(ROA.isEmpty()){
+                    println("empty")
+                    ROA.add(-9999)
+                    println(ROA)
+                    println(ROA[0])
+                }
+                if(ROE.isEmpty()){
+                    println("empty")
+                    ROE.add(-9999)
+                    println(ROE)
+                    println(ROE[0])
+                }
 
-            startBack(start!!, end!!, market, changeCode, PER, PBR, PSR, ROA, ROE, sellCondition)
-            if(ROE.isEmpty()){
-                println("empty")
-                ROE.add(-9999)
-                println(ROE)
-                println(ROE[0])
+                val intentBack = Intent(context, BackResult::class.java)
+
+
+
+                Log.d("APP id :", App.prefs.id.toString())
+                Log.d("start :", start.toString())
+                Log.d("end :", end.toString())
+                Log.d("market :", market.toString())
+                Log.d("changeCode :", changeCode.toString())
+                Log.d("sellCondition :", sellCondition.toString())
+                Log.d("PER :", PER.toString())
+                Log.d("PBR :", PBR.toString())
+                Log.d("PSR :", PSR.toString())
+                Log.d("ROA :", ROA.toString())
+                Log.d("ROE :", ROE.toString())
+
+                startBack(App.prefs.id!!, start!!, end!!, market, sellCondition, changeCode, PER, PBR, PSR, ROA, ROE)
+                super.onViewCreated(view, savedInstanceState)
+
+                //startActivity(intentBack)
             }
-
-            super.onViewCreated(view, savedInstanceState)
         }
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        job.cancel()
     }
     // 세터값 변환
     inner class CheckBoxListener : CompoundButton.OnCheckedChangeListener{
@@ -863,24 +876,67 @@ class BackFragment : Fragment() {
         ROAcheckBox.setOnCheckedChangeListener(condition)
     }
 
-    private fun startBack(start: String, end: String, market: List<Int>, sector: ArrayList<Int>, perconditions: ArrayList<Int>? = null, psrconditions: ArrayList<Int>? = null,
-            pbrconditions: ArrayList<Int>? = null, roaconditions: ArrayList<Int>? = null, roeconditions: ArrayList<Int>? = null, sellCondition: List<Int>){
+    private fun startBack(id : String, start: String, end: String, market: ArrayList<Int>,  sellCondition: MutableList<Int>, sector: ArrayList<Int>, perconditions: ArrayList<Int>, psrconditions: ArrayList<Int>,
+            pbrconditions: ArrayList<Int>, roeconditions: ArrayList<Int>, roaconditions: ArrayList<Int>){
         val backService : BackService = retrofit.create(BackService::class.java)
         val backData : BackData? = null
 
-        backService.requestBack(BackInfo(start, end, market, sector, perconditions, psrconditions, pbrconditions, roaconditions, roeconditions, sellCondition)).enqueue(object : Callback<BackData>{
-            override fun onResponse(call: Call<BackData>, response: Response<BackData>) {
-                val data = response.body()
+        Log.d("ID: " , App.prefs.id.toString())
 
-                if(response.isSuccessful) {
-                    Log.e("antennaData : ", backData.toString())
-                } else{
+        backService.requestBack(BackDataX(id, start, end, market, sellCondition, sector, perconditions, psrconditions, pbrconditions, roaconditions, roeconditions)).enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                val data1 = response.body()!!.string()
+                /*val data2 = data1.toString().split(",").associate {
+                    val (key,value) = it.split(":")
+                    key to value.rangeTo()
+
+                }*/
+                val data = response.body()
+                if (response.isSuccessful) {
+                    Log.d("success :", data.toString())
+                    Log.d("data1", data1.toString())
+                    print(data1)
+                   // Log.d("data2", data2.toString())
+
+                    /*for(i in 0 until data.count()){
+                        Log.e("antennaData : ", data[i].toString())
+                    }*/
+                    /*backList.add(data!!.x20210302)
+                    backList.add(data.x20210303)
+                    backList.add(data.x20210304)
+                    backList.add(data.x20210305)
+                    backList.add(data.x20210308)
+                    backList.add(data.x20210309)
+                    backList.add(data.x20210310)
+                    backList.add(data.x20210311)
+                    backList.add(data.x20210312)
+                    backList.add(data.x20210315)
+                    backList.add(data.x20210316)
+                    backList.add(data.x20210317)
+                    backList.add(data.x20210318)
+                    backList.add(data.x20210309)
+                    backList.add(data.x20210322)
+                    backList.add(data.x20210323)
+                    backList.add(data.x20210324)
+                    backList.add(data.x20210325)
+                    backList.add(data.x20210326)
+                    backList.add(data.x20210329)
+                    backList.add(data.x20210330)
+                    backList.add(data.x20210331)
+                    backList.add(data.x20210401)
+                    backList.add(data.x20210402)
+
+                    App.prefs.backSV(backList)
+
+                    Log.d("BackList", App.prefs.backGET().toString())*/
+
+                } else {
                     Log.e("antennaData : ", response.errorBody().toString())
                     Log.e("antennaData : ", response.code().toString())
                 }
             }
 
-            override fun onFailure(call: Call<BackData>, t: Throwable) {
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 t.printStackTrace()
             }
         })

@@ -2,7 +2,6 @@ package com.example.antenna.sharedPreference
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.antenna.dataclass.LoadDataItem
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -124,6 +123,21 @@ class SharedPreferences(context: Context) {
     fun actualAntennaListSV(list: ArrayList<Double>) {
         val json = gson.toJson(list)
         editor.putString("actual", json)
+        editor.apply() // This line is IMPORTANT !!!
+    }
+
+    fun backGET(): ArrayList<Double> {
+        val emptyList = Gson().toJson(ArrayList<Double>())
+        return Gson().fromJson(
+                prefs.getString("back", emptyList),
+                object : TypeToken<ArrayList<Double>>(){
+                }.type
+        )
+    }
+
+    fun backSV(list: ArrayList<Any>) {
+        val json = gson.toJson(list)
+        editor.putString("back", json)
         editor.apply() // This line is IMPORTANT !!!
     }
 }

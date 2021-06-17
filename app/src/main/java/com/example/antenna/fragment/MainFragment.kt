@@ -95,12 +95,6 @@ class MainFragment : Fragment() {
             })
             loadCommunity()
         }
-
-        for(i in 0 until App.prefs.getArrayList1().count()){
-            if(App.prefs.getArrayList1()[i] != "null"){
-                list.add(DataList(App.prefs.getArrayList1()[i]))
-            }
-        }
     }
     /*fun refreshAdapter() {
         // 아예 초기화
@@ -129,9 +123,11 @@ class MainFragment : Fragment() {
     override fun onResume() {
         intername.text = App.prefs.group1
         list.clear()
-        for(i in 0 until App.prefs.getArrayList1().count()){
-            if(App.prefs.getArrayList1()[i] != "null"){
-                list.add(DataList(App.prefs.getArrayList1()[i]))
+        if(App.prefs.getArrayList1().isNotEmpty()){
+            for(i in 0 until App.prefs.getArrayList1().count()){
+                if(App.prefs.getArrayList1()[i].isNotBlank() && App.prefs.getArrayList1()[i] != "null"){
+                    list.add(DataList(App.prefs.getArrayList1()[i]))
+                }
             }
         }
         adapter1.notifyDataSetChanged()

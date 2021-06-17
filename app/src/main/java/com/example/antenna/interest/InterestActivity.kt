@@ -9,6 +9,7 @@ import com.example.antenna.R
 import com.example.antenna.adpater.CompanyAdapter
 import com.example.antenna.adpater.CompanyList
 import com.opencsv.CSVReader
+import com.opencsv.CSVReaderBuilder
 import kotlinx.android.synthetic.main.add_company.*
 import java.io.FileReader
 import java.io.IOException

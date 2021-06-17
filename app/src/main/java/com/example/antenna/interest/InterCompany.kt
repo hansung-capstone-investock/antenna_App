@@ -187,15 +187,15 @@ class InterCompany : AppCompatActivity() {
 
             // val intent = Intent(this, MyFragment::class.java)
 
-            if (groupId!! == 10){
+            if (groupId!! == App.prefs.idGroup1?.toInt()){
                 updateData(groupId!!.toInt(), App.prefs.id.toString(), groupName.toString(), App.prefs.getArrayList1()[0],App.prefs.getArrayList1()[1], App.prefs.getArrayList1()[2],
                         App.prefs.getArrayList1()[3], App.prefs.getArrayList1()[4], App.prefs.getArrayList1()[5], App.prefs.getArrayList1()[6], App.prefs.getArrayList1()[7],
                         App.prefs.getArrayList1()[8], App.prefs.getArrayList1()[9])
-            } else if(groupId!! == 11) {
+            } else if(groupId!! == App.prefs.idGroup2?.toInt()) {
                 updateData(groupId!!.toInt(), App.prefs.id.toString(), groupName.toString(), App.prefs.getArrayList2()[0], App.prefs.getArrayList2()[1], App.prefs.getArrayList2()[2],
                         App.prefs.getArrayList2()[3], App.prefs.getArrayList2()[4], App.prefs.getArrayList2()[5], App.prefs.getArrayList2()[6], App.prefs.getArrayList2()[7],
                         App.prefs.getArrayList2()[8], App.prefs.getArrayList2()[9])
-            } else {
+            } else if(groupId!! == App.prefs.idGroup3?.toInt()) {
                 updateData(groupId!!.toInt(), App.prefs.id.toString(), groupName.toString(), App.prefs.getArrayList3()[0], App.prefs.getArrayList3()[1], App.prefs.getArrayList3()[2],
                         App.prefs.getArrayList3()[3], App.prefs.getArrayList3()[4], App.prefs.getArrayList3()[5], App.prefs.getArrayList3()[6], App.prefs.getArrayList3()[7],
                         App.prefs.getArrayList3()[8], App.prefs.getArrayList3()[9])
@@ -205,6 +205,9 @@ class InterCompany : AppCompatActivity() {
         }
 
         codeaddbtn.setOnClickListener {
+            App.prefs.codeName = null
+            App.prefs.code = null
+
             App.prefs.codeName = companyname
             App.prefs.code = code
             Log.d("codeName 추가 : " , App.prefs.codeName!!)
@@ -322,7 +325,7 @@ class InterCompany : AppCompatActivity() {
 
     private fun addDataList(groupId : Int){
 
-        if(groupId == 10){
+        if(groupId == App.prefs.idGroup1?.toInt()){
             listGruop1.clear()
             for(i in 0 until App.prefs.getArrayList1().count()){
                 listGruop1.add(App.prefs.getArrayList1()[i])
@@ -331,40 +334,44 @@ class InterCompany : AppCompatActivity() {
             for(i in 0 until App.prefs.getArrayList1().count()){
                 Log.d("listGruop1", listGruop1[i])
                 Log.d("itemspos", companyname.toString())
-                if(listGruop1[i] != companyname && listGruop1[i] == "null"){
+                if(listGruop1[i] != companyname && listGruop1[i].isBlank() || listGruop1[i] == "null"){
                     listGruop1[i] = companyname.toString()
+                    Log.d("listGruop1", listGruop1.toString())
                     break
                 }
             }
             App.prefs.saveArrayList1(listGruop1)
 
-        } else if(groupId == 11){
+        }
+        else if(groupId == App.prefs.idGroup2?.toInt()){
             listGruop2.clear()
             for(i in 0 until App.prefs.getArrayList2().count()){
                 listGruop2.add(App.prefs.getArrayList2()[i])
                 Log.d("getArrayList2 : " , App.prefs.getArrayList2()[i])
             }
             for(i in 0 until App.prefs.getArrayList2().count()){
-                Log.d("listGruop1", listGruop2[i])
+                Log.d("listGruop2", listGruop2[i])
                 Log.d("itemspos", companyname.toString())
-                if(listGruop2[i] != companyname && listGruop2[i] == "null"){
+                if(listGruop2[i] != companyname && listGruop2[i].isBlank() || listGruop2[i] == "null"){
                     listGruop2[i] = companyname.toString()
+                    Log.d("listGruop2", listGruop2.toString())
                     break
                 }
             }
             App.prefs.saveArrayList2(listGruop2)
         }
-        else if(groupId == 12){
+        else if(groupId == App.prefs.idGroup3?.toInt()){
             listGruop3.clear()
             for(i in 0 until App.prefs.getArrayList3().count()){
                 listGruop3.add(App.prefs.getArrayList3()[i])
                 Log.d("getArrayList3 : " , App.prefs.getArrayList3()[i])
             }
             for(i in 0 until App.prefs.getArrayList3().count()){
-                Log.d("listGruop1", listGruop3[i])
+                Log.d("listGruop3", listGruop3[i])
                 Log.d("itemspos", companyname.toString())
-                if(listGruop3[i] != companyname && listGruop3[i] == "null"){
+                if(listGruop3[i] != companyname && listGruop3[i].isBlank() ||  listGruop3[i] == "null"){
                     listGruop3[i] = companyname.toString()
+                    Log.d("listGruop2", listGruop3.toString())
                     break
                 }
             }
@@ -372,8 +379,9 @@ class InterCompany : AppCompatActivity() {
         }
     }
 
-    private fun updateData(id : Int, name : String, group : String, company1 : String, company2 : String, company3 : String, company4 : String, company5 : String,
-                           company6 : String, company7 : String, company8 : String, company9 : String, company10 : String,) {
+    private fun updateData(id : Int, name : String, group : String, company1 : String? = null, company2 : String? = null, company3 : String? = null,
+                           company4 : String? = null, company5 : String? = null, company6 : String? = null,
+                           company7 : String? = null, company8 : String? = null, company9 : String? = null, company10 : String? = null,) {
         val companyService : UpdateService = retrofit.create(UpdateService::class.java)
 
         companyService.updateCompany(id, name, group, company1, company2, company3,company4, company5,company6,company7,

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.antenna.R
 import com.example.antenna.`interface`.UpdateService
 import com.example.antenna.dataclass.UpdateData
+import com.example.antenna.interest.InterCompany
 import com.example.antenna.interest.InterestActivity
 import com.example.antenna.sharedPreference.App
 import kotlinx.android.synthetic.main.list_item.view.*
@@ -64,9 +65,9 @@ class RecyclerAdapter(private val items: MutableList<DataList>):
                 holder.itemView.removebutton.setOnClickListener {
 
                     removeDL(position)
-
-                    updateData(App.prefs.idGroup1!!.toInt(), App.prefs.id.toString(), App.prefs.group1.toString(), App.prefs.getArrayList1()[0],App.prefs.getArrayList1()[1], App.prefs.getArrayList1()[2],
-                            App.prefs.getArrayList1()[3], App.prefs.getArrayList1()[4], App.prefs.getArrayList1()[5], App.prefs.getArrayList1()[6], App.prefs.getArrayList1()[7],
+                    updateData(App.prefs.idGroup1!!.toInt(), App.prefs.id.toString(), App.prefs.group1.toString(), App.prefs.getArrayList1()[0],
+                            App.prefs.getArrayList1()[1], App.prefs.getArrayList1()[2], App.prefs.getArrayList1()[3], App.prefs.getArrayList1()[4],
+                            App.prefs.getArrayList1()[5], App.prefs.getArrayList1()[6], App.prefs.getArrayList1()[7],
                             App.prefs.getArrayList1()[8], App.prefs.getArrayList1()[9])
                 }
 
